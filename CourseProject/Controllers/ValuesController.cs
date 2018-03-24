@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CourseProject.Web.Api.Conspect;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Controllers
@@ -9,11 +11,18 @@ namespace CourseProject.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly IMediator _mediator;
+
+        public ValuesController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return  Ok(await _mediator.Send(new GetConspetcs.Query()));
         }
 
         // GET api/values/5
@@ -41,4 +50,5 @@ namespace CourseProject.Controllers
         {
         }
     }
+
 }
