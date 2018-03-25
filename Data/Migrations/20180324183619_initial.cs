@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CourseProject.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,27 +35,6 @@ namespace CourseProject.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ConspectId = table.Column<int>(nullable: false),
-                    Mark = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Conspects",
                 columns: table => new
                 {
@@ -65,7 +44,6 @@ namespace CourseProject.Data.Migrations
                     Content = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    RatingId = table.Column<int>(nullable: false),
                     SpecialityNumberId = table.Column<int>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
@@ -73,12 +51,6 @@ namespace CourseProject.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Conspects", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Conspects_Ratings_RatingId",
-                        column: x => x.RatingId,
-                        principalTable: "Ratings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Conspects_Users_UserId",
                         column: x => x.UserId,
@@ -141,6 +113,33 @@ namespace CourseProject.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ConspectId = table.Column<int>(nullable: false),
+                    Mark = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Conspects_ConspectId",
+                        column: x => x.ConspectId,
+                        principalTable: "Conspects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ConspectId",
                 table: "Comments",
@@ -152,11 +151,6 @@ namespace CourseProject.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Conspects_RatingId",
-                table: "Conspects",
-                column: "RatingId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Conspects_UserId",
                 table: "Conspects",
                 column: "UserId");
@@ -165,6 +159,11 @@ namespace CourseProject.Data.Migrations
                 name: "IX_ConspectTag_TagId",
                 table: "ConspectTag",
                 column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_ConspectId",
+                table: "Ratings",
+                column: "ConspectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_UserId",
@@ -181,13 +180,13 @@ namespace CourseProject.Data.Migrations
                 name: "ConspectTag");
 
             migrationBuilder.DropTable(
-                name: "Conspects");
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "Conspects");
 
             migrationBuilder.DropTable(
                 name: "Users");

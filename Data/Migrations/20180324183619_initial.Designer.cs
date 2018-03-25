@@ -11,14 +11,14 @@ using System;
 namespace CourseProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20180323121248_Initial")]
-    partial class Initial
+    [Migration("20180324183619_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CourseProject.Data.Model.Comment", b =>
@@ -63,8 +63,6 @@ namespace CourseProject.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<int>("RatingId");
-
                     b.Property<int>("SpecialityNumberId");
 
                     b.Property<DateTime>("UpdatedDate");
@@ -72,8 +70,6 @@ namespace CourseProject.Data.Migrations
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RatingId");
 
                     b.HasIndex("UserId");
 
@@ -106,6 +102,8 @@ namespace CourseProject.Data.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConspectId");
 
                     b.HasIndex("UserId");
 
@@ -151,11 +149,6 @@ namespace CourseProject.Data.Migrations
 
             modelBuilder.Entity("CourseProject.Data.Model.Conspect", b =>
                 {
-                    b.HasOne("CourseProject.Data.Model.Rating", "Rating")
-                        .WithMany("Conspects")
-                        .HasForeignKey("RatingId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("CourseProject.Data.Model.User", "User")
                         .WithMany("Conspects")
                         .HasForeignKey("UserId");
@@ -176,6 +169,11 @@ namespace CourseProject.Data.Migrations
 
             modelBuilder.Entity("CourseProject.Data.Model.Rating", b =>
                 {
+                    b.HasOne("CourseProject.Data.Model.Conspect")
+                        .WithMany("Ratings")
+                        .HasForeignKey("ConspectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("CourseProject.Data.Model.User", "User")
                         .WithMany("Ratings")
                         .HasForeignKey("UserId")

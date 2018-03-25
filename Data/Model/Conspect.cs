@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace CourseProject.Data.Model
@@ -11,6 +12,7 @@ namespace CourseProject.Data.Model
         {
             ConspectTags = new List<ConspectTag>();
             Comments = new List<Comment>();
+            Ratings = new List<Rating>();
         }
 
         [Required]
@@ -25,6 +27,7 @@ namespace CourseProject.Data.Model
         [Required]
         public string Content { get; set; }
 
+        [ForeignKey("User")]
         public string UserId { get; set; }
 
         [Required]
@@ -35,13 +38,11 @@ namespace CourseProject.Data.Model
         [Required]
         public bool Active { get; set; }
 
-        public int RatingId { get; set; }
-
-        public Rating Rating { get; set; }
-
         public User User { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public ICollection<Rating> Ratings { get; set; }
 
         public ICollection<ConspectTag> ConspectTags { get; set; }
     }

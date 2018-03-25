@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace CourseProject.Data.Model
 {
     public class Rating
     {
-        public Rating()
-        {
-            Conspects = new List<Conspect>();
-        }
-
         [Required]
         public int Id { get; set; }
 
         public int Mark { get; set; }
 
         [Required]
+        [ForeignKey("User")]
         public string UserId { get; set; }
 
         [Required]
@@ -25,6 +22,6 @@ namespace CourseProject.Data.Model
 
         public User User { get; set; }
 
-        public ICollection<Conspect> Conspects { get; set; }
+        public Conspect Conspect { get; set; }
     }
 }

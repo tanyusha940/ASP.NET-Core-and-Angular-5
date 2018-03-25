@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using CourseProject.Web.Api;
 using CourseProject.Web.Api.Conspect;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,14 +20,16 @@ namespace CourseProject.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return  Ok(await _mediator.Send(new GetConspetcs.Query()));
+            return  Ok(await _mediator.Send(new GetConspects.Query()));
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await _mediator.Send(new GetConspect.Query {
+                Id = id
+            }));
         }
 
         // POST api/values

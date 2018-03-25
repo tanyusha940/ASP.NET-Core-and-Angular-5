@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
 
-namespace CourseProject.Web.Api.Conspect
+namespace CourseProject.Web.Api
 {
-    public static class GetConspetcs
+    public static class GetConspects
     {
         public class Query : IRequest<IQueryable<Data.Model.Conspect>>
         {
@@ -23,7 +23,7 @@ namespace CourseProject.Web.Api.Conspect
                 this.context = context;
             }
 
-            protected override async Task<IQueryable<Data.Model.Conspect>> HandleCore(Query request)
+            protected override async Task<IQueryable<Data.Model.Conspect>> HandleCore(Query query)
             {
                 return context.Conspects;
             }
