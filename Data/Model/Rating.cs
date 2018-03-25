@@ -18,6 +18,9 @@ namespace CourseProject.Data.Model
         public string UserId { get; set; }
 
         [Required]
+        public bool Active { get; set; }
+
+        [Required]
         public int ConspectId { get; set; }
 
         public User User { get; set; }

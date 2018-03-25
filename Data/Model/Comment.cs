@@ -18,7 +18,7 @@ namespace CourseProject.Data.Model
         public string UserId { get; set; }
 
         [Required]
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Required]
         public bool Active { get; set; }

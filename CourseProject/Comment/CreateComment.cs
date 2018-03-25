@@ -26,7 +26,7 @@ namespace CourseProject.Web.Api.Comment
 
             protected override Task<int> HandleCore(CreateComment.Command command)
             {
-                command.Comment.CreateDate = DateTime.Now;
+                command.Comment.CreatedDate = DateTime.Now;
                 command.Comment.Active = true;
                 command.Comment.ConspectId = command.ConspectId;
                 context.Comments.Add(command.Comment);
