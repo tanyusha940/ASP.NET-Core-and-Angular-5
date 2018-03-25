@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
+using CourseProject.Api.Services.Tag;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using CourseProject.Data.Model;
-using CourseProject.Data.Model.Context;
-using CourseProject.Web.Api.Tag;
 using MediatR;
 
 namespace CourseProject.Web.Api.Controllers

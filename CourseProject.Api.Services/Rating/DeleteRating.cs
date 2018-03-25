@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
-using CourseProject.Web.Api.Comment;
 using MediatR;
 
-namespace CourseProject.Web.Api.Rating
+namespace CourseProject.Api.Services.Rating
 {
-    public class CreateRating
+    public class DeleteRating
     {
         public class Command : IRequest<int>
         {
-            public Data.Model.Rating Rating { get; set; }
-
             public int ConspectId { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<CreateRating.Command, int>
+        public class Handler : AsyncRequestHandler<DeleteRating.Command, int>
         {
             private readonly ApplicationContext context;
 
@@ -26,14 +23,12 @@ namespace CourseProject.Web.Api.Rating
                 this.context = context;
             }
 
-            protected override Task<int> HandleCore(CreateRating.Command command)
+            protected override Task<int> HandleCore(DeleteRating.Command command)
             {
-                command.Rating.ConspectId = command.ConspectId;
-                command.Rating.Active = true;
-                context.Ratings.Add(command.Rating);
+                var rating = context.Ratings.First(r => r.ConspectId == command.ConspectId);
+                rating.Active = false;
                 context.SaveChanges();
-
-                return Task.FromResult(command.Rating.Id);
+                return Task.FromResult(command.ConspectId);
             }
         }
     }

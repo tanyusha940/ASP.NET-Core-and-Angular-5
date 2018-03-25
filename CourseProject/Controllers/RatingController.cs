@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using CourseProject.Data.Model.Context;
-using CourseProject.Web.Api.Rating;
 using MediatR;
+using CourseProject.Api.Services.Rating;
 
 namespace CourseProject.Web.Api.Controllers
 {

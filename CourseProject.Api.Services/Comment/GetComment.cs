@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
-using CourseProject.Web.Api.Conspect;
 using MediatR;
 
-namespace CourseProject.Web.Api.Comment
+namespace CourseProject.Api.Services.Comment
 {
     public class GetComment
     {

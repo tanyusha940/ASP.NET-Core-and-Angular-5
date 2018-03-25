@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
-using CourseProject.Web.Api.Rating;
 using MediatR;
 
-namespace CourseProject.Web.Api.Tag
+namespace CourseProject.Api.Services.Comment
 {
-    public class GetTags
+    public class GetComments
     {
-        public class Query : IRequest<IQueryable<Data.Model.Tag>>
+        public class Query : IRequest<IQueryable<Data.Model.Comment>>
         {
 
         }
 
-        public class Handler : AsyncRequestHandler<GetTags.Query, IQueryable<Data.Model.Tag>>
+        public class Handler : AsyncRequestHandler<Query, IQueryable<Data.Model.Comment>>
         {
             private readonly ApplicationContext context;
 
@@ -24,9 +23,9 @@ namespace CourseProject.Web.Api.Tag
                 this.context = context;
             }
 
-            protected override async Task<IQueryable<Data.Model.Tag>> HandleCore(GetTags.Query query)
+            protected override async Task<IQueryable<Data.Model.Comment>> HandleCore(Query query)
             {
-                return context.Tags.Where(tag => tag.Active);
+                return context.Comments.Where(comment => comment.Active);
             }
         }
     }

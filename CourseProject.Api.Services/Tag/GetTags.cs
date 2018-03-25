@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
 
-namespace CourseProject.Web.Api.Comment
+namespace CourseProject.Api.Services.Tag
 {
-    public class GetComments
+    public class GetTags
     {
-        public class Query : IRequest<IQueryable<Data.Model.Comment>>
+        public class Query : IRequest<IQueryable<Data.Model.Tag>>
         {
 
         }
 
-        public class Handler : AsyncRequestHandler<Query, IQueryable<Data.Model.Comment>>
+        public class Handler : AsyncRequestHandler<GetTags.Query, IQueryable<Data.Model.Tag>>
         {
             private readonly ApplicationContext context;
 
@@ -23,9 +23,9 @@ namespace CourseProject.Web.Api.Comment
                 this.context = context;
             }
 
-            protected override async Task<IQueryable<Data.Model.Comment>> HandleCore(Query query)
+            protected override async Task<IQueryable<Data.Model.Tag>> HandleCore(GetTags.Query query)
             {
-                return context.Comments.Where(comment => comment.Active);
+                return context.Tags.Where(tag => tag.Active);
             }
         }
     }

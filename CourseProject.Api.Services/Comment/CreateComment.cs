@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
 
-namespace CourseProject.Web.Api.Comment
+namespace  CourseProject.Api.Services.Comment
 {
     public class CreateComment
     {

@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CourseProject.Web.Api;
-using CourseProject.Web.Api.Conspect;
+using CourseProject.Api.Services.Conspect;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

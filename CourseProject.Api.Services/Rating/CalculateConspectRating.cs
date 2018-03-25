@@ -6,7 +6,7 @@ using CourseProject.Data.Model.Context;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourseProject.Web.Api.Rating
+namespace CourseProject.Api.Services.Rating
 {
     public class CalculateConspectRating
     {

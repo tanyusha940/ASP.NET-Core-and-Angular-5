@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
-using CourseProject.Web.Api.Rating;
 using MediatR;
 
-namespace CourseProject.Web.Api.Tag
+namespace CourseProject.Api.Services.Tag
 {
     public class GetConpectTags
     {

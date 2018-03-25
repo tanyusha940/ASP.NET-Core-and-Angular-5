@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
 
-namespace CourseProject.Web.Api.Conspect
+namespace CourseProject.Api.Services.Conspect
 {
     public class GetConspect
     {

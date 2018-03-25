@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using CourseProject.Api.Services.Comment;
 using Microsoft.AspNetCore.Mvc;
-using CourseProject.Web.Api.Comment;
 using MediatR;
 
 namespace CourseProject.Web.Api.Controllers

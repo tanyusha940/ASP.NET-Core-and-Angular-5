@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CourseProject.Web.Api.Conspect
+namespace CourseProject.Api.Services.Conspect
 {
-    public class UpdateConspect
+    public class DeleteConspect
     {
         public class Command : IRequest<int>
         {
-            public Data.Model.Conspect Conspect { get; set; }
+            public int Id { get; set; }
         }
 
         public class Handler : AsyncRequestHandler<Command, int>
@@ -25,12 +25,10 @@ namespace CourseProject.Web.Api.Conspect
 
             protected override Task<int> HandleCore(Command command)
             {
-                var conspectDto = command.Conspect;
-                var conspect = context.Conspects.First(c => c.Id == command.Conspect.Id);
-                conspect.Name = conspectDto.Name;
-                conspect.Content = conspectDto.Content;
-                conspect.UpdatedDate = conspect.UpdatedDate;
-                return Task.FromResult(conspect.Id);
+                var conspect = context.Conspects.First(c => c.Id == command.Id);
+                conspect.Active = false;
+                context.SaveChanges();
+                return Task.FromResult(command.Id);
             }
         }
     }

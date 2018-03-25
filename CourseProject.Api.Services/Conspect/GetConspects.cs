@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
 
-namespace CourseProject.Web.Api
+namespace CourseProject.Api.Services.Conspect
 {
     public static class GetConspects
     {

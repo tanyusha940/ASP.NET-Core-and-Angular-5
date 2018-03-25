@@ -1,20 +1,18 @@
-﻿using CourseProject.Data.Model.Context;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using CourseProject.Data.Model.Context;
+using MediatR;
 
-namespace CourseProject.Web.Api.Conspect
+namespace CourseProject.Api.Services.Tag
 {
-    public class DeleteConspect
+    public class DeleteTag
     {
         public class Command : IRequest<int>
         {
             public int Id { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<Command, int>
+        public class Handler : AsyncRequestHandler<DeleteTag.Command, int>
         {
             private readonly ApplicationContext context;
 
@@ -23,10 +21,10 @@ namespace CourseProject.Web.Api.Conspect
                 this.context = context;
             }
 
-            protected override Task<int> HandleCore(Command command)
+            protected override Task<int> HandleCore(DeleteTag.Command command)
             {
-                var conspect = context.Conspects.First(c => c.Id == command.Id);
-                conspect.Active = false;
+                var tag = context.Tags.First(t => t.Id == command.Id);
+                context.Remove(tag);
                 context.SaveChanges();
                 return Task.FromResult(command.Id);
             }

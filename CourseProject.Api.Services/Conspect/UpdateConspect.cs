@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CourseProject.Web.Api.Conspect
+namespace CourseProject.Api.Services.Conspect
 {
-    public class CreateConspect
+    public class UpdateConspect
     {
         public class Command : IRequest<int>
         {
@@ -25,11 +25,12 @@ namespace CourseProject.Web.Api.Conspect
 
             protected override Task<int> HandleCore(Command command)
             {
-                command.Conspect.CreatedDate = DateTime.Now;
-                command.Conspect.Active = true;
-                context.Conspects.Add(command.Conspect);
-                context.SaveChanges();
-                return Task.FromResult(command.Conspect.Id);
+                var conspectDto = command.Conspect;
+                var conspect = context.Conspects.First(c => c.Id == command.Conspect.Id);
+                conspect.Name = conspectDto.Name;
+                conspect.Content = conspectDto.Content;
+                conspect.UpdatedDate = conspect.UpdatedDate;
+                return Task.FromResult(conspect.Id);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using CourseProject.Api.Services.Conspect;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using CourseProject.Web.Api.Conspect;
 
 namespace CourseProject.Web.Api.Controllers
 {
