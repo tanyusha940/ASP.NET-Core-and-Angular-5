@@ -26,7 +26,10 @@ namespace CourseProject.Web.Api.Conspect
 
             protected override Task<Data.Model.Conspect> HandleCore(Query query)
             {
-                return Task.FromResult(context.Conspects.First(conspect => conspect.Id == query.Id));
+                return Task.FromResult(context.Conspects
+                    .Where(conspect => conspect.Active)
+                    .First(conspect => conspect.Id == query.Id)
+                );
             }
         }
     }

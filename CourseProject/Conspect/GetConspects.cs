@@ -25,7 +25,7 @@ namespace CourseProject.Web.Api
 
             protected override async Task<IQueryable<Data.Model.Conspect>> HandleCore(Query query)
             {
-                return context.Conspects;
+                return context.Conspects.Where(conspect => conspect.Active);
             }
         }
     }

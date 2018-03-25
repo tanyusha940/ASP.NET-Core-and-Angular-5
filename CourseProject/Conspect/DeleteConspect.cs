@@ -26,7 +26,7 @@ namespace CourseProject.Web.Api.Conspect
             protected override Task<int> HandleCore(Command command)
             {
                 var conspect = context.Conspects.First(c => c.Id == command.Id);
-                context.Remove(conspect);
+                conspect.Active = false;
                 context.SaveChanges();
                 return Task.FromResult(command.Id);
             }

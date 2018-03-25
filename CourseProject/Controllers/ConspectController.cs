@@ -5,47 +5,37 @@ using CourseProject.Web.Api.Conspect;
 
 namespace CourseProject.Web.Api.Controllers
 {
-    [Route("api/Conspects")]
-    public class ConspectsController : Controller
+    [Route("api/Conspect")]
+    public class ConspectController : Controller
     {
         private readonly IMediator _mediator;
 
-        public ConspectsController(IMediator mediator)
+        public ConspectController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        // GET: api/Conspects
+        // GET: api/Conspect
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             return Ok(await _mediator.Send(new GetConspects.Query()));
         }
 
-        // GET: api/Conspects/5
+        // GET: api/Conspect/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetConspect([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             return Ok(await _mediator.Send(new GetConspect.Query
             {
                 Id = id
             }));
         }
 
-        // PUT: api/Conspects/5
+        // PUT: api/Conspect/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutConspect([FromRoute] int id, [FromBody] Data.Model.Conspect conspect)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (id != conspect.Id)
             {
                 return BadRequest();
@@ -57,7 +47,7 @@ namespace CourseProject.Web.Api.Controllers
             }));
         }
 
-        // POST: api/Conspects
+        // POST: api/Conspect
         [HttpPost]
         public async Task<IActionResult> CreateConspect([FromBody] Data.Model.Conspect conspect)
         {
@@ -67,7 +57,7 @@ namespace CourseProject.Web.Api.Controllers
             }));
         }
 
-        // DELETE: api/Conspects/5
+        // DELETE: api/Conspect/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteConspect([FromRoute] int Id)
         {
