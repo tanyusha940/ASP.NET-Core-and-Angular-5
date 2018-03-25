@@ -16,6 +16,9 @@ namespace CourseProject.Data.Model
         public int Id { get; set; }
 
         [Required]
+        public bool Active { get; set; }
+
+        [Required]
         public string Text { get; set; }
 
         public ICollection<ConspectTag> ConspectTags { get; set; }

@@ -39,5 +39,7 @@ namespace CourseProject.Data.Model.Context
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<ConspectTag> ConspectTags { get; set; }
     }
 }
