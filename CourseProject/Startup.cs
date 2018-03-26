@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using CourseProject.Api.Services.Comment;
+using CourseProject.Api.Services.Conspect.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using CourseProject.Data.Model.Context;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
+using StructureMap;
 
 namespace CourseProject
 {
@@ -26,17 +25,49 @@ namespace CourseProject
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connection));
-            services.AddMediatR();
-            services.AddMediatR(typeof(CreateComment.Handler).GetTypeInfo().Assembly);
 
-            services.AddMvc();
+           // services.AddMvc().AddFluentValidation();
+            services.AddMvc()
+                .AddControllersAsServices();
+
+            return ConfigureIoC(services);
+        }
+
+        public IServiceProvider ConfigureIoC(IServiceCollection services)
+        {
+            var container = new Container();
+
+            container.Configure(config =>
+            {
+                // Register stuff in container, using the StructureMap APIs...
+                config.Scan(_ =>
+                {
+                    _.AssemblyContainingType(typeof(Startup));
+                    _.AssembliesFromPath(Environment.CurrentDirectory);
+                    _.WithDefaultConventions();
+                    _.ConnectImplementationsToTypesClosing(typeof(IValidator<>));
+                    _.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<>)); // Handlers with no response
+                    _.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>)); // Handlers with a response
+                    _.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
+                    _.ConnectImplementationsToTypesClosing(typeof(IPipelineBehavior<,>));
+                });
+
+                config.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
+                config.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+                config.For<IMediator>().Use<Mediator>();
+
+                //Populate the container using the service collection
+                config.Populate(services);
+            });
+
+            return container.GetInstance<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

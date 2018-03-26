@@ -3,7 +3,10 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using CourseProject.Api.Services.Conspect.Models;
+using FluentValidation;
 
 namespace CourseProject.Api.Services.Conspect
 {
@@ -14,16 +17,27 @@ namespace CourseProject.Api.Services.Conspect
             public Data.Model.Conspect Conspect { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<Command, int>
+        public class Handler : IRequestHandler<Command, int>, IPipelineBehavior<Command, int>
         {
+            private readonly IValidator<Data.Model.Conspect> validator;
             private readonly ApplicationContext context;
 
-            public Handler(ApplicationContext context)
+            public Handler(ApplicationContext context, IValidator<Data.Model.Conspect> commandValidator)
             {
                 this.context = context;
+                this.validator = commandValidator;
             }
 
-            protected override Task<int> HandleCore(Command command)
+            public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
+            {
+                validator.ValidateAndThrow(request.Conspect);
+
+                var response = await next();
+
+                return response;
+            }
+
+            public Task<int> Handle(Command command, CancellationToken cancellationToken)
             {
                 command.Conspect.CreatedDate = DateTime.Now;
                 command.Conspect.Active = true;
