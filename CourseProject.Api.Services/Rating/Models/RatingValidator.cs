@@ -16,14 +16,13 @@ namespace CourseProject.Api.Services.Rating.Models
                 .WithMessage("Custom validation message");
             RuleFor(x => x.Id)
                 .NotNull();
-            RuleFor(x => x.Mark)
-                .LessThanOrEqualTo(5); //TODO: изменить ограничения
+            RuleFor(x => x.Mark).ExclusiveBetween(1, 5).WithMessage("invalid value range");
             RuleFor(x => x.UserId)
-                .NotNull();
+                .NotNull().WithMessage("this field is required");
             RuleFor(x => x.Active)
                 .NotNull();
             RuleFor(x => x.ConspectId)
-                .NotNull();
+                .NotNull().WithMessage("this field is required");
         }
 
         public bool UserVerification(Data.Model.Rating rating)

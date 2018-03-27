@@ -11,9 +11,9 @@ namespace CourseProject.Api.Services.Tag.Models
             RuleFor(x => x.Active)
                 .NotNull();
             RuleFor(x => x.Text)
-                .NotNull();
+                .NotNull().WithMessage("this field is required");
             RuleFor(x => x.Text)
-                .Length(1,15);
+                .Length(1,15).WithMessage("length must not exceed 15 characters");
         }
     }
 }

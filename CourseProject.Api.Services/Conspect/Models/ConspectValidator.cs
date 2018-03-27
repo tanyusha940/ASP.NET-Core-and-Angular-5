@@ -9,15 +9,15 @@ namespace CourseProject.Api.Services.Conspect.Models
             RuleFor(x => x.Id)
                 .NotNull();
             RuleFor(x => x.Name)
-                .NotNull();
+                .NotNull().WithMessage("this field is required");
             RuleFor(x => x.Name)
-                .Length(1, 50).WithMessage("don't like length");
+                .Length(1, 50).WithMessage("length must not exceed 50 characters");
             RuleFor(x => x.SpecialityNumberId)
-                .NotNull();
+                .NotNull().WithMessage("this field is required");
             RuleFor(x => x.SpecialityNumberId)
-                .LessThanOrEqualTo(500);
+                .LessThanOrEqualTo(500).WithMessage("incorrectly entered the number of the specialty");
             RuleFor(x => x.Content)
-                .NotNull();
+                .NotNull().WithMessage("this field is required");
             RuleFor(x => x.CreatedDate)
                 .NotNull();
             RuleFor(x => x.Active)

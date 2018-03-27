@@ -9,13 +9,13 @@ namespace CourseProject.Api.Services.Comment.Models
             RuleFor(x => x.Id)
                 .NotNull();
             RuleFor(x => x.Text)
-                .NotNull();
+                .NotNull().WithMessage("this field is required");
             RuleFor(x => x.CreatedDate)
                 .NotNull();
             RuleFor(x => x.Active)
                 .NotNull();
             RuleFor(x => x.ConspectId)
-                .NotNull();
+                .NotNull().WithMessage("this field is required");
         }
     }
 }
