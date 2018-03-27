@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
@@ -17,16 +15,16 @@ namespace CourseProject.Api.Services.Tag
 
         public class Handler : AsyncRequestHandler<Query, IQueryable<Data.Model.Tag>>
         {
-            private readonly ApplicationContext context;
+            private readonly ApplicationContext _context;
 
             public Handler(ApplicationContext context)
             {
-                this.context = context;
+                _context = context;
             }
 
             protected override Task<IQueryable<Data.Model.Tag>> HandleCore(Query query)
             {
-                return Task.FromResult(context.ConspectTags
+                return Task.FromResult(_context.ConspectTags
                     .Where(conspectTag => conspectTag.ConspectId == query.ConspectId)
                     .Select(conspectTag => conspectTag.Tag));
             }

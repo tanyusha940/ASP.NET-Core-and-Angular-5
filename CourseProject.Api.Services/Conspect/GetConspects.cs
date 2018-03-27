@@ -14,16 +14,16 @@ namespace CourseProject.Api.Services.Conspect
 
         public class Handler : AsyncRequestHandler<Query, IQueryable<Data.Model.Conspect>>
         {
-            private readonly ApplicationContext context;
+            private readonly ApplicationContext _context;
 
             public Handler(ApplicationContext context)
             {
-                this.context = context;
+                _context = context;
             }
 
             protected override async Task<IQueryable<Data.Model.Conspect>> HandleCore(Query query)
             {
-                return context.Conspects.Where(conspect => conspect.Active);
+                return _context.Conspects.Where(conspect => conspect.Active);
             }
         }
     }

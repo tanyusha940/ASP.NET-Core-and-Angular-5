@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
+using FluentValidation;
 using MediatR;
 
 namespace CourseProject.Api.Services.Tag
@@ -14,22 +13,32 @@ namespace CourseProject.Api.Services.Tag
             public Data.Model.Tag Tag { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<CreateTag.Command, int>
+        public class Handler : AsyncRequestHandler<Command, int>,IPipelineBehavior<Command, int>
         {
-            private readonly ApplicationContext context;
+            private readonly ApplicationContext _context;
+            private readonly IValidator<Data.Model.Tag> _validator;
 
-            public Handler(ApplicationContext context)
+            public Handler(ApplicationContext context, IValidator<Data.Model.Tag> validator)
             {
-                this.context = context;
+                _context = context;
+                _validator = validator;
             }
 
-            protected override Task<int> HandleCore(CreateTag.Command command)
+            protected override Task<int> HandleCore(Command command)
             {
                 command.Tag.Active = true;
-                context.Tags.Add(command.Tag);
-                context.SaveChanges();
+                _context.Tags.Add(command.Tag);
+                _context.SaveChanges();
 
                 return Task.FromResult(command.Tag.Id);
+            }
+            public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
+            {
+                _validator.Validate(request.Tag);
+
+                var response = await next();
+
+                return response;
             }
         }
     }

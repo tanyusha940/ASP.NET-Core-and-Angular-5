@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using FluentValidation;
@@ -16,29 +13,29 @@ namespace CourseProject.Api.Services.Rating
             public Data.Model.Rating Rating { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<CreateRating.Command, int>, IPipelineBehavior<CreateRating.Command, int>
+        public class Handler : AsyncRequestHandler<Command, int>, IPipelineBehavior<Command, int>
         {
-            private readonly ApplicationContext context;
-            private readonly IValidator<Data.Model.Rating> validator;
+            private readonly ApplicationContext _context;
+            private readonly IValidator<Data.Model.Rating> _validator;
 
             public Handler(ApplicationContext context, IValidator<Data.Model.Rating> validator)
             {
-                this.context = context;
-                this.validator = validator;
+                _context = context;
+                _validator = validator;
             }
 
-            protected override Task<int> HandleCore(CreateRating.Command command)
+            protected override Task<int> HandleCore(Command command)
             {
                 command.Rating.Active = true;
-                context.Ratings.Add(command.Rating);
-                context.SaveChanges();
+                _context.Ratings.Add(command.Rating);
+                _context.SaveChanges();
 
                 return Task.FromResult(command.Rating.Id);
             }
 
             public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
             {
-                var result = validator.Validate(request.Rating);
+                _validator.ValidateAndThrow(request.Rating);
 
                 var response = await next();
 

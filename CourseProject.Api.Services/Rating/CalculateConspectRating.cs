@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Api.Services.Rating
 {
@@ -17,16 +14,16 @@ namespace CourseProject.Api.Services.Rating
 
         public class Handler : AsyncRequestHandler<Query, double>
         {
-            private readonly ApplicationContext context;
+            private readonly ApplicationContext _context;
 
             public Handler(ApplicationContext context)
             {
-                this.context = context;
+                _context = context;
             }
 
             protected override async Task<double> HandleCore(Query query)
             {
-                return context.Ratings
+                return _context.Ratings
                     .Where(rating => rating.Active)
                     .Where(rating => rating.ConspectId == query.Id)
                     .Average(rating => rating.Mark);

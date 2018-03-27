@@ -59,11 +59,11 @@ namespace CourseProject.Web.Api.Controllers
 
         // DELETE: api/Conspect/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteConspect([FromRoute] int Id)
+        public async Task<IActionResult> DeleteConspect([FromRoute] int id)
         {
             return Ok(await _mediator.Send(new DeleteConspect.Command
             {
-                Id = Id
+                Id = id
             }));
         }
     }

@@ -6,18 +6,18 @@ namespace CourseProject.Api.Services.Rating.Models
 {
     public class RatingValidator : AbstractValidator<Data.Model.Rating>
     {
-        private readonly ApplicationContext context;
+        private readonly ApplicationContext _context;
 
         public RatingValidator(ApplicationContext context)
         {
-            this.context = context;
+            _context = context;
             RuleFor(x => x)
                 .Must(UserVerification)
                 .WithMessage("Custom validation message");
             RuleFor(x => x.Id)
                 .NotNull();
             RuleFor(x => x.Mark)
-                .LessThanOrEqualTo(5);
+                .LessThanOrEqualTo(5); //TODO: изменить ограничения
             RuleFor(x => x.UserId)
                 .NotNull();
             RuleFor(x => x.Active)
@@ -28,7 +28,7 @@ namespace CourseProject.Api.Services.Rating.Models
 
         public bool UserVerification(Data.Model.Rating rating)
         {
-            return context.Conspects
+            return _context.Conspects
                 .Where(x => x.UserId == rating.UserId)
                 .Any(x => x.Id == rating.ConspectId);
         }

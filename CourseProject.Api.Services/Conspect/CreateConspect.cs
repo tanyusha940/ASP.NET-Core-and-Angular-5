@@ -1,11 +1,8 @@
 ﻿using CourseProject.Data.Model.Context;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CourseProject.Api.Services.Conspect.Models;
 using FluentValidation;
 
 namespace CourseProject.Api.Services.Conspect
@@ -19,21 +16,19 @@ namespace CourseProject.Api.Services.Conspect
 
         public class Handler : IRequestHandler<Command, int>, IPipelineBehavior<Command, int>
         {
-            private readonly IValidator<Data.Model.Conspect> validator;
-            private readonly ApplicationContext context;
-
+            private readonly ApplicationContext _context;
+            private readonly IValidator<Data.Model.Conspect> _validator;
+            
             public Handler(ApplicationContext context, IValidator<Data.Model.Conspect> commandValidator)
             {
-                this.context = context;
-                this.validator = commandValidator;
+                _context = context;
+                _validator = commandValidator;
             }
 
             public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
             {
-                validator.ValidateAndThrow(request.Conspect);
-
+                _validator.Validate(request.Conspect);
                 var response = await next();
-
                 return response;
             }
 
@@ -41,8 +36,8 @@ namespace CourseProject.Api.Services.Conspect
             {
                 command.Conspect.CreatedDate = DateTime.Now;
                 command.Conspect.Active = true;
-                context.Conspects.Add(command.Conspect);
-                context.SaveChanges();
+                _context.Conspects.Add(command.Conspect);
+                _context.SaveChanges();
                 return Task.FromResult(command.Conspect.Id);
             }
         }

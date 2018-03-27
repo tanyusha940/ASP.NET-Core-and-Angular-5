@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using CourseProject.Api.Services.Comment;
-using CourseProject.Api.Services.Conspect.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CourseProject.Data.Model.Context;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using MediatR;
 using StructureMap;
 
@@ -24,10 +20,8 @@ namespace CourseProject
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<ApplicationContext>(options =>

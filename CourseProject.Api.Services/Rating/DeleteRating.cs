@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
@@ -14,20 +12,20 @@ namespace CourseProject.Api.Services.Rating
             public int ConspectId { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<DeleteRating.Command, int>
+        public class Handler : AsyncRequestHandler<Command, int>
         {
-            private readonly ApplicationContext context;
+            private readonly ApplicationContext _context;
 
             public Handler(ApplicationContext context)
             {
-                this.context = context;
+                _context = context;
             }
 
-            protected override Task<int> HandleCore(DeleteRating.Command command)
+            protected override Task<int> HandleCore(Command command)
             {
-                var rating = context.Ratings.First(r => r.ConspectId == command.ConspectId);
+                var rating = _context.Ratings.First(r => r.ConspectId == command.ConspectId);
                 rating.Active = false;
-                context.SaveChanges();
+                _context.SaveChanges();
                 return Task.FromResult(command.ConspectId);
             }
         }

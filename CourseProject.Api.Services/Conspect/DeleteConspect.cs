@@ -1,7 +1,5 @@
 ﻿using CourseProject.Data.Model.Context;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,18 +14,18 @@ namespace CourseProject.Api.Services.Conspect
 
         public class Handler : AsyncRequestHandler<Command, int>
         {
-            private readonly ApplicationContext context;
+            private readonly ApplicationContext _context;
 
             public Handler(ApplicationContext context)
             {
-                this.context = context;
+                _context = context;
             }
 
             protected override Task<int> HandleCore(Command command)
             {
-                var conspect = context.Conspects.First(c => c.Id == command.Id);
+                var conspect = _context.Conspects.First(c => c.Id == command.Id);
                 conspect.Active = false;
-                context.SaveChanges();
+                _context.SaveChanges();
                 return Task.FromResult(command.Id);
             }
         }

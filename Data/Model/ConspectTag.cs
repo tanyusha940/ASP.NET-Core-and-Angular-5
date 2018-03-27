@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CourseProject.Data.Model
+﻿namespace CourseProject.Data.Model
 {
     public class ConspectTag
     {

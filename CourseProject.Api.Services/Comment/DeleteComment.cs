@@ -12,20 +12,20 @@ namespace CourseProject.Api.Services.Comment
             public int ConspectId { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<DeleteComment.Command, int>
+        public class Handler : AsyncRequestHandler<Command, int>
         {
-            private readonly ApplicationContext context;
+            private readonly ApplicationContext _context;
 
             public Handler(ApplicationContext context)
             {
-                this.context = context;
+                _context = context;
             }
 
-            protected override Task<int> HandleCore(DeleteComment.Command command)
+            protected override Task<int> HandleCore(Command command)
             {
-                var comments = context.Comments.First(c => c.Conspect.Id == command.ConspectId);
+                var comments = _context.Comments.First(c => c.Conspect.Id == command.ConspectId);
                 comments.Active = false;
-                context.SaveChanges();
+                _context.SaveChanges();
                 return Task.FromResult(command.ConspectId);
             }
         }

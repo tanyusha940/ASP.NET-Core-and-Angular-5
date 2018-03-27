@@ -12,20 +12,20 @@ namespace CourseProject.Api.Services.Tag
             public int Id { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<DeleteTag.Command, int>
+        public class Handler : AsyncRequestHandler<Command, int>
         {
-            private readonly ApplicationContext context;
+            private readonly ApplicationContext _context;
 
             public Handler(ApplicationContext context)
             {
-                this.context = context;
+                _context = context;
             }
 
-            protected override Task<int> HandleCore(DeleteTag.Command command)
+            protected override Task<int> HandleCore(Command command)
             {
-                var tag = context.Tags.First(t => t.Id == command.Id);
-                context.Remove(tag);
-                context.SaveChanges();
+                var tag = _context.Tags.First(t => t.Id == command.Id);
+                _context.Remove(tag);
+                _context.SaveChanges();
                 return Task.FromResult(command.Id);
             }
         }
