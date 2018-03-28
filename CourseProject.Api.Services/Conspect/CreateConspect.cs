@@ -27,7 +27,7 @@ namespace CourseProject.Api.Services.Conspect
 
             public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
             {
-                _validator.Validate(request.Conspect);
+                _validator.ValidateAndThrow(request.Conspect);
                 var response = await next();
                 return response;
             }

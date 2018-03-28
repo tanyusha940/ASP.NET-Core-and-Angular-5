@@ -39,7 +39,7 @@ namespace CourseProject.Api.Services.Comment
 
             public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
             {
-                _validator.Validate(request.Comment);
+                _validator.ValidateAndThrow(request.Comment);
 
                 var response = await next();
 

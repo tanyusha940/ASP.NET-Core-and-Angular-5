@@ -35,7 +35,7 @@ namespace CourseProject.Api.Services.Rating
 
             public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
             {
-                _validator.Validate(request.Rating);
+                _validator.ValidateAndThrow(request.Rating);
 
                 var response = await next();
 

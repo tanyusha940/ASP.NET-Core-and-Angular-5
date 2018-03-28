@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CourseProject.Data.Model.Context;
+using CourseProject.Infrastructure;
+using CourseProject.Infrastructure.Filter;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using StructureMap;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace CourseProject
 {
@@ -30,7 +36,14 @@ namespace CourseProject
            // services.AddMvc().AddFluentValidation();
             services.AddMvc()
                 .AddControllersAsServices();
-
+            //services.AddMvc(options => { options.Filters.Add(new ApiExceptionFilter()); });
+            services.AddScoped<ApiExceptionFilterAttribute>();
+            services.AddApplicationInsightsTelemetry(Configuration);
+            services.AddMvc(
+                config => {
+                    config.Filters.Add(new ApiExceptionFilterAttribute());
+                }
+            );
             return ConfigureIoC(services);
         }
 
@@ -59,6 +72,8 @@ namespace CourseProject
 
                 //Populate the container using the service collection
                 config.Populate(services);
+                
+
             });
 
             return container.GetInstance<IServiceProvider>();
@@ -71,7 +86,22 @@ namespace CourseProject
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //app.UseExceptionHandler(
+            //    options => {
+            //        options.Run(
+            //            async context =>
+            //            {
+            //                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            //                context.Response.ContentType = "text/html";
+            //                var ex = context.Features.Get<IExceptionHandlerFeature>();
+            //                if (ex != null)
+            //                {
+            //                    var err = $"<h1>Error: {ex.Error.Message}</h1>{ex.Error.StackTrace }";
+            //                    await context.Response.WriteAsync(err).ConfigureAwait(false);
+            //                }
+            //            });
+            //    }
+            //);
             app.UseMvc();
         }
     }

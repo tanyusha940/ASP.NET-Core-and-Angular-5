@@ -34,7 +34,7 @@ namespace CourseProject.Api.Services.Tag
             }
             public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
             {
-                _validator.Validate(request.Tag);
+                _validator.ValidateAndThrow(request.Tag);
 
                 var response = await next();
 

@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CourseProject.Api.Services.Conspect;
+using CourseProject.Infrastructure.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 
 namespace CourseProject.Web.Api.Controllers
 {
+    [ApiExceptionFilterAttribute]
     [Route("api/Conspect")]
     public class ConspectController : Controller
     {
