@@ -12,6 +12,8 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using StructureMap;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -34,16 +36,16 @@ namespace CourseProject
                 options.UseSqlServer(connection));
 
            // services.AddMvc().AddFluentValidation();
-            services.AddMvc()
+            services.AddCors();
+            services.AddMvc(
+                    config => {
+                        config.Filters.Add(new ApiExceptionFilterAttribute());
+                    }
+                )
                 .AddControllersAsServices();
             //services.AddMvc(options => { options.Filters.Add(new ApiExceptionFilter()); });
             services.AddScoped<ApiExceptionFilterAttribute>();
             services.AddApplicationInsightsTelemetry(Configuration);
-            services.AddMvc(
-                config => {
-                    config.Filters.Add(new ApiExceptionFilterAttribute());
-                }
-            );
             return ConfigureIoC(services);
         }
 
@@ -86,22 +88,11 @@ namespace CourseProject
             {
                 app.UseDeveloperExceptionPage();
             }
-            //app.UseExceptionHandler(
-            //    options => {
-            //        options.Run(
-            //            async context =>
-            //            {
-            //                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            //                context.Response.ContentType = "text/html";
-            //                var ex = context.Features.Get<IExceptionHandlerFeature>();
-            //                if (ex != null)
-            //                {
-            //                    var err = $"<h1>Error: {ex.Error.Message}</h1>{ex.Error.StackTrace }";
-            //                    await context.Response.WriteAsync(err).ConfigureAwait(false);
-            //                }
-            //            });
-            //    }
-            //);
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
             app.UseMvc();
         }
     }
