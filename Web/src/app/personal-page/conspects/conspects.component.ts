@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 import { ConspectItem } from '@app/personal-page/conspects/models/conspectItem';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-conspects',
@@ -9,12 +10,50 @@ import { ConspectItem } from '@app/personal-page/conspects/models/conspectItem';
 })
 export class ConspectsComponent implements OnInit {
 
+  createConspectForm: FormGroup;
   conspectItems: ConspectItem[];
 
-  constructor(private conspectsService: ConspectsService) { }
+  constructor(private conspectsService: ConspectsService, private fb: FormBuilder) { }
 
   async ngOnInit() {
+    this.initForm();
     this.conspectItems = await this.conspectsService.getConspects();
   }
 
+  
+  isControlInvalid(controlName: string): boolean {
+    const control = this.createConspectForm.controls[controlName];
+
+    const result = control.invalid && control.touched;
+
+    return result;
+  }
+
+  onSubmit() {
+    const controls = this.createConspectForm.controls;
+
+    if (this.createConspectForm.invalid) {
+      Object.keys(controls)
+        .forEach(controlName => controls[controlName].markAsTouched());
+
+      return;
+    }
+
+    /** TODO: Обработка данных формы */
+    console.log(this.createConspectForm.value);
+  }
+
+  private initForm() {
+    this.createConspectForm = this.fb.group({
+      name: ['', [
+        Validators.required,
+        Validators.pattern(/[А-я]/)
+      ]
+      ],
+      email: ['', [
+        Validators.required, Validators.email
+      ]
+      ]
+    });
+  }
 }
