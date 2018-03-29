@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { map, catchError } from 'rxjs/operators';
 import { ConspectItem } from '@app/personal-page/conspects/models/conspectItem';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Conspect } from '@app/personal-page/conspects/models/conspect';
 
 @Injectable()
 export class ConspectsService {
@@ -16,4 +17,8 @@ export class ConspectsService {
       .get<ConspectItem[]>('/conspect').toPromise();
   }
 
+  async createConspect(conspect: Conspect): Promise<Conspect>{
+    return await this.httpClient
+      .post<Conspect>('/conspect',conspect).toPromise();
+  }
 }

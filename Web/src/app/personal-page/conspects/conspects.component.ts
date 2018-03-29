@@ -29,7 +29,7 @@ export class ConspectsComponent implements OnInit {
     return result;
   }
 
-  onSubmit() {
+  async onSubmit() {
     const controls = this.createConspectForm.controls;
 
     if (this.createConspectForm.invalid) {
@@ -39,19 +39,22 @@ export class ConspectsComponent implements OnInit {
       return;
     }
 
-    /** TODO: Обработка данных формы */
-    console.log(this.createConspectForm.value);
+    await this.conspectsService.createConspect(this.createConspectForm.value);
   }
 
   private initForm() {
     this.createConspectForm = this.fb.group({
-      name: ['', [
+      Name: ['', [
         Validators.required,
-        Validators.pattern(/[А-я]/)
+        Validators.pattern(/[A-z]/)
       ]
       ],
-      email: ['', [
-        Validators.required, Validators.email
+      SpecialityNumberId: ['', [
+        Validators.required
+      ]
+      ],
+      Content: ['', [
+        Validators.required
       ]
       ]
     });
