@@ -18,11 +18,11 @@ namespace CourseProject.Api.Services.Rating.Models
                 .NotNull();
             RuleFor(x => x.Mark).ExclusiveBetween(1, 5).WithMessage("invalid value range");
             RuleFor(x => x.UserId)
-                .NotNull().WithMessage("this field is required");
+                .NotNull().WithMessage("field UserId is required");
             RuleFor(x => x.Active)
                 .NotNull();
             RuleFor(x => x.ConspectId)
-                .NotNull().WithMessage("this field is required");
+                .NotNull().WithMessage("field ConspectId is required");
         }
 
         public bool UserVerification(Data.Model.Rating rating)
