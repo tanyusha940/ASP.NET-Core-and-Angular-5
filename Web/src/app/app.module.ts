@@ -15,6 +15,7 @@ import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PersonalPageModule } from '@app/personal-page/personal-page.module';
+import { ConspectsComponent } from '@app/personal-page/conspects/conspects.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,9 @@ import { PersonalPageModule } from '@app/personal-page/personal-page.module';
   declarations: [AppComponent],
   providers: [
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+    ConspectsComponent  
+  ]
 })
 export class AppModule { }

@@ -19,6 +19,17 @@ export class ConspectsService {
 
   async createConspect(conspect: Conspect): Promise<Conspect>{
     return await this.httpClient
-      .post<Conspect>('/conspect',conspect).toPromise();
+      .post<Conspect>('/conspect',conspect)
+      .toPromise();
+  }
+
+  async deleteConspect(id: number): Promise<{}>{
+    return await this.httpClient
+      .delete(`/conspect/${id}`).toPromise();
+  }
+  async updateConspect(conspect: Conspect): Promise<Conspect>{
+    return await this.httpClient
+      .put<Conspect>('/conspect',conspect)
+      .toPromise();
   }
 }

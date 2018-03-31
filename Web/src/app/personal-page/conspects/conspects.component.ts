@@ -46,11 +46,12 @@ export class ConspectsComponent implements OnInit {
     this.createConspectForm = this.fb.group({
       Name: ['', [
         Validators.required,
-        Validators.pattern(/[A-z]/)
+        Validators.maxLength(50)
       ]
       ],
       SpecialityNumberId: ['', [
-        Validators.required
+        Validators.required,
+        Validators.max(500)
       ]
       ],
       Content: ['', [

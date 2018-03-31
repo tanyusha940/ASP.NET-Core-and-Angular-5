@@ -3,22 +3,20 @@
     <label for="Name">Название</label>
     <input type="text" id="Name" formControlName="Name" />
     <div class="error" *ngIf="isControlInvalid('Name')">
-      Имя должно состоять только из русских букв
+      Максимальная длинна имени не должна привышать 50 символов
     </div>
     <br/><br/>
   
     <label for="SpecialityNumberId">Номер специальности</label>
     <input type="text" id="SpecialityNumberId" formControlName="SpecialityNumberId" />
       <div class="error" *ngIf="isControlInvalid('SpecialityNumberId')">
-      Введите валидный адрес почты
+        Вы ввели некорректный номер специальности
     </div>
     <br/><br/>
   
     <label for="Content">Контент</label>
     <input type="text" id="Content" formControlName="Content" />
-      <div class="error" *ngIf="isControlInvalid('Content')">
-      Введите валидный адрес почты
-    </div>
+      <div class="error" *ngIf="isControlInvalid('Content')"></div>
     <br/><br/>
 
     <button type="submit">отправить</button>
