@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Conspect } from '@app/personal-page/conspects/models/conspect';
 import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { TagsComponent } from '@app/personal-page/tags/tags.component';
 
 @Component({
   selector: 'app-conspects',
@@ -17,7 +18,11 @@ export class ConspectsComponent implements OnInit {
   conspectItems: ConspectItem[];
   conspect: Conspect;
 
-  constructor(private conspectsService: ConspectsService, private fb: FormBuilder) { }
+  
+  constructor(
+    private conspectsService: ConspectsService,
+    private fb: FormBuilder
+  ) { }
 
   async ngOnInit() {
     this.initForm();

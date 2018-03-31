@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PersonalPageModule } from '@app/personal-page/personal-page.module';
 import { ConspectsComponent } from '@app/personal-page/conspects/conspects.component';
+import { TagsComponent } from '@app/personal-page/tags/tags.component';
 
 @NgModule({
   imports: [
@@ -38,8 +39,7 @@ import { ConspectsComponent } from '@app/personal-page/conspects/conspects.compo
   providers: [
   ],
   bootstrap: [
-    AppComponent,
-    ConspectsComponent  
+    AppComponent
   ]
 })
 export class AppModule { }

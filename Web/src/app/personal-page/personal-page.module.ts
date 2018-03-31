@@ -5,6 +5,7 @@ import { PersonalPageRoutingModule } from './personal-page-routing.module';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from '@app/app.component';
+import { TagsComponent } from '@app/personal-page/tags/tags.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,10 @@ import { AppComponent } from '@app/app.component';
     ReactiveFormsModule 
   ],
   providers: [ConspectsService],
-  declarations: [ ConspectsComponent ],
+  declarations: [
+     ConspectsComponent,
+     TagsComponent
+    ],
   //bootstrap: [AppComponent]
 })
 export class PersonalPageModule { }
