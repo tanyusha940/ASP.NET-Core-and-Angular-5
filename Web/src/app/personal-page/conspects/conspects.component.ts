@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 import { ConspectItem } from '@app/personal-page/conspects/models/conspectItem';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Conspect } from '@app/personal-page/conspects/models/conspect';
+import { NgModule } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-conspects',
@@ -10,8 +13,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ConspectsComponent implements OnInit {
 
-  createConspectForm: FormGroup;
+  form: FormGroup;
   conspectItems: ConspectItem[];
+  conspect: Conspect;
 
   constructor(private conspectsService: ConspectsService, private fb: FormBuilder) { }
 
@@ -22,7 +26,7 @@ export class ConspectsComponent implements OnInit {
 
   
   isControlInvalid(controlName: string): boolean {
-    const control = this.createConspectForm.controls[controlName];
+    const control = this.form.controls[controlName];
 
     const result = control.invalid && control.touched;
 
@@ -30,34 +34,31 @@ export class ConspectsComponent implements OnInit {
   }
 
   async onSubmit() {
-    const controls = this.createConspectForm.controls;
+    const controls = this.form.controls;
 
-    if (this.createConspectForm.invalid) {
+    if (this.form.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
 
       return;
     }
 
-    await this.conspectsService.createConspect(this.createConspectForm.value);
+    await this.conspectsService.createConspect(this.form.value);
   }
 
   private initForm() {
-    this.createConspectForm = this.fb.group({
+    this.form = this.fb.group({
       Name: ['', [
         Validators.required,
         Validators.maxLength(50)
-      ]
-      ],
+      ]],
       SpecialityNumberId: ['', [
         Validators.required,
         Validators.max(500)
-      ]
-      ],
+      ]],
       Content: ['', [
         Validators.required
-      ]
-      ]
+      ]]
     });
   }
 }
