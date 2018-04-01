@@ -1,3 +1,25 @@
-<div *ngFor="let item of tagItems">
+<!-- <div *ngFor="let item of tagItems">
   {{item.text}}
+</div> -->
+<h3>Select multiple cities</h3>
+<div class="example-block">
+    <div class="example-block__item">
+        <ngx-select 
+        [multiple]="true"
+        [items]="tagItemsNew"
+        [disabled]="ngxDisabled"
+       
+        placeholder="No city selected"
+        ></ngx-select>
+
+        <p></p>
+        <div class="alert alert-secondary">
+            <pre>{{ngxValue | json}}</pre>
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="ngxDisabled = !ngxDisabled">
+                {{ngxDisabled ? 'Enable' : 'Disable'}}
+            </button>
+        </div>
+    </div>
 </div>

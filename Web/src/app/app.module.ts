@@ -18,6 +18,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { PersonalPageModule } from '@app/personal-page/personal-page.module';
 import { ConspectsComponent } from '@app/personal-page/conspects/conspects.component';
 import { TagsComponent } from '@app/personal-page/tags/tags.component';
+import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
+
+const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
+  optionValueField: 'id',
+  optionTextField: 'name'
+};
 
 @NgModule({
   imports: [
@@ -33,7 +39,8 @@ import { TagsComponent } from '@app/personal-page/tags/tags.component';
     AboutModule,
     LoginModule,
     PersonalPageModule,
-    AppRoutingModule
+    AppRoutingModule,
+   // NgxSelectModule.forRoot(CustomSelectOptions)
   ],
   declarations: [AppComponent],
   providers: [

@@ -18,13 +18,13 @@
     <input type="text" formControlName="Content" [ngModel]="conspect?.content"/>
       <div class="error" *ngIf="isControlInvalid('Content')"></div>
     <br/><br/>
-
+    <app-tags> </app-tags>
     <button type="submit">отправить</button>
   </form>
 <div *ngFor="let item of conspectItems" >
   <div class="panel panel-default">
       {{item.name}}
     <div class="panel-body" >{{item.content}}</div>
-    <app-tags> </app-tags>
+
   </div>
 </div>

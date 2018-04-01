@@ -6,12 +6,18 @@ import { ConspectsService } from '@app/personal-page/conspects/conspects.service
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from '@app/app.component';
 import { TagsComponent } from '@app/personal-page/tags/tags.component';
+import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 
+const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
+  optionValueField: 'id',
+  optionTextField: 'name'
+};
 @NgModule({
   imports: [
     CommonModule,
     PersonalPageRoutingModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule ,
+    NgxSelectModule.forRoot(CustomSelectOptions)
   ],
   providers: [ConspectsService],
   declarations: [

@@ -18,7 +18,9 @@ import { Input} from '@angular/core';
 export class TagsComponent implements OnInit {
 
   tagItems: TagItem[];
-
+  tagItemsNew: any = [];
+  public ngxValue: any = [];
+  public ngxDisabled = false;
  // @Input() Tags
   constructor(
     private tagsService: TagsService,
@@ -26,6 +28,9 @@ export class TagsComponent implements OnInit {
 
   async ngOnInit() {
     this.tagItems = await this.tagsService.getTags();
+    for(let i=0; i<this.tagItems.length; i++){
+      this.tagItemsNew.push(this.tagItems[i].text);
+    }
   }
 
 }
