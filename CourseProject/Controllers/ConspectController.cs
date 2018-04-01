@@ -52,12 +52,9 @@ namespace CourseProject.Web.Api.Controllers
 
         // POST: api/Conspect
         [HttpPost]
-        public async Task<IActionResult> CreateConspect([FromBody] Data.Model.Conspect conspect)
+        public async Task<IActionResult> CreateConspect([FromBody] CreateConspect.Command command)
         {
-            return Ok(await _mediator.Send(new CreateConspect.Command
-            {
-                Conspect = conspect
-            }));
+            return Ok(await _mediator.Send(command));
         }
 
         // DELETE: api/Conspect/5

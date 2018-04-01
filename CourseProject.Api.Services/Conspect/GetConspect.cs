@@ -1,18 +1,21 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CourseProject.Api.Services.Conspect.Models;
+using CourseProject.Api.Services.LookUps.Models;
 using CourseProject.Data.Model.Context;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Api.Services.Conspect
 {
     public class GetConspect
     {
-        public class Query : IRequest<Data.Model.Conspect>
+        public class Query : IRequest<ConspectDto>
         {
             public int Id { get; set; }
         }
 
-        public class Handler : AsyncRequestHandler<Query, Data.Model.Conspect>
+        public class Handler : AsyncRequestHandler<Query, ConspectDto>
         {
             private readonly ApplicationContext _context;
 
@@ -21,12 +24,26 @@ namespace CourseProject.Api.Services.Conspect
                 _context = context;
             }
 
-            protected override Task<Data.Model.Conspect> HandleCore(Query query)
+            protected async override Task<ConspectDto> HandleCore(Query query)
             {
-                return Task.FromResult(_context.Conspects
+                var tags = await _context.ConspectTags
+                    .Include(conspectTag => conspectTag.Tag)
+                    .Where(conspectTag => conspectTag.ConspectId == query.Id)
+                    .Select(conspectTag => new LookUp
+                    {
+                        Id = conspectTag.TagId,
+                        Text = conspectTag.Tag.Text
+                    })
+                    .ToListAsync();
+
+                return await Task.FromResult(_context.Conspects
                     .Where(conspect => conspect.Active)
-                    .First(conspect => conspect.Id == query.Id)
-                );
+                    .Select(conspect => new ConspectDto
+                    {
+                        Id = conspect.Id,
+                        Tags = tags
+                    })
+                    .First(conspect => conspect.Id == query.Id));
             }
         }
     }

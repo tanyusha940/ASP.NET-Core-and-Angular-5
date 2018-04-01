@@ -1,8 +1,11 @@
 ﻿using CourseProject.Data.Model.Context;
 using MediatR;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CourseProject.Data.Model;
 using FluentValidation;
 
 namespace CourseProject.Api.Services.Conspect
@@ -12,6 +15,8 @@ namespace CourseProject.Api.Services.Conspect
         public class Command : IRequest<int>
         {
             public Data.Model.Conspect Conspect { get; set; }
+
+            public IEnumerable<Data.Model.Tag> Tags { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, int>, IPipelineBehavior<Command, int>
@@ -34,11 +39,22 @@ namespace CourseProject.Api.Services.Conspect
 
             public Task<int> Handle(Command command, CancellationToken cancellationToken)
             {
-                command.Conspect.CreatedDate = DateTime.Now;
-                command.Conspect.Active = true;
-                _context.Conspects.Add(command.Conspect);
+                var conspect = command.Conspect;
+                var tags = command.Tags;
+                var conspectTags = tags.Select(tag => new ConspectTag
+                    {
+                        Conspect = conspect,
+                        Tag = tag
+                    })
+                    .ToList();
+
+                conspect.CreatedDate = DateTime.Now;
+                conspect.Active = true;
+                conspect.ConspectTags = conspectTags;
+                _context.Conspects.Add(conspect);
+                _context.ConspectTags.AddRange(conspectTags);
                 _context.SaveChanges();
-                return Task.FromResult(command.Conspect.Id);
+                return Task.FromResult(conspect.Id);
             }
         }
     }
