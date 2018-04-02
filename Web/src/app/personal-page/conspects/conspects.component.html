@@ -3,7 +3,7 @@
     <label for="Name">Название</label>
     <input type="text" formControlName="Name" [ngModel] = "conspect?.name" />
     <div class="error" *ngIf="isControlInvalid('Name')">
-      Максимальная длинна имени не должна привышать 50 символов
+      Максимальная длина имени не должна превышать 50 символов
     </div>
     <br/><br/>
   

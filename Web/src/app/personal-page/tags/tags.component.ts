@@ -8,6 +8,7 @@ import { NgModel } from '@angular/forms';
 import { TagItem } from '@app/personal-page/tags/models/tagItem';
 import { TagsService } from '@app/personal-page/tags/tags.service';
 import { Input} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tags',
@@ -17,9 +18,10 @@ import { Input} from '@angular/core';
 })
 export class TagsComponent implements OnInit {
 
+  form: FormGroup;
   tagItems: TagItem[];
   tagItemsNew: any = [];
-  public ngxValue: any = [];
+  public ngxValue: any = ['a','x'];
   public ngxDisabled = false;
  // @Input() Tags
   constructor(
