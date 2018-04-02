@@ -1,6 +1,6 @@
-export class Conspect{
+export class Conspect {
     public name: string;
-    public specialityNumberId: number;
+    public specialityNumberId = 0;
     public content: string;
     public id: number;
 }

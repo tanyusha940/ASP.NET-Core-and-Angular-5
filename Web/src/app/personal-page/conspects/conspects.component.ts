@@ -25,6 +25,7 @@ export class ConspectsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.conspect = new Conspect();
     this.initForm();
     this.conspectItems = await this.conspectsService.getConspects();
   }
