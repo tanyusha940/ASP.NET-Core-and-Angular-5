@@ -19,6 +19,8 @@ import { PersonalPageModule } from '@app/personal-page/personal-page.module';
 import { ConspectsComponent } from '@app/personal-page/conspects/conspects.component';
 import { TagsComponent } from '@app/personal-page/tags/tags.component';
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagInputModule } from 'ngx-chips';
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
   optionValueField: 'id',
@@ -40,6 +42,8 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
     LoginModule,
     PersonalPageModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    TagInputModule,
    // NgxSelectModule.forRoot(CustomSelectOptions)
   ],
   declarations: [AppComponent],

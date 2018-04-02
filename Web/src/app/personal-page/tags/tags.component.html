@@ -1,6 +1,21 @@
 <h3>Введите теги</h3>
+<form class="form" [formGroup]="form">
+    <div class="home-container">
+        <div>
+            <h3>Tags within an autocomplete component</h3>
+            <tag-input  formControlName ="tagItems"
+                        [ngModel] = "tagItemsNew"
+                        [addOnBlur]="true"
+                        [clearOnBlur]="true">
+                <tag-input-dropdown [autocompleteItems]="autocompleteItems">
+                </tag-input-dropdown>
+            </tag-input>
+        </div>
+    </div>
+</form>
+    
 
-<div class="example-block">
+<!-- <div class="example-block">
     <div class="example-block__item">
         <ngx-select 
         [multiple]="true"
@@ -14,11 +29,5 @@
         <div class="alert alert-secondary">
             <pre>{{ngxValue | json}}</pre>
         </div>
-        <!-- <div>
-            <button class="btn btn-primary" (click)="ngxDisabled = !ngxDisabled">
-                {{ngxDisabled ? 'Enable' : 'Disable'}}
-            </button>
-        </div> -->
-    </div>
-    
-</div>
+    </div>   
+</div> -->

@@ -33,6 +33,7 @@
     "bootstrap": "4.0.0",
     "core-js": "^2.5.2",
     "lodash": "^4.17.4",
+    "ngx-chips": "^1.6.8",
     "ngx-select-ex": "^3.4.0",
     "rxjs": "^5.5.5",
     "zone.js": "^0.8.18"
