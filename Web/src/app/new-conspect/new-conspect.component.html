@@ -1,0 +1,25 @@
+<div *ngFor="let item of conspectItems">
+    <div class="container h-100">
+      <div class="row align-items-center h-100">
+        <div class="col-7 mx-auto">
+          <div class="card h-100 border-primary justify-content-center">
+            <div class="card text-center">
+              <div class="card-header">
+               <h4> {{item.name}}</h4>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">Tags</h6>
+              <p class="card-text">
+                {{item.content}}
+              </p>
+            </div>
+            <div class="card-footer text-muted">
+              {{item.createdDate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>

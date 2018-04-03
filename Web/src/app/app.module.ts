@@ -23,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
 import { TagsService } from '@app/personal-page/tags/tags.service';
 import { NewConspectComponent } from './new-conspect/new-conspect.component';
-import { BestConspectComponent } from './best-conspect/best-conspect.component';
+import { NewConspectModule } from './new-conspect/new-conspect.module';
+
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
   optionValueField: 'id',
@@ -47,9 +48,11 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
     AppRoutingModule,
     BrowserAnimationsModule,
     TagInputModule,
+    NewConspectModule
+
    // NgxSelectModule.forRoot(CustomSelectOptions)
   ],
-  declarations: [AppComponent, NewConspectComponent, BestConspectComponent],
+  declarations: [AppComponent],
   providers: [
     TagsService
   ],
