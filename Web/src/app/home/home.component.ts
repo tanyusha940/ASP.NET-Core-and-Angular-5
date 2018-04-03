@@ -42,12 +42,15 @@ export class HomeComponent implements OnInit {
     overflow: false,
   }
  async getWords(){
+  var data:any = [];
   this.tagItems.forEach(tag => {
-    this.wordData.push({
+    data.push({
             weight: this.random(),
             text: tag.text
           });
+
   });
+  this.wordData = data;
   return await this.wordData;
   }
 }

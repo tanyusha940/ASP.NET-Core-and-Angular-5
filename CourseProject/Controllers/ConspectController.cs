@@ -35,6 +35,13 @@ namespace CourseProject.Web.Api.Controllers
             }));
         }
 
+        [Route("api/Conspect/[action]")]
+        [HttpGet]
+        public async Task<IActionResult> GetSortByDateConspects()
+        {
+            return Ok(await _mediator.Send(new GetSortByDateConspects.Query()));
+        }
+
         // PUT: api/Conspect/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutConspect([FromRoute] int id, [FromBody] Data.Model.Conspect conspect)
