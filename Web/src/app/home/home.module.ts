@@ -7,20 +7,25 @@ import { SharedModule } from '@app/shared';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
-
+import { TagCloudModule } from 'angular-tag-cloud-module';
+import {AgWordCloudModule} from 'angular4-word-cloud';
+import { TagsService } from '@app/personal-page/tags/tags.service';
 @NgModule({
   imports: [
     CommonModule,
     TranslateModule,
     CoreModule,
     SharedModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    TagCloudModule,
+    AgWordCloudModule.forRoot()
   ],
   declarations: [
     HomeComponent
   ],
   providers: [
-    QuoteService
+    QuoteService,
+    TagsService
   ]
 })
 export class HomeModule { }

@@ -21,6 +21,7 @@ import { TagsComponent } from '@app/personal-page/tags/tags.component';
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
+import { TagsService } from '@app/personal-page/tags/tags.service';
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
   optionValueField: 'id',
@@ -48,6 +49,7 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
   ],
   declarations: [AppComponent],
   providers: [
+    TagsService
   ],
   bootstrap: [
     AppComponent
