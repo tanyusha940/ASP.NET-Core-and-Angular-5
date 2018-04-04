@@ -25,7 +25,7 @@ namespace CourseProject.Api.Services.Conspect
             {
                 return _context.Conspects
                     .Where(conspect => conspect.Active)
-                    .OrderByDescending(c => c.Ratings.Count);
+                    .OrderByDescending(c => c.Ratings.Average(rating => rating.Mark));
             }
         }
     }
