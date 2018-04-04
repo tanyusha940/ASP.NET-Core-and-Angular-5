@@ -6,22 +6,25 @@ import { Conspect } from '@app/personal-page/conspects/models/conspect';
 import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { TagsComponent } from '@app/personal-page/tags/tags.component';
+import { MarkdownParserService } from '@app/personal-page/conspects/markdown-parser.service';
 
 @Component({
   selector: 'app-conspects',
   templateUrl: './conspects.component.html',
-  styleUrls: ['./conspects.component.scss']
+  styleUrls: ['./conspects.component.scss'],
+  providers: [ MarkdownParserService] 
 })
 export class ConspectsComponent implements OnInit {
 
   form: FormGroup;
   conspectItems: ConspectItem[];
   conspect: Conspect;
-
+  convertedText: string;
   
   constructor(
     private conspectsService: ConspectsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private md: MarkdownParserService
   ) { }
 
   async ngOnInit() {
@@ -29,7 +32,6 @@ export class ConspectsComponent implements OnInit {
     this.initForm();
     this.conspectItems = await this.conspectsService.getConspects();
   }
-
   
   isControlInvalid(controlName: string): boolean {
     const control = this.form.controls[controlName];
@@ -67,4 +69,9 @@ export class ConspectsComponent implements OnInit {
       ]]
     });
   }
+
+  updateOutput(mdText: string) {
+    this.convertedText = this.md.convert(mdText);
+  }
+
 }

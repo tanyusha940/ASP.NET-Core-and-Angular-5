@@ -10,12 +10,14 @@ import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
   optionValueField: 'id',
   optionTextField: 'name'
 };
 @NgModule({
   imports: [
+
     BrowserAnimationsModule,
     TagInputModule,
     CommonModule,
