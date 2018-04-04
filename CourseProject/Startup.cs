@@ -37,6 +37,12 @@ namespace CourseProject.Web.Api
       string connection = Configuration.GetConnectionString("DefaultConnection");
       var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
 
+      services.Configure<JwtIssuerOptions>(options =>
+      {
+        options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+        options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
+        options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+      });
       services.AddDbContext<ApplicationContext>(options =>
         options.UseSqlServer(connection));
 
@@ -104,6 +110,7 @@ namespace CourseProject.Web.Api
           _.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>)); // Handlers with a response
           _.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
           _.ConnectImplementationsToTypesClosing(typeof(IPipelineBehavior<,>));
+          _.WithDefaultConventions();
         });
 
         config.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
