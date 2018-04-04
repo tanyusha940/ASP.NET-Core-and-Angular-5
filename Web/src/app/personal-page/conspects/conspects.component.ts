@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { TagsComponent } from '@app/personal-page/tags/tags.component';
 import { MarkdownParserService } from '@app/personal-page/conspects/markdown-parser.service';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
 @Component({
   selector: 'app-conspects',
