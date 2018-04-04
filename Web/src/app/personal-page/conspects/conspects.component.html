@@ -2,7 +2,7 @@
 <form class="form" [formGroup]="form" (submit)="onSubmit()">
   <label for="Name">Название</label>
   <input type="text" [formControl]="form.get('Name')" [(ngModel)]="conspect.name" />
-  <div class="error" *ngIf="isControlInvalid('Name')">
+  <div class="error" *ngIf="isControlInvalid('Name')"> -->
     Максимальная длина имени не должна превышать 50 символов
   </div>
   <br/>
@@ -15,27 +15,30 @@
   </div>
   <br/>
   <br/>
-
+<!-- 
   <label for="Content">Контент</label>
   <input type="text" [formControl]="form.get('Content')" [(ngModel)]="conspect.content" />
   <div class="error" *ngIf="isControlInvalid('Content')"></div>
   <br/>
-  <br/>
+  <br/> -->
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+              <h5>Markdown</h5>
+              <textarea  placeholder="Enter your markdown here..."
+               (keyup)="updateOutput($event.target.value)" formControlName = "Content"  [ngModel] = "this.conspect.content"  ></textarea>
+          </div>
+          <div class="col-md-6">
+              <h5>Output</h5>
+              <label [innerHtml]="convertedText" ></label>
+              
+          </div>
+      </div>
+  </div>
   <app-tags> </app-tags>
   <button type="submit">отправить</button>
 </form>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h5>Markdown</h5>
-            <textarea name="markdown" id="markdown-area" rows="10" placeholder="Enter your markdown here..." (keyup)="updateOutput($event.target.value)" ></textarea>
-        </div>
-        <div class="col-md-6">
-            <h5>Output</h5>
-            <div [innerHtml]="convertedText"></div>
-        </div>
-    </div>
-</div>
+
 <div *ngFor="let item of conspectItems">
   <div class="panel panel-default">
     {{item.name}}
