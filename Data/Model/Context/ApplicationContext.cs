@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Data.Model.Context
 {
-    public class ApplicationContext : DbContext
-    {
+    public class ApplicationContext : IdentityDbContext<UserIdentity>
+  {
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
@@ -12,6 +13,7 @@ namespace CourseProject.Data.Model.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ConspectTag>()
                 .HasKey(ct => new { ct.ConspectId, ct.TagId });
 
