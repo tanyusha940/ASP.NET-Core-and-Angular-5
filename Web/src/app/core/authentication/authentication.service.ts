@@ -94,8 +94,12 @@ export class AuthenticationService {
     console.log(perms);
     });
     this._credentials = credentials || null;
-    console.log(this._credentials.role);
-    this.permissionsService.addPermission(this._credentials.role);
+    this.permissionsService.flushPermissions();
+    if (this._credentials && this._credentials.role) {
+      this.permissionsService.addPermission(this._credentials.role);
+    }
+
+    this.permissionsService.addPermission('guest');
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
@@ -103,6 +107,10 @@ export class AuthenticationService {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
     }
+  }
+
+  defineDefaultRoles() {
+    this.permissionsService.addPermission('guest');
   }
 
 }

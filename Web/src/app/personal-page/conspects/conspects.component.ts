@@ -12,7 +12,7 @@ import { MarkdownParserService } from '@app/personal-page/conspects/markdown-par
   selector: 'app-conspects',
   templateUrl: './conspects.component.html',
   styleUrls: ['./conspects.component.scss'],
-  providers: [ MarkdownParserService] 
+  providers: [ MarkdownParserService]
 })
 export class ConspectsComponent implements OnInit {
 
@@ -20,7 +20,7 @@ export class ConspectsComponent implements OnInit {
   conspectItems: ConspectItem[];
   conspect: Conspect;
   convertedText: string;
-  
+
   constructor(
     private conspectsService: ConspectsService,
     private fb: FormBuilder,
@@ -32,7 +32,7 @@ export class ConspectsComponent implements OnInit {
     this.initForm();
     this.conspectItems = await this.conspectsService.getConspects();
   }
-  
+
   isControlInvalid(controlName: string): boolean {
     const control = this.form.controls[controlName];
 

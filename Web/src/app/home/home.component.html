@@ -12,7 +12,7 @@
   <div *ngxPermissionsOnly="['admin']">
     For user admin
   </div>
-  <div *ngxPermissionsExcept="['user', 'admin']">
+  <div *ngxPermissionsOnly="['guest']">
     For guest
   </div>
 <div *ngFor="let item of conspectItems">

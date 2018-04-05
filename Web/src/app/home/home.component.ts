@@ -9,7 +9,7 @@ import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 import { AgWordCloudData } from 'angular4-word-cloud';
 import { TagItem } from '@app/personal-page/tags/models/tagItem';
 import { TagsService } from '@app/personal-page/tags/tags.service';
- 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -40,9 +40,9 @@ export class HomeComponent implements OnInit {
     width : 1000,
     height : 400,
     overflow: false,
-  }
- async getWords(){
-  var data:any = [];
+  };
+ async getWords() {
+  const data: any = [];
   this.tagItems.forEach(tag => {
     data.push({
             weight: this.random(),

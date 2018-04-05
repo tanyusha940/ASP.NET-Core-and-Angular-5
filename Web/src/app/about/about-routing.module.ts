@@ -3,12 +3,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { Route, extract } from '@app/core';
 import { AboutComponent } from './about.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   Route.withShell([
-    { path: 'about', component: AboutComponent, data: { title: extract('About') } }
-  ])
-];
+    {
+      path: 'about',
+      component: AboutComponent,
+      data: {
+        title: extract('About'),
+        permissions: {
+          only: 'admin'
+        }
+      },
+      canActivate: [NgxPermissionsGuard],
+    }]
+  )];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
