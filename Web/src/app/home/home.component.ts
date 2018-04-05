@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   this.tagItems.forEach(tag => {
     data.push({
             weight: this.random(),
-            text: tag.text
+            text: tag.value
           });
 
   });

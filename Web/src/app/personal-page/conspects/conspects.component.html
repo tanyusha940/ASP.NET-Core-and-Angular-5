@@ -2,8 +2,7 @@
 <form class="form" [formGroup]="form" (submit)="onSubmit()">
   <label for="Name">Название</label>
   <input type="text" [formControl]="form.get('Name')" [(ngModel)]="conspect.name" />
-  <div class="error" *ngIf="isControlInvalid('Name')"> -->
-    Максимальная длина имени не должна превышать 50 символов
+  <div class="error" *ngIf="isControlInvalid('Name')"> --> Максимальная длина имени не должна превышать 50 символов
   </div>
   <br/>
   <br/>
@@ -15,26 +14,13 @@
   </div>
   <br/>
   <br/>
-<!-- 
+
   <label for="Content">Контент</label>
   <input type="text" [formControl]="form.get('Content')" [(ngModel)]="conspect.content" />
   <div class="error" *ngIf="isControlInvalid('Content')"></div>
   <br/>
-  <br/> -->
-  <div class="container">
-      <div class="row">
-          <div class="col-md-6">
-              <h5>Markdown</h5>
-              <textarea  placeholder="Enter your markdown here..."
-              class="variable-textarea" formControlName = "Content"  [ngModel] = "this.conspect.content"  ></textarea>
-          </div>
-          <div class="col-md-6">
-              <h5>Output</h5>
-              <label [innerHtml]="convertedText" ></label>
-              
-          </div>
-      </div>
-  </div>
+  <br/>
+
   <app-tags> </app-tags>
   <button type="submit">отправить</button>
 </form>
@@ -42,7 +28,8 @@
 <div *ngFor="let item of conspectItems">
   <div class="panel panel-default">
     {{item.name}}
-    <markdown class="variable-binding card" [data]="item.content"></markdown> 
-    <!-- <div class="panel-body">{{item.content}}</div> -->
+    <div class="panel-body">
+      <markdown class="variable-binding card" [data]="item.content"></markdown>
+    </div>
   </div>
 </div>

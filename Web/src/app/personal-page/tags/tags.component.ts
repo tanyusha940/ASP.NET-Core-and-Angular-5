@@ -40,7 +40,7 @@ export class TagsComponent implements OnInit {
   async ngOnInit() {
     this.tagItems = await this.tagsService.getTags();
     for(let i=0; i<this.tagItems.length; i++){
-      this.tagItemsNew.push(this.tagItems[i].text);
+      this.tagItemsNew.push(this.tagItems[i].value);
     }
     this.autocompleteItems = this.tagItems;
   }
