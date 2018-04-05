@@ -38,6 +38,7 @@
     "lodash": "^4.17.4",
     "marked": "^0.3.19",
     "ngx-chips": "^1.6.8",
+    "ngx-permissions": "^4.1.0",
     "ngx-select-ex": "^3.4.0",
     "rxjs": "^5.5.5",
     "zone.js": "^0.8.18"

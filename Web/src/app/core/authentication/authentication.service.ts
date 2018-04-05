@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient } from '@angular/common/http';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 export interface Credentials {
   // Customize received credentials here
@@ -28,7 +29,8 @@ export class AuthenticationService {
 
   private _credentials: Credentials | null;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private permissionsService: NgxPermissionsService) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -45,7 +47,6 @@ export class AuthenticationService {
     .post<Credentials>('/login', context)
     .toPromise()
     .then((data: Credentials) => {
-      console.log(data);
       this.setCredentials(data, context.remember);
       return true;
     })
@@ -88,8 +89,13 @@ export class AuthenticationService {
    * @param {boolean=} remember True to remember credentials across sessions.
    */
   private setCredentials(credentials?: Credentials, remember?: boolean) {
+    const permissions = this.permissionsService.getPermissions();
+    this.permissionsService.permissions$.subscribe((perms) => {
+    console.log(perms);
+    });
     this._credentials = credentials || null;
-
+    console.log(this._credentials.role);
+    this.permissionsService.addPermission(this._credentials.role);
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoaderComponent } from './loader/loader.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { LoaderComponent } from './loader/loader.component';
     LoaderComponent
   ],
   exports: [
-    LoaderComponent
+    LoaderComponent,
+    NgxPermissionsModule
   ]
 })
 export class SharedModule { }

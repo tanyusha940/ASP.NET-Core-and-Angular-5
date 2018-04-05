@@ -10,6 +10,7 @@ import { QuoteService } from './quote.service';
 import { TagCloudModule } from 'angular-tag-cloud-module';
 import {AgWordCloudModule} from 'angular4-word-cloud';
 import { TagsService } from '@app/personal-page/tags/tags.service';
+import { NgxPermissionsModule } from 'ngx-permissions';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +19,8 @@ import { TagsService } from '@app/personal-page/tags/tags.service';
     SharedModule,
     HomeRoutingModule,
     TagCloudModule,
-    AgWordCloudModule.forRoot()
+    AgWordCloudModule.forRoot(),
+    NgxPermissionsModule.forRoot()
   ],
   declarations: [
     HomeComponent

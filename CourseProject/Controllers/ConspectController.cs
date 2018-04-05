@@ -4,9 +4,11 @@ using CourseProject.Api.Services.Conspect;
 using CourseProject.Infrastructure.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CourseProject.Web.Api.Controllers
 {
+    [Authorize]
     [ApiExceptionFilterAttribute]
     [Route("api/Conspect")]
     public class ConspectController : Controller
