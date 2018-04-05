@@ -24,6 +24,7 @@ import { TagInputModule } from 'ngx-chips';
 import { TagsService } from '@app/personal-page/tags/tags.service';
 import { NewConspectComponent } from './new-conspect/new-conspect.component';
 import { NewConspectModule } from './new-conspect/new-conspect.module';
+import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
@@ -52,7 +53,8 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
 
    // NgxSelectModule.forRoot(CustomSelectOptions)
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent,
+    ],
   providers: [
     TagsService
   ],

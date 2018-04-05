@@ -11,6 +11,7 @@ import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ConspectFormComponent } from '@app/personal-page/conspect-form/conspect-form.component';
+import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options

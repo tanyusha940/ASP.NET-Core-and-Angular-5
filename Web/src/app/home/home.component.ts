@@ -3,12 +3,12 @@ import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
 import { FormGroup } from '@angular/forms';
-import { ConspectItem } from '@app/personal-page/conspects/models/conspectItem';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 import { AgWordCloudData } from 'angular4-word-cloud';
 import { TagItem } from '@app/personal-page/tags/models/tagItem';
 import { TagsService } from '@app/personal-page/tags/tags.service';
+import { ConspectItem } from '@app/shared/consectItem/models/conspectItem';
  
 @Component({
   selector: 'app-home',
