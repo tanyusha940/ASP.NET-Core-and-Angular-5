@@ -33,4 +33,14 @@ export class ConspectsService {
       .put<Conspect>('/conspect',conspect)
       .toPromise();
   }
+
+  async GetSortByDateConspects():Promise<ConspectItem[]>{
+    return await this.httpClient
+    .get<ConspectItem[]>('/SortConspectController/GetSortByDateConspects').toPromise();
+  }
+
+  async GetSortByRatingConspects(): Promise<ConspectItem[]>{
+    return await this.httpClient
+    .get<ConspectItem[]>('/SortConspectController/GetSortByRatingConspects').toPromise();
+  }
 }

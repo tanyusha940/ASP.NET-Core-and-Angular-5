@@ -23,7 +23,8 @@
       "prefix": "app",
       "styles": [
         "main.scss",
-        "../node_modules/prismjs/themes/prism-okaidia.css"
+        "../node_modules/prismjs/themes/prism-okaidia.css",
+        "../node_modules/ngx-bar-rating/themes/br-default-theme.css"
       ],
       "scripts": [ "../node_modules/angular4-word-cloud/d3.min.js",
         "../node_modules/prismjs/prism.js",

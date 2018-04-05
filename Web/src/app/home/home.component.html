@@ -1,3 +1,4 @@
+<!-- <link rel="stylesheet" href="../node_modules/ngx-bar-rating/themes/br-default-theme.css"/> -->
 <div>
     <angular-tag-cloud
       [data]="wordData"
@@ -7,6 +8,7 @@
     </angular-tag-cloud>
   </div>
 <div *ngFor="let item of conspectItems">
+
   <div class="container h-100">
     <div class="row align-items-center h-100">
       <div class="col-7 mx-auto">
@@ -22,7 +24,11 @@
               {{item.content}}
             </p>
           </div>
+          <div>
+            
+          </div>
           <div class="card-footer text-muted">
+              <bar-rating [(rate)]="rate" [max]="5" [theme]="'default'" > </bar-rating>
             {{item.createdDate}}
           </div>
         </div>

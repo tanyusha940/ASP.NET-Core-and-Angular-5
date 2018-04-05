@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './loader/loader.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
+import { BarRatingModule } from 'ngx-bar-rating';
+import { RatingComponent } from '@app/shared/rating/rating.component';
 
 @NgModule({
   imports: [   
@@ -19,11 +21,14 @@ import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.com
       smartypants: false,
     },
     }),
-    CommonModule
+    CommonModule,
+    BarRatingModule
   ],
   declarations: [
     LoaderComponent,
     ConspectItemComponent,
+    RatingComponent,
+    
   ],
   exports: [
     LoaderComponent,
