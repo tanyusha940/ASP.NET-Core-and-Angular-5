@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 import { ConspectItem } from '@app/personal-page/conspects/models/conspectItem';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Conspect } from '@app/personal-page/conspects/models/conspect';
 import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { TagItem } from '@app/personal-page/tags/models/tagItem';

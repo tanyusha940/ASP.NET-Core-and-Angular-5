@@ -10,6 +10,7 @@ import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { ConspectFormComponent } from '@app/personal-page/conspect-form/conspect-form.component';
 
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
@@ -40,7 +41,8 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
   providers: [ConspectsService],
   declarations: [
      ConspectsComponent,
-     TagsComponent
+     TagsComponent,
+     ConspectFormComponent
     ],
   //bootstrap: [AppComponent]
 })
