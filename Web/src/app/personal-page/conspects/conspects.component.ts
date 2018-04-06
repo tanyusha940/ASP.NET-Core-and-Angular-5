@@ -7,12 +7,12 @@ import { TagsComponent } from '@app/personal-page/tags/tags.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { ConspectItem } from '@app/shared/consectItem/models/conspectItem';
+import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
 
 @Component({
   selector: 'app-conspects',
   templateUrl: './conspects.component.html',
-  styleUrls: ['./conspects.component.scss'],
-  providers: [ MarkdownParserService]
+  styleUrls: ['./conspects.component.scss']
 })
 export class ConspectsComponent implements OnInit {
 
@@ -20,12 +20,13 @@ export class ConspectsComponent implements OnInit {
   conspectItems: ConspectItem[];
   conspect: Conspect;
   convertedText: string;
+  fb: FormBuilder;
 
   constructor(
     private conspectsService: ConspectsService,
   ) { }
 
-  async ngOnInit() {     
+  async ngOnInit() {
     this.conspectItems = await this.conspectsService.getConspects();
   }
 
@@ -67,7 +68,6 @@ export class ConspectsComponent implements OnInit {
   }
 
   updateOutput(mdText: string) {
-    this.convertedText = this.md.convert(mdText);
   }
 
 }

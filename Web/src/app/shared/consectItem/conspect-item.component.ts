@@ -16,7 +16,7 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 export class ConspectItemComponent implements OnInit {
 
   conspectItems: ConspectItem[];
-  
+
   constructor(
     private conspectsService: ConspectsService,
   ) { }
