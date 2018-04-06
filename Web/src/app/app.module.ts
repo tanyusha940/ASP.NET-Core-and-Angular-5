@@ -27,6 +27,8 @@ import { NewConspectModule } from './new-conspect/new-conspect.module';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ConspectsViewModule } from '@app/conspects-view/conspects-view.module';
+import { AdminPageModule } from '@app/admin-page/admin-page.module';
+
 
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
@@ -49,12 +51,13 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
     LoginModule,
     PersonalPageModule,
     NewConspectModule,
+    AdminPageModule,
     ConspectsViewModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     TagInputModule,
   ],
-  declarations: [AppComponent,
+  declarations: [AppComponent, 
     ],
   providers: [
     TagsService,

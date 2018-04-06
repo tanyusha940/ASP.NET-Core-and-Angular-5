@@ -1,0 +1,16 @@
+<div *ngFor="let item of userItem">
+  <div class="card">
+    <div class="card-header">
+      <h4>Имя: </h4>
+      <h4>{{item.name}}</h4>
+    </div>
+    <div class="card-body">
+      <h6 class="card-title"> Email: </h6>
+      <p class="card-text"> {{item.email}} </p>
+      <br>
+      <h6 class="card-title"> Активность: </h6>
+      <p class="card-text">{{item.active}}</p>
+      <br>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,6 @@ export class ConspectsComponent implements OnInit {
   form: FormGroup;
   conspectItems: ConspectItem[];
   conspect: Conspect;
-  convertedText: string;
   fb: FormBuilder;
 
   constructor(
@@ -66,8 +65,4 @@ export class ConspectsComponent implements OnInit {
       ]]
     });
   }
-
-  updateOutput(mdText: string) {
-  }
-
 }
