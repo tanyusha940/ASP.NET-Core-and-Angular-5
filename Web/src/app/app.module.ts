@@ -24,6 +24,7 @@ import { TagInputModule } from 'ngx-chips';
 import { TagsService } from '@app/personal-page/tags/tags.service';
 import { NewConspectComponent } from './new-conspect/new-conspect.component';
 import { NewConspectModule } from './new-conspect/new-conspect.module';
+import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ConspectsViewModule } from '@app/conspects-view/conspects-view.module';
 
@@ -53,7 +54,8 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
     BrowserAnimationsModule,
     TagInputModule,
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent,
+    ],
   providers: [
     TagsService,
   ],

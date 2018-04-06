@@ -1,39 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { TagsComponent } from '@app/personal-page/tags/tags.component';
-import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
-import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
-import { ConspectItem } from '@app/shared/consectItem/models/conspectItem';
+import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
+import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 
 @Component({
-  selector: 'app-conspects',
-  templateUrl: './conspects.component.html',
-  styleUrls: ['./conspects.component.scss'],
-  providers: [ MarkdownParserService]
+  selector: 'app-conspect-form',
+  templateUrl: './conspect-form.component.html',
+  styleUrls: ['./conspect-form.component.scss']
 })
-export class ConspectsComponent implements OnInit {
+export class ConspectFormComponent implements OnInit {
 
   form: FormGroup;
-  conspectItems: ConspectItem[];
   conspect: Conspect;
-  convertedText: string;
-
+  
   constructor(
     private conspectsService: ConspectsService,
+    private fb: FormBuilder,
   ) { }
 
-  async ngOnInit() {     
-    this.conspectItems = await this.conspectsService.getConspects();
+  ngOnInit() {
+    this.initForm();
+    this.conspect = new Conspect();
   }
 
   isControlInvalid(controlName: string): boolean {
     const control = this.form.controls[controlName];
-
     const result = control.invalid && control.touched;
-
     return result;
   }
 
@@ -43,10 +37,8 @@ export class ConspectsComponent implements OnInit {
     if (this.form.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
-
       return;
     }
-
     await this.conspectsService.createConspect(this.form.value);
   }
 
@@ -65,9 +57,4 @@ export class ConspectsComponent implements OnInit {
       ]]
     });
   }
-
-  updateOutput(mdText: string) {
-    this.convertedText = this.md.convert(mdText);
-  }
-
 }

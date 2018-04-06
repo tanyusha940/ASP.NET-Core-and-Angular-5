@@ -1,48 +1,10 @@
-<div *ngxPermissionsOnly="['user', 'admin']">
-  <h1>Создание конспекта</h1>
-  <form class="form" [formGroup]="form" (submit)="onSubmit()">
-    <label for="Name">Название</label>
-    <input type="text" [formControl]="form.get('Name')" [(ngModel)]="conspect.name" />
-    <div class="error" *ngIf="isControlInvalid('Name')">
-      Максимальная длина имени не должна превышать 50 символов
-    </div>
-    <br/>
-    <br/>
-
-    <label for="SpecialityNumberId">Номер специальности</label>
-    <input type="text" [formControl]="form.get('SpecialityNumberId')" [(ngModel)]="conspect.specialityNumberId" />
-    <div class="error" *ngIf="isControlInvalid('SpecialityNumberId')">
-      Вы ввели некорректный номер специальности
-    </div>
-    <br/>
-    <br/>
-
-    <label for="Content">Контент</label>
-    <input type="text" [formControl]="form.get('Content')" [(ngModel)]="conspect.content" />
-    <div class="error" *ngIf="isControlInvalid('Content')"></div>
-    <br/>
-    <br/>
-    <app-tags> </app-tags>
-    <button type="submit">отправить</button>
-  </form>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h5>Markdown</h5>
-        <textarea name="markdown" id="markdown-area" rows="10" placeholder="Enter your markdown here..." (keyup)="updateOutput($event.target.value)"></textarea>
-      </div>
-      <div class="col-md-6">
-        <h5>Output</h5>
-        <div [innerHtml]="convertedText"></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div *ngxPermissionsExcept="['guest']">
-  <div *ngFor="let item of conspectItems">
+<app-conspect-form></app-conspect-form>
+<div *ngFor="let item of conspectItems">
     <div class="panel panel-default">
-      {{item.name}}
-      <div class="panel-body">{{item.content}}</div>
+        {{item.name}}
+        <div class="panel-body">
+            <markdown class="variable-binding card" [data]="item.content"></markdown>
+        </div>
     </div>
   </div>
 </div>
