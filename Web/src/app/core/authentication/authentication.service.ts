@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { HttpClient } from '@angular/common/http';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 export interface Credentials {
   // Customize received credentials here
-  username: string;
+  id: string;
   token: string;
+  username: string;
+  role: string;
 }
 
 export interface LoginContext {
@@ -25,7 +29,8 @@ export class AuthenticationService {
 
   private _credentials: Credentials | null;
 
-  constructor() {
+  constructor(private http: HttpClient,
+              private permissionsService: NgxPermissionsService) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -37,14 +42,17 @@ export class AuthenticationService {
    * @param {LoginContext} context The login parameters.
    * @return {Observable<Credentials>} The user credentials.
    */
-  login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
-    const data = {
-      username: context.username,
-      token: '123456'
-    };
-    this.setCredentials(data, context.remember);
-    return of(data);
+  async login(context: LoginContext): Promise<boolean> {
+    const result = await this.http
+    .post<Credentials>('/login', context)
+    .toPromise()
+    .then((data: Credentials) => {
+      this.setCredentials(data, context.remember);
+      return true;
+    })
+    .catch(() => false);
+
+    return result;
   }
 
   /**
@@ -81,8 +89,17 @@ export class AuthenticationService {
    * @param {boolean=} remember True to remember credentials across sessions.
    */
   private setCredentials(credentials?: Credentials, remember?: boolean) {
+    const permissions = this.permissionsService.getPermissions();
+    this.permissionsService.permissions$.subscribe((perms) => {
+    console.log(perms);
+    });
     this._credentials = credentials || null;
+    this.permissionsService.flushPermissions();
+    if (this._credentials && this._credentials.role) {
+      this.permissionsService.addPermission(this._credentials.role);
+    }
 
+    this.permissionsService.addPermission('guest');
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
@@ -90,6 +107,10 @@ export class AuthenticationService {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
     }
+  }
+
+  defineDefaultRoles() {
+    this.permissionsService.addPermission('guest');
   }
 
 }

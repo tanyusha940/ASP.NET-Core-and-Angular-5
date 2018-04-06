@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ConspectFormComponent } from '@app/personal-page/conspect-form/conspect-form.component';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
@@ -37,7 +38,8 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
     CommonModule,
     PersonalPageRoutingModule,
     ReactiveFormsModule ,
-    NgxSelectModule.forRoot(CustomSelectOptions)
+    NgxSelectModule.forRoot(CustomSelectOptions),
+    NgxPermissionsModule.forRoot()
   ],
   providers: [ConspectsService],
   declarations: [
@@ -45,6 +47,5 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
      TagsComponent,
      ConspectFormComponent
     ],
-  //bootstrap: [AppComponent]
 })
 export class PersonalPageModule { }

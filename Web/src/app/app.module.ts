@@ -25,6 +25,8 @@ import { TagsService } from '@app/personal-page/tags/tags.service';
 import { NewConspectComponent } from './new-conspect/new-conspect.component';
 import { NewConspectModule } from './new-conspect/new-conspect.module';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { ConspectsViewModule } from '@app/conspects-view/conspects-view.module';
 
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
@@ -46,17 +48,16 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
     AboutModule,
     LoginModule,
     PersonalPageModule,
+    NewConspectModule,
+    ConspectsViewModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     TagInputModule,
-    NewConspectModule
-
-   // NgxSelectModule.forRoot(CustomSelectOptions)
   ],
   declarations: [AppComponent,
     ],
   providers: [
-    TagsService
+    TagsService,
   ],
   bootstrap: [
     AppComponent

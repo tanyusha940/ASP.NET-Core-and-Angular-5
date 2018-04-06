@@ -18,6 +18,10 @@ namespace CourseProject.Data.Model
         [Required]
         public bool Active { get; set; }
 
+        public string IdentityId { get; set; }
+
+        public UserIdentity Identity { get; set; }
+
         public ICollection<Conspect> Conspects { get; set; }
 
         public ICollection<Comment> Comments { get; set; }

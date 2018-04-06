@@ -49,10 +49,10 @@ export class HomeComponent implements OnInit {
     width : 1000,
     height : 400,
     overflow: false,
-  }
-
-  async getWords(){
-  var data:any = [];
+  };
+  
+ async getWords() {
+  const data: any = [];
   this.tagItems.forEach(tag => {
     data.push({
             weight: this.random(),

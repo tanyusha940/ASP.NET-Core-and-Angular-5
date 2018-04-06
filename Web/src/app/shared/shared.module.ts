@@ -6,6 +6,7 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { RatingComponent } from '@app/shared/rating/rating.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [   
@@ -32,6 +33,7 @@ import { RatingComponent } from '@app/shared/rating/rating.component';
   ],
   exports: [
     LoaderComponent,
+    NgxPermissionsModule
   ]
 })
 export class SharedModule { }

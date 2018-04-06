@@ -11,6 +11,7 @@ import { TagCloudModule } from 'angular-tag-cloud-module';
 import {AgWordCloudModule} from 'angular4-word-cloud';
 import { TagsService } from '@app/personal-page/tags/tags.service';
 import { BarRatingModule } from  "ngx-bar-rating";
+import { NgxPermissionsModule } from 'ngx-permissions';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,8 +21,8 @@ import { BarRatingModule } from  "ngx-bar-rating";
     HomeRoutingModule,
     TagCloudModule,
     AgWordCloudModule.forRoot(),
-    BarRatingModule
-    
+    BarRatingModule,
+    NgxPermissionsModule.forRoot()
   ],
   declarations: [
     HomeComponent

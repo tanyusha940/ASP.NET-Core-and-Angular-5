@@ -6,7 +6,8 @@ import { merge } from 'rxjs/observable/merge';
 import { filter, map, mergeMap } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
-import { Logger, I18nService } from '@app/core';
+import { Logger, I18nService, AuthenticationService } from '@app/core';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 const log = new Logger('App');
 
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
               private translateService: TranslateService,
-              private i18nService: I18nService) { }
+              private i18nService: I18nService,
+              private authService: AuthenticationService) { }
 
   ngOnInit() {
     // Setup logger
@@ -30,7 +32,7 @@ export class AppComponent implements OnInit {
     }
 
     log.debug('init');
-
+    this.authService.defineDefaultRoles();
     // Setup translations
     this.i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
 

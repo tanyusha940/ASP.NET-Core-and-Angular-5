@@ -27,14 +27,14 @@ namespace CourseProject.Api.Services.Comment
                 _validator = validator;
             }
 
-            protected override Task<int> HandleCore(Command command)
+            protected override async Task<int> HandleCore(Command command)
             {
                 command.Comment.CreatedDate = DateTime.Now;
                 command.Comment.Active = true;
                 command.Comment.ConspectId = command.ConspectId;
                 _context.Comments.Add(command.Comment);
-                _context.SaveChanges();
-                return Task.FromResult(command.Comment.Id);
+                await _context.SaveChangesAsync();
+                return command.Comment.Id;
             }
 
             public async Task<int> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<int> next)
