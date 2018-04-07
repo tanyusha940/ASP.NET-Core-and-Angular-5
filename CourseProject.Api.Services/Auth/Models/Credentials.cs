@@ -11,5 +11,7 @@
     public int ExpiresIn { get; set; }
 
     public string Id { get; set; }
+
+    public bool IsEmailConfirmed { get; set; }
   }
 }
