@@ -42,16 +42,23 @@ namespace CourseProject.Api.Services.Auth
         var user = await _userManager.FindByNameAsync(request.Username);
         var role = await _userManager.GetRolesAsync(user);
 
-        var result = new Credentials
+        if (!await _userManager.IsEmailConfirmedAsync(user))
+        {
+          return new Credentials
+          {
+            IsEmailConfirmed = false
+          };
+        }
+
+        return new Credentials
         {
           Id = identity.Claims.Single(c => c.Type == "id").Value,
           Username = request.Username,
           Token = await _jwtFactory.GenerateEncodedToken(request.Username, identity),
           ExpiresIn = (int)_jwtOptions.ValidFor.TotalSeconds,
-          Role = role.FirstOrDefault()
+          Role = role.FirstOrDefault(),
+          IsEmailConfirmed = true
         };
-
-        return result;
       }
 
       private async Task<ClaimsIdentity> GetClaimsIdentity(string userName, string password)

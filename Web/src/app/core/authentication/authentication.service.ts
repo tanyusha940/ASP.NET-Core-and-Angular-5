@@ -10,6 +10,7 @@ export interface Credentials {
   token: string;
   username: string;
   role: string;
+  isEmailConfirmed: boolean;
 }
 
 export interface LoginContext {
@@ -42,15 +43,19 @@ export class AuthenticationService {
    * @param {LoginContext} context The login parameters.
    * @return {Observable<Credentials>} The user credentials.
    */
-  async login(context: LoginContext): Promise<boolean> {
+  async login(context: LoginContext): Promise<boolean | string> {
     const result = await this.http
     .post<Credentials>('/login', context)
     .toPromise()
     .then((data: Credentials) => {
-      this.setCredentials(data, context.remember);
-      return true;
+      console.log(data);
+      if (data.isEmailConfirmed) {
+        this.setCredentials(data, context.remember);
+        return true;
+      }
+      return 'confirm your email';
     })
-    .catch(() => false);
+    .catch((data: any) => {console.log(data); return 'invalid login or password'; });
 
     return result;
   }

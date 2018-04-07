@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationRoutingModule } from '@app/registration/registration-routing.module';
-import { RegistrationComponent } from '@app/registration/registration.component';
+import { RegistrationFormComponent } from '@app/registration/registration-form/registration-form.component';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { RegistrationComponent } from '@app/registration/registration.component'
     RegistrationRoutingModule
   ],
   declarations: [
-    RegistrationComponent
+    RegistrationFormComponent
   ]
 })
 export class RegistrationModule { }

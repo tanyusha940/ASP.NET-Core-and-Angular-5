@@ -1,8 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using CourseProject.Api.Services.Auth;
 using CourseProject.Api.Services.User;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace CourseProject.Web.Api.Controllers
 {
@@ -23,7 +28,8 @@ namespace CourseProject.Web.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUser.Command command)
         {
-            return Ok(await _mediator.Send(command));
+          command.UrlHelper = new UrlHelper(Url.ActionContext);
+          return Ok(await _mediator.Send(command));
         }
 
         [HttpPost("role")]
@@ -39,5 +45,14 @@ namespace CourseProject.Web.Api.Controllers
         {
             return Ok(await _mediator.Send(new GetUsers.Query()));
         }
-    }
+
+
+        [HttpGet("confirm")]
+        public async Task ConfirmEmail(ConfirmEmail.Query query)
+        {
+          var result = await _mediator.Send(query);
+          string url = $"http://localhost:4200/confirm?confirmSuccess={result}";
+          Response.Redirect(url);
+        }
+  }
 }
