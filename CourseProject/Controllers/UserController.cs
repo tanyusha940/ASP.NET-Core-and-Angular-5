@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using CourseProject.Api.Services.Auth;
 using CourseProject.Api.Services.User;
@@ -26,8 +28,8 @@ namespace CourseProject.Web.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUser.Command command)
         {
-            command.UrlHelper = new UrlHelper(Url.ActionContext);
-            return Ok(await _mediator.Send(command));
+          command.UrlHelper = new UrlHelper(Url.ActionContext);
+          return Ok(await _mediator.Send(command));
         }
 
         [HttpPost("role")]
@@ -46,9 +48,11 @@ namespace CourseProject.Web.Api.Controllers
 
 
         [HttpGet("confirm")]
-        public async Task<IActionResult> ConfirmEmail(ConfirmEmail.Query query)
+        public async Task ConfirmEmail(ConfirmEmail.Query query)
         {
-            return Ok(await _mediator.Send(query));
+          var result = await _mediator.Send(query);
+          string url = $"http://localhost:4200/home?confirmSuccess={result}";
+          Response.Redirect(url);
         }
   }
 }

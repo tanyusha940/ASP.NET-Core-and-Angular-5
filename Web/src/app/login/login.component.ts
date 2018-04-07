@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   async login() {
     this.isLoading = true;
     const result = await this.authenticationService.login(this.loginForm.value);
-    console.log(result);
     if (result === true) {
       this.router.navigate(['/home']);
     } else {
