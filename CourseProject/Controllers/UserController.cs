@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using CourseProject.Api.Services.Auth;
 using CourseProject.Api.Services.User;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace CourseProject.Web.Api.Controllers
 {
@@ -23,6 +26,7 @@ namespace CourseProject.Web.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUser.Command command)
         {
+            command.UrlHelper = new UrlHelper(Url.ActionContext);
             return Ok(await _mediator.Send(command));
         }
 
@@ -39,5 +43,12 @@ namespace CourseProject.Web.Api.Controllers
         {
             return Ok(await _mediator.Send(new GetUsers.Query()));
         }
-    }
+
+
+        [HttpGet("confirm")]
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmail.Query query)
+        {
+            return Ok(await _mediator.Send(query));
+        }
+  }
 }

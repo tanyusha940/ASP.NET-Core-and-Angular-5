@@ -5,6 +5,8 @@ using CourseProject.Data.Model;
 using CourseProject.Data.Model.Context;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace CourseProject.Api.Services.User
 {
@@ -17,6 +19,8 @@ namespace CourseProject.Api.Services.User
       public string Email { get; set; }
 
       public string Password { get; set; }
+
+      public IUrlHelper UrlHelper { get; set; }
     }
 
     public class Handler : AsyncRequestHandler<Command, string>
@@ -60,18 +64,22 @@ namespace CourseProject.Api.Services.User
         if (result.Succeeded)
         {
           await userManager.AddToRoleAsync(identity, "user");
-          await SendConfirmationMail(identity);
+          await SendConfirmationMail(identity, request.UrlHelper);
         }
 
         return identity;
       }
 
-      private async Task SendConfirmationMail(UserIdentity userIdentity)
+      private async Task SendConfirmationMail(UserIdentity userIdentity, IUrlHelper urlHeleHelper)
       {
         var code = await userManager.GenerateEmailConfirmationTokenAsync(userIdentity);
-        var callbackUrl = String.Format("http://localhost:24606/api/user/confirm?userId={0}&code={1}", userIdentity.Id, code);
+        var callbackUrl = urlHeleHelper.Action("ConfirmEmail", "User", new
+        {
+          userId = userIdentity.Id,
+          code = code
+        });
         await emailService.SendEmailAsync(userIdentity.Email, "Confirm your account",
-          $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+          $"Подтвердите регистрацию, перейдя по ссылке: <a href='http://localhost:24606{callbackUrl}'>link</a>");
       }
     }
   }
