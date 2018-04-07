@@ -9,7 +9,8 @@ export class MockAuthenticationService {
     id: 'test',
     token: '123',
     username: 'test',
-    role: 'user'
+    role: 'user',
+    isEmailConfirmed: true
   };
 
   login(context: LoginContext): Observable<Credentials> {
@@ -17,7 +18,8 @@ export class MockAuthenticationService {
       id: context.username,
       token: '123456',
       username: 'test',
-      role: 'user'
+      role: 'user',
+      isEmailConfirmed: true
     });
   }
 

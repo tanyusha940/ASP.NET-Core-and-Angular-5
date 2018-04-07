@@ -32,10 +32,11 @@ export class LoginComponent implements OnInit {
   async login() {
     this.isLoading = true;
     const result = await this.authenticationService.login(this.loginForm.value);
-    if (result) {
+    console.log(result);
+    if (result === true) {
       this.router.navigate(['/home']);
     } else {
-      this.error = 'invalid login or password';
+      this.error = result.toString();
     }
     this.isLoading = false;
   }

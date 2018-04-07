@@ -56,7 +56,8 @@ namespace CourseProject.Api.Services.Auth
           Username = request.Username,
           Token = await _jwtFactory.GenerateEncodedToken(request.Username, identity),
           ExpiresIn = (int)_jwtOptions.ValidFor.TotalSeconds,
-          Role = role.FirstOrDefault()
+          Role = role.FirstOrDefault(),
+          IsEmailConfirmed = true
         };
       }
 
