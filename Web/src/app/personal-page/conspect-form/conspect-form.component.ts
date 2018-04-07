@@ -5,6 +5,8 @@ import { NgModel } from '@angular/forms';
 import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 import { I18nService } from '@app/core';
+import { HttpClient } from '@angular/common/http';
+import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 
 @Component({
   selector: 'app-conspect-form',
@@ -15,16 +17,20 @@ export class ConspectFormComponent implements OnInit {
 
   form: FormGroup;
   conspect: Conspect;
-  
+  tagOptions: LookUp[] = [];
+  tags: LookUp[] = [];
+
   constructor(
     private conspectsService: ConspectsService,
     private fb: FormBuilder,
-    private i18nService: I18nService
+    private i18nService: I18nService,
+    private http: HttpClient
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.initForm();
     this.conspect = new Conspect();
+    await this.getTagsLookUps();
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -56,8 +62,15 @@ export class ConspectFormComponent implements OnInit {
       ]],
       Content: ['', [
         Validators.required
+      ]],
+      Tags: ['', [
+        Validators.required
       ]]
     });
+  }
+
+  async createConspect() {
+    await this.http.post('/conspect', {conspect: this.conspect, tags: this.tags}).toPromise();
   }
 
   setLanguage(language: string) {
@@ -69,5 +82,13 @@ export class ConspectFormComponent implements OnInit {
   }
   get languages(): string[] {
     return this.i18nService.supportedLanguages;
+  }
+
+  onTagsChanged(e: any) {
+    console.log(e);
+  }
+
+  async getTagsLookUps() {
+     this.tagOptions = await this.http.get<LookUp[]>('/lookUp/tags').toPromise();
   }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CourseProject.Api.Services.LookUps.Models;
 
 namespace CourseProject.Api.Services.Conspect.Models
@@ -7,6 +8,18 @@ namespace CourseProject.Api.Services.Conspect.Models
     {
         public int Id { get; set; }
 
-        public IEnumerable<LookUp> Tags { get; set; }
+        public string Name { get; set; }
+
+        public int SpecialityNumberId { get; set; }
+
+        public string Content { get; set; }
+
+        public string UserId { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
+
+        public ICollection<LookUp> Tags { get; set; }
     }
 }

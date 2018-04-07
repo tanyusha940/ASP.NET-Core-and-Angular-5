@@ -14,6 +14,7 @@ import { ConspectFormComponent } from '@app/personal-page/conspect-form/conspect
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TranslateModule } from '@ngx-translate/core';
+import { TagsInputModule } from 'ngx-tags-input/dist';
 
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
@@ -34,6 +35,7 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
         smartypants: false,
       },
       }),
+    TagsInputModule.forRoot(),
     BrowserAnimationsModule,
     TranslateModule,
     TagInputModule,

@@ -18,28 +18,28 @@ export class ConspectsService {
       .get<ConspectItem[]>('/conspect').toPromise();
   }
 
-  async createConspect(conspect: Conspect): Promise<Conspect>{
+  async createConspect(conspect: Conspect): Promise<Conspect> {
     return await this.httpClient
-      .post<Conspect>('/conspect',conspect)
+      .post<Conspect>('/conspect', conspect)
       .toPromise();
   }
 
-  async deleteConspect(id: number): Promise<{}>{
+  async deleteConspect(id: number): Promise<{}> {
     return await this.httpClient
       .delete(`/conspect/${id}`).toPromise();
   }
-  async updateConspect(conspect: Conspect): Promise<Conspect>{
+  async updateConspect(conspect: Conspect): Promise<Conspect> {
     return await this.httpClient
-      .put<Conspect>('/conspect',conspect)
+      .put<Conspect>('/conspect', conspect)
       .toPromise();
   }
 
-  async GetSortByDateConspects():Promise<ConspectItem[]>{
+  async GetSortByDateConspects(): Promise<ConspectItem[]> {
     return await this.httpClient
     .get<ConspectItem[]>('/SortConspectController/GetSortByDateConspects').toPromise();
   }
 
-  async GetSortByRatingConspects(): Promise<ConspectItem[]>{
+  async GetSortByRatingConspects(): Promise<ConspectItem[]> {
     return await this.httpClient
     .get<ConspectItem[]>('/SortConspectController/GetSortByRatingConspects').toPromise();
   }

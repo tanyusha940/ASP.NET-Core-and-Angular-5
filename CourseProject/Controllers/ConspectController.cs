@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CourseProject.Web.Api.Controllers
 {
-    [Authorize]
     [ApiExceptionFilterAttribute]
     [Route("api/Conspect")]
     public class ConspectController : Controller
@@ -63,6 +62,7 @@ namespace CourseProject.Web.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateConspect([FromBody] CreateConspect.Command command)
         {
+            command.UserClaims = User;
             return Ok(await _mediator.Send(command));
         }
 

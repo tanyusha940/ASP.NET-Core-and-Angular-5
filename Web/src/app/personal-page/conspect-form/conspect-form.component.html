@@ -16,6 +16,10 @@
   <input type="text" [formControl]="form.get('Content')" [(ngModel)]="conspect.content" />
   <div class="error" *ngIf="isControlInvalid('Content')"></div>
   <br/>
-  <app-tags> </app-tags>
-  <button type="submit" translate>Create conspect</button>
+  <tag-input identifyBy="id" displayBy="text" [(ngModel)]="tags" [formControl]="form.get('Content')"
+             [clearOnBlur]="true">
+                <tag-input-dropdown [displayBy]="'text'" [identifyBy]="'id'" [focusFirstElement]="true" [autocompleteItems]="tagOptions">
+                </tag-input-dropdown>
+            </tag-input>
+  <button type="submit" translate (click)="createConspect()">Create conspect</button>
 </form>
