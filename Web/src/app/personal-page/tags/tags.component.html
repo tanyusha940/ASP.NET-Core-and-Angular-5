@@ -1,8 +1,7 @@
-<h3>Введите теги</h3>
+<h4 translate>EnterTagsTitle</h4>
 <form class="form" [formGroup]="form">
     <div class="home-container">
         <div>
-            <h3>Tags within an autocomplete component</h3>
             <tag-input  formControlName ="tagItems"
                         [ngModel] = "tagItemsNew"
                         [addOnBlur]="true"
@@ -14,20 +13,3 @@
     </div>
 </form>
     
-
-<!-- <div class="example-block">
-    <div class="example-block__item">
-        <ngx-select 
-        [multiple]="true"
-        [items]="tagItemsNew"
-        [disabled]="ngxDisabled"
-      
-        placeholder="Не выбраны теги">
-        </ngx-select>
-
-        <p></p>
-        <div class="alert alert-secondary">
-            <pre>{{ngxValue | json}}</pre>
-        </div>
-    </div>   
-</div> -->

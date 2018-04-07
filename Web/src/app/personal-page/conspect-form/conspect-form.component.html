@@ -1,26 +1,21 @@
-<h1>Создание конспекта</h1>
+<h1 translate>CreateConspectTitle</h1>
 <form class="form" [formGroup]="form" (submit)="onSubmit()">
-  <label for="Name">Название</label>
+  <label for="Name" translate>NameConspect</label>
   <input type="text" [formControl]="form.get('Name')" [(ngModel)]="conspect.name" />
-  <div class="error" *ngIf="isControlInvalid('Name')"> --> Максимальная длина имени не должна превышать 50 символов
+  <div class="error" *ngIf="isControlInvalid('Name')" translate>
+    ConspectNameInvalid
   </div>
   <br/>
-  <br/>
-
-  <label for="SpecialityNumberId">Номер специальности</label>
+  <label for="SpecialityNumberId" translate>Specialty number</label>
   <input type="text" [formControl]="form.get('SpecialityNumberId')" [(ngModel)]="conspect.specialityNumberId" />
   <div class="error" *ngIf="isControlInvalid('SpecialityNumberId')">
-    Вы ввели некорректный номер специальности
+      ConspectNumberInvalid 
   </div>
   <br/>
-  <br/>
-
-  <label for="Content">Контент</label>
+  <label for="Content" translate>Сontent</label>
   <input type="text" [formControl]="form.get('Content')" [(ngModel)]="conspect.content" />
   <div class="error" *ngIf="isControlInvalid('Content')"></div>
   <br/>
-  <br/>
-
   <app-tags> </app-tags>
-  <button type="submit">отправить</button>
+  <button type="submit" translate>Create conspect</button>
 </form>
