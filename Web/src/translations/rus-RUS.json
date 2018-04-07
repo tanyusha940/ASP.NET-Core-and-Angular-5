@@ -23,5 +23,7 @@
   "Username is required": "Введите логин",
   "Username or password incorrect.": "Пароль или логин введены некорректно",
   "Remember me": "Запомнить меня",
-  "Version": "Version"
+  "Version": "Version",
+  "Registration":"Регистрация",
+  "RepeatPassword":"Повторите пароль"
 }

@@ -23,5 +23,7 @@
   "Username is required": "Увядзіце лагін",
   "Username or password incorrect.": "Пароль ці лагін ўведзены некарэктна",
   "Remember me": "Запомніць мяне",
-  "Version": "Version"
+  "Version": "Version",
+  "Registration":"Рэгістрацыя",
+  "RepeatPassword":"Паўтарыце пароль"
 }

@@ -1,0 +1,50 @@
+<div class="login-container bg-light">
+  <div class="login-box">
+    <div>
+      <div class="d-inline-block ml-3" ngbDropdown>
+        <button id="language-dropdown" class="btn btn-sm btn-secondary" ngbDropdownToggle>
+          {{currentLanguage}}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="language-dropdown">
+          <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
+            {{language}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card col-md-6 mt-3 mx-auto">
+        <div class="card-body">
+          <h4 class="card-title text-center">
+            <i class="far fa-3x fa-user-circle text-muted"></i>
+          </h4>
+          <form [formGroup]="form" novalidate>
+            <div class="form-group">
+              <label class="d-block">
+                <input type="text" [formControl]="form.get('UserName')" 
+                       class="form-control" [placeholder]="'Username' | translate" />
+                <!-- <span hidden translate>Username</span> -->
+              </label>
+              <label class="d-block">
+                <input type="text" [formControl]="form.get('Email')" 
+                      class="form-control" placeholder="Email" />
+                <!-- <span hidden >Email</span> -->
+              </label>
+              <label class="d-block">
+                <input type="password" [formControl]="form.get('Password')"
+                       class="form-control" [placeholder]="'Password' | translate" required/>
+                <!-- <span hidden translate>Password</span> -->
+              </label>
+              <label class="d-block">
+                <input type="password" [formControl]="form.get('Password')" 
+                      class="form-control" [placeholder]="'RepeatPassword' | translate" required/>
+                <!-- <span hidden translate>RepeatPassword</span> -->
+              </label>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
