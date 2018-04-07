@@ -21,28 +21,37 @@
           <form [formGroup]="form" novalidate>
             <div class="form-group">
               <label class="d-block">
-                <input type="text" [formControl]="form.get('UserName')" 
-                       class="form-control" [placeholder]="'Username' | translate" />
+                <input type="text" [formControl]="form.get('UserName')" class="form-control" [placeholder]="'Username' | translate" />
+                <div class="text-danger" *ngIf="isControlInvalid('UserName')" translate>
+                  Username is required
+                </div>
                 <!-- <span hidden translate>Username</span> -->
               </label>
               <label class="d-block">
-                <input type="text" [formControl]="form.get('Email')" 
-                      class="form-control" placeholder="Email" />
-                <!-- <span hidden >Email</span> -->
+                <input type="text" [formControl]="form.get('Email')" class="form-control" placeholder="Email" />
+                <div class="text-danger" *ngIf="isControlInvalid('Email')" translate>
+                  EmailInvalide
+                </div>
               </label>
               <label class="d-block">
-                <input type="password" [formControl]="form.get('Password')"
-                       class="form-control" [placeholder]="'Password' | translate" required/>
-                <!-- <span hidden translate>Password</span> -->
+                <input type="password" [formControl]="form.get('Password')" class="form-control" [placeholder]="'Password' | translate" required/>
+                <div class="text-danger" *ngIf="isControlInvalid('Password')" translate>
+                  Password is required
+                </div>
               </label>
+
               <label class="d-block">
-                <input type="password" [formControl]="form.get('Password')" 
-                      class="form-control" [placeholder]="'RepeatPassword' | translate" required/>
-                <!-- <span hidden translate>RepeatPassword</span> -->
+                <input type="password" [formControl]="form.get('RepeatPassword')" class="form-control" [placeholder]="'RepeatPassword' | translate"
+                  required/>
+                  <div class="text-danger" *ngIf="isControlInvalid('RepeatPassword')" translate>
+                    RepeatPassword
+                  </div>
               </label>
             </div>
           </form>
-
+          <button class="btn btn-primary w-100" [disabled]="form.invalid">            
+            <span translate>Registration</span>
+          </button>
         </div>
       </div>
     </div>

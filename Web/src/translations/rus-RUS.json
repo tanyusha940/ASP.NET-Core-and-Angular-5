@@ -25,5 +25,6 @@
   "Remember me": "Запомнить меня",
   "Version": "Version",
   "Registration":"Регистрация",
-  "RepeatPassword":"Повторите пароль"
+  "RepeatPassword":"Пароль введен некорректно",
+  "EmailInvalide":"Email введен некорректно"
 }
