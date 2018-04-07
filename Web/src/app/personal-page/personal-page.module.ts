@@ -13,6 +13,7 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ConspectFormComponent } from '@app/personal-page/conspect-form/conspect-form.component';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more options
@@ -34,6 +35,7 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
       },
       }),
     BrowserAnimationsModule,
+    TranslateModule,
     TagInputModule,
     CommonModule,
     PersonalPageRoutingModule,

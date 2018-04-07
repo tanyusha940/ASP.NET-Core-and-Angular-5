@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
+import { I18nService } from '@app/core';
 
 @Component({
   selector: 'app-conspect-form',
@@ -18,6 +19,7 @@ export class ConspectFormComponent implements OnInit {
   constructor(
     private conspectsService: ConspectsService,
     private fb: FormBuilder,
+    private i18nService: I18nService
   ) { }
 
   ngOnInit() {
@@ -56,5 +58,16 @@ export class ConspectFormComponent implements OnInit {
         Validators.required
       ]]
     });
+  }
+
+  setLanguage(language: string) {
+    this.i18nService.language = language;
+  }
+
+  get currentLanguage(): string {
+    return this.i18nService.language;
+  }
+  get languages(): string[] {
+    return this.i18nService.supportedLanguages;
   }
 }

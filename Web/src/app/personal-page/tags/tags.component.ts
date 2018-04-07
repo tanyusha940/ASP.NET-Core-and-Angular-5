@@ -7,6 +7,7 @@ import { TagItem } from '@app/personal-page/tags/models/tagItem';
 import { TagsService } from '@app/personal-page/tags/tags.service';
 import { Input} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { I18nService } from '@app/core';
 
 @Component({
   selector: 'app-tags',
@@ -22,11 +23,10 @@ export class TagsComponent implements OnInit {
   
   tagItems: TagItem[];
   tagItemsNew: any = [];
-  public ngxValue: any = ['a','x'];
-  public ngxDisabled = false;
 
   constructor(
     public tagsService: TagsService,
+    private i18nService: I18nService
   ) { }
 
   public autocompleteItems: any;
@@ -37,5 +37,14 @@ export class TagsComponent implements OnInit {
     }
     this.autocompleteItems = this.tagItems;
   }
+  setLanguage(language: string) {
+    this.i18nService.language = language;
+  }
 
+  get currentLanguage(): string {
+    return this.i18nService.language;
+  }
+  get languages(): string[] {
+    return this.i18nService.supportedLanguages;
+  }
 }
