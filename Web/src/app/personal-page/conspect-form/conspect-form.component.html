@@ -12,6 +12,10 @@
       ConspectNumberInvalid 
   </div>
   <br/>
+  <label for="Description" translate>Description</label>
+  <input type="text" [formControl]="form.get('Description')" [(ngModel)]="conspect.description" />
+  <div class="error" *ngIf="isControlInvalid('Description')"></div>
+  <br/>
   <label for="Content" translate>Сontent</label>
   <input type="text" [formControl]="form.get('Content')" [(ngModel)]="conspect.content" />
   <div class="error" *ngIf="isControlInvalid('Content')"></div>

@@ -3,4 +3,5 @@ export class ConspectItem {
     public name: string;
     public content: string;
     public createdDate: Date;
+    public description: string;
 }

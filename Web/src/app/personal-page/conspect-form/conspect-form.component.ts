@@ -56,6 +56,9 @@ export class ConspectFormComponent implements OnInit {
       ]],
       Content: ['', [
         Validators.required
+      ]],
+      Description:['',[
+        Validators.required
       ]]
     });
   }

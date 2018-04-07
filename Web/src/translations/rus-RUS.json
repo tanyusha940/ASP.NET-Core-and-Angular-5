@@ -26,5 +26,6 @@
   "Version": "Version",
   "Registration":"Регистрация",
   "RepeatPassword":"Пароль введен некорректно",
-  "EmailInvalide":"Email введен некорректно"
+  "EmailInvalide":"Email введен некорректно",
+  "Description":"Краткое описание"
 }

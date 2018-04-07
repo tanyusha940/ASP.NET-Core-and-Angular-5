@@ -22,6 +22,8 @@ namespace CourseProject.Api.Services.Conspect.Models
                 .NotNull();
             RuleFor(x => x.Active)
                 .NotNull();
+            RuleFor(x => x.Description)
+                .NotNull().WithMessage("field Description is required");
         }
     }
 }

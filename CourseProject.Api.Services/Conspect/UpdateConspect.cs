@@ -27,6 +27,7 @@ namespace CourseProject.Api.Services.Conspect
                 var conspect = _context.Conspects.First(c => c.Id == command.Conspect.Id);
                 conspect.Name = conspectDto.Name;
                 conspect.Content = conspectDto.Content;
+                conspect.Description = conspectDto.Description;
                 conspect.UpdatedDate = conspect.UpdatedDate;
                 return Task.FromResult(conspect.Id);
             }

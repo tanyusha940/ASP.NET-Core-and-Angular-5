@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace CourseProject.Web.Api.Controllers
 {
     [Authorize]
-    [ApiExceptionFilterAttribute]
     [Route("api/Conspect")]
     public class ConspectController : Controller
     {

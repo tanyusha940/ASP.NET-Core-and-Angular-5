@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Web.Api.Controllers
 {
-    [ApiExceptionFilter]
     [Route("api/[controller]/[action]")]
     public class SortConspectController : Controller
     {
