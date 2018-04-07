@@ -51,7 +51,7 @@ namespace CourseProject.Web.Api.Controllers
         public async Task ConfirmEmail(ConfirmEmail.Query query)
         {
           var result = await _mediator.Send(query);
-          string url = $"http://localhost:4200/home?confirmSuccess={result}";
+          string url = $"http://localhost:4200/confirm?confirmSuccess={result}";
           Response.Redirect(url);
         }
   }

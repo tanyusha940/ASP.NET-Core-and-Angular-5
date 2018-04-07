@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { I18nService } from '@app/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup, EmailValidator } from '@angular/forms';
+import {Registration} from './models/registration';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  selector: 'app-registration-form',
+  templateUrl: './registration-form.component.html',
+  styleUrls: ['./registration-form.component.scss']
 })
-export class RegistrationComponent implements OnInit {
-
+export class RegistrationFormComponent implements OnInit {
   form: FormGroup;
+  registration: Registration = new Registration();
 
-  constructor(
-    private router: Router,
-    private i18nService: I18nService,
-    private fb: FormBuilder,
-  ) { }
+  constructor(private router: Router,
+              private i18nService: I18nService,
+              private fb: FormBuilder,
+              private http: HttpClient) { }
 
   ngOnInit() {
     this.initForm();
@@ -24,36 +25,22 @@ export class RegistrationComponent implements OnInit {
 
   private initForm() {
     this.form = this.fb.group({
-      UserName: ['', [
-        Validators.required
-      ]],
-      Email: ['', [
-        Validators.required,
-        Validators.email
-      ]],
-      Password: ['', [
-        Validators.required,
-        Validators.pattern(/[a-zA-Z0-9]/),
-        Validators.min(6)
-      ]],
-      RepeatPassword:['',[
-        Validators.required,
-        this.matchOtherValidator('Password')
-      ]]
+      UserName: ['', [Validators.required]],
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]/), Validators.min(6)]],
+      RepeatPassword: ['', [Validators.required, this.matchOtherValidator('Password')]]
     });
   }
 
-  matchOtherValidator (otherControlName: string) {
-
+  matchOtherValidator(otherControlName: string) {
     let thisControl: FormControl;
     let otherControl: FormControl;
-  
-    return function matchOtherValidate (control: FormControl) {
-  
+
+    return function matchOtherValidate(control: FormControl) {
       if (!control.parent) {
         return null;
       }
-  
+
       // Initializing the validator.
       if (!thisControl) {
         thisControl = control;
@@ -65,21 +52,19 @@ export class RegistrationComponent implements OnInit {
           thisControl.updateValueAndValidity();
         });
       }
-  
+
       if (!otherControl) {
         return null;
       }
-  
+
       if (otherControl.value !== thisControl.value) {
         return {
           matchOther: true
         };
       }
-  
+
       return null;
-  
-    }
-  
+    };
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -99,5 +84,11 @@ export class RegistrationComponent implements OnInit {
   get languages(): string[] {
     return this.i18nService.supportedLanguages;
   }
-  
+
+  async submit() {
+     await this.http.post('/user', this.registration)
+      .toPromise()
+      .then(() => this.router.navigate(['/confirm']));
+
+  }
 }
