@@ -1,16 +1,23 @@
 <div *ngFor="let item of userItem">
-  <div class="card">
-    <div class="card-header">
-      <h4>Имя: </h4>
-      <h4>{{item.name}}</h4>
-    </div>
-    <div class="card-body">
-      <h6 class="card-title"> Email: </h6>
-      <p class="card-text"> {{item.email}} </p>
-      <br>
-      <h6 class="card-title" translate> Active </h6>
-      <p class="card-text">{{item.active}}</p>
-      <br>
+  <div class="container h-100">
+    <div class="row align-items-center h-100">
+      <div class="col-5 mx-auto">
+        <div class="card h-100 border-primary justify-content-center">
+            <div class="card">
+
+              <div class="card-header">
+                <h4>Имя: {{item.name}} </h4>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title"> Email: {{item.email}}</h6>
+                <h6 class="card-title"> Active: {{item.active}} </h6>
+                <button (click)="createAdmin()"><i class="fa fa-user"></i></button>
+                <button (click)="blockUser()"><i class="fa fa-ban"></i></button>
+              </div>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
+  <br>
 </div>

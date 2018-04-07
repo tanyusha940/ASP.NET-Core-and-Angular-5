@@ -19,7 +19,12 @@ export class AdminComponent implements OnInit {
   async ngOnInit() {
     this.userItem = await this.userService.getUsers();
   }
+  createAdmin(){
 
+  }
+  blockUser(){
+
+  }
   setLanguage(language: string) {
     this.i18nService.language = language;
   }
