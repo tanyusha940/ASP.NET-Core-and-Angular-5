@@ -1,0 +1,16 @@
+{
+  "APP_NAME": "ngX-Rocket",
+  "About": "Апісанне",
+  "Hello world !": "опроаы",
+  "Home": "Хатняя старонка",
+  "Logged in as": "Вы ўвайшлі як ",
+  "Login": "Увайсці",
+  "Logout": "Выхад",
+  "Password": "Пароль",
+  "Password is required": "Увядзіце пароль",
+  "Username": "Лагін",
+  "Username is required": "Увядзіце лагін",
+  "Username or password incorrect.": "Пароль ці лагін ўведзены некарэктна",
+  "Remember me": "Запомніць мяне",
+  "Version": "Version"
+}

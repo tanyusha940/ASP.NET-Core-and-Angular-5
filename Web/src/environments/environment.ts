@@ -3,9 +3,9 @@ export const environment = {
   production: false,
   version: env.npm_package_version,
   serverUrl: 'http://localhost:24606/api',
-  defaultLanguage: 'en-US',
+  defaultLanguage: 'rus-RUS',
   supportedLanguages: [
-    'en-US',
-    'fr-FR'
+    'rus-RUS',
+    'br-BLR'
   ]
 };
