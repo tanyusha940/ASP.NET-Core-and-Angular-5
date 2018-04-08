@@ -36,6 +36,7 @@ namespace CourseProject.Web.Api.Controllers
         public async Task<IActionResult> CreateRole([FromBody] CreateUser.Command command)
         {
             IdentityResult result = await _roleManager.CreateAsync(new IdentityRole("user"));
+            await _roleManager.CreateAsync(new IdentityRole("admin"));
 
             return Ok();
         }
