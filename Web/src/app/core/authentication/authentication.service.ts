@@ -48,14 +48,14 @@ export class AuthenticationService {
     .post<Credentials>('/login', context)
     .toPromise()
     .then((data: Credentials) => {
-      console.log(data);
       if (data.isEmailConfirmed) {
         this.setCredentials(data, context.remember);
         return true;
       }
+
       return 'confirm your email';
     })
-    .catch((data: any) => {console.log(data); return 'invalid login or password'; });
+    .catch((data) => 'invalid login or password');
 
     return result;
   }
@@ -98,10 +98,7 @@ export class AuthenticationService {
    * @param {boolean=} remember True to remember credentials across sessions.
    */
   private setCredentials(credentials?: Credentials, remember?: boolean) {
-    const permissions = this.permissionsService.getPermissions();
-    this.permissionsService.permissions$.subscribe((perms) => {
-    console.log(perms);
-    });
+
     this._credentials = credentials || null;
     this.permissionsService.flushPermissions();
     if (this._credentials && this._credentials.role) {

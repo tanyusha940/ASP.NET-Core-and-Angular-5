@@ -22,7 +22,6 @@ import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
 import { TagsService } from '@app/personal-page/tags/tags.service';
-import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AdminPageModule } from '@app/admin-page/admin-page.module';
 import { RegistrationModule } from '@app/registration/registration.module';

@@ -1,1 +1,1 @@
-<bar-rating [(rate)]="rate" [max]="5" [theme]="'default'" > </bar-rating>
+<bar-rating [(rate)]="rate" [max]="5" [theme]="'default'" [readOnly]="isReadOnly()" (rateChange)="onRateChanged($event)" > </bar-rating>

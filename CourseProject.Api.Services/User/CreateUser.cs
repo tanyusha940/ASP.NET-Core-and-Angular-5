@@ -70,10 +70,10 @@ namespace CourseProject.Api.Services.User
         return identity;
       }
 
-      private async Task SendConfirmationMail(UserIdentity userIdentity, IUrlHelper urlHeleHelper)
+      private async Task SendConfirmationMail(UserIdentity userIdentity, IUrlHelper urlHelper)
       {
         var code = await userManager.GenerateEmailConfirmationTokenAsync(userIdentity);
-        var callbackUrl = urlHeleHelper.Action("ConfirmEmail", "User", new
+        var callbackUrl = urlHelper.Action("ConfirmEmail", "User", new
         {
           userId = userIdentity.Id,
           code = code
