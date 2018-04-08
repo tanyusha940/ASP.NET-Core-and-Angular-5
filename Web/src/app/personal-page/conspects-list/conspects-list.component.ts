@@ -19,6 +19,7 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
   @Input() url: string;
   conspects: ConspectDto[];
   rate: any = 0;
+  isPreviewMode = false;
   private subscriptions: Subscription[] = [];
 
   constructor(private conspectsService: ConspectsService,
@@ -30,6 +31,7 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.subscriptions.push(this.route.data.subscribe((params: any) => {
       this.url = params.url;
+      this.isPreviewMode = params.isPreviewMode;
     }));
     await this.refreshConspect();
   }
@@ -57,8 +59,12 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
   }
 
   onEdit(item: ConspectDto) {
-    const url = (item.id === null) ? '/conspect' : `/conspect/${item.id}`;
+    const url = (item.id === null) ? 'conspect/create' : `conspect/${item.id}`;
     this.router.navigate([url]);
+  }
+
+  onCreate() {
+    this.router.navigate(['conspect/create']);
   }
 
 }

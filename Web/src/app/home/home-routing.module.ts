@@ -9,7 +9,8 @@ const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent, data: {
       title: extract('Home'),
-      url: '/lookUp/conspects/latest'
+      url: '/lookUp/conspects/latest',
+      isPreviewMode: true
     } }
   ])
 ];

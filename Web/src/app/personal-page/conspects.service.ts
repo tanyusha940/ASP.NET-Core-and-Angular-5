@@ -21,9 +21,9 @@ export class ConspectsService {
       .get<ConspectDto[]>(url).toPromise();
   }
 
-  async createConspect(conspect: Conspect, tags: LookUp[]) {
+  async createConspect(conspect: Conspect) {
     await this.httpClient
-      .post<number>('/conspect', {conspect: conspect, tags: tags})
+      .post<number>('/conspect', {conspect: conspect, tags: conspect.tags})
       .toPromise()
       .then(() => {
         this.toastr.success('Conspect created', 'Success!');

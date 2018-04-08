@@ -7,4 +7,5 @@ export class Conspect {
     public id: number;
     public createdDate: Date;
     public userName: string;
+    public tags: LookUp[];
 }

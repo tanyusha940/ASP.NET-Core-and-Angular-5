@@ -36,14 +36,18 @@ namespace CourseProject.Api.Services.Conspect
                     })
                     .ToListAsync();
 
-                return await Task.FromResult(_context.Conspects
+                var result = _context.Conspects
                     .Where(conspect => conspect.Active)
                     .Select(conspect => new ConspectDto
                     {
                         Id = conspect.Id,
+                        Name = conspect.Name,
+                        SpecialityNumberId = conspect.SpecialityNumberId,
+                        Content = conspect.Content,
                         Tags = tags
                     })
-                    .First(conspect => conspect.Id == query.Id));
+                    .First(conspect => conspect.Id == query.Id);
+                return result;
             }
         }
     }

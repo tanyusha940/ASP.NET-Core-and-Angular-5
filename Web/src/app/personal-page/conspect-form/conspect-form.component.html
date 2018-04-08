@@ -19,7 +19,7 @@
   <tag-input
   identifyBy="id"
   displayBy="text"
-  [(ngModel)]="tags"
+  [(ngModel)]="conspect.tags"
   [formControl]="form.get('tags')"
   [clearOnBlur]="true"
   (onAdd)="onTagAdd($event)"
@@ -30,4 +30,5 @@
   <div class="error" *ngIf="isControlInvalid('tags')"></div>
   <br/>
   <button type="submit" translate>Create conspect</button>
+  <button type="button" translate (click)="onCancel()">Cancel</button>
 </form>

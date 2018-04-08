@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-conspect-form',
@@ -22,7 +22,6 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
   conspect: Conspect;
   initialState = new Conspect();
   tagOptions: LookUp[] = [];
-  tags: LookUp[] = [];
 
   private subscriptions: Subscription[] = [];
 
@@ -32,10 +31,13 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
     private i18nService: I18nService,
     private http: HttpClient,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.subscriptions.push(this.route.params.subscribe(params => this.loadConspect(+params['id'])));
+    if (this.route.firstChild) {
+      this.subscriptions.push(this.route.firstChild.params.subscribe(params => this.loadConspect(+params['id'])));
+    }
   }
 
   ngOnDestroy() {
@@ -46,7 +48,7 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  private loadConspect(id?: number) {
+  private loadConspect(id: number) {
     this.conspect = null;
     this.initForm();
     if (id) {
@@ -57,8 +59,8 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  private initConspect(product: Conspect) {
-    this.initialState = product;
+  private initConspect(conspect: Conspect) {
+    this.initialState = conspect;
     this.resetForm();
   }
 
@@ -76,9 +78,18 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
     } else {
-      await this.conspectsService.createConspect(this.conspect, this.tags);
-      this.resetForm();
+      await this.conspectsService.createConspect(this.conspect);
+      this.goAwayFromForm();
     }
+  }
+
+  onCancel() {
+    this.goAwayFromForm();
+  }
+
+  private goAwayFromForm() {
+    this.resetForm();
+    this.router.navigate(['account']);
   }
 
   private initForm() {
@@ -117,7 +128,6 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
 
   private resetForm() {
     this.conspect = cloneDeep(this.initialState);
-    this.tags = cloneDeep([]);
     if (this.form != null) {
       this.form.markAsPristine();
       this.form.markAsUntouched();
