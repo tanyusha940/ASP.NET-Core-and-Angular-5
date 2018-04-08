@@ -23,7 +23,7 @@ export class ConspectsService {
 
   async createConspect(conspect: Conspect) {
     await this.httpClient
-      .post<number>('/conspect', {conspect: conspect, tags: conspect.tags})
+      .post<number>('/conspect', {conspect: conspect})
       .toPromise()
       .then(() => {
         this.toastr.success('Conspect created', 'Success!');
@@ -40,10 +40,13 @@ export class ConspectsService {
     return await this.httpClient
       .delete(`/conspect/${id}`).toPromise();
   }
-  async updateConspect(conspect: Conspect): Promise<Conspect> {
-    return await this.httpClient
-      .put<Conspect>('/conspect', conspect)
-      .toPromise();
+  async updateConspect(conspect: Conspect, id: number) {
+    await this.httpClient
+      .put<number>(`/conspect/${id}`, {conspect: conspect})
+      .toPromise()
+      .then(() => {
+        this.toastr.success('Conspect updated!', 'Success!');
+      });
   }
 
   async GetSortByDateConspects(): Promise<Conspect[]> {

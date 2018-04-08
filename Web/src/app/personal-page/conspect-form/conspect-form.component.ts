@@ -78,7 +78,11 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
     } else {
-      await this.conspectsService.createConspect(this.conspect);
+      if (this.conspect.id > 0) {
+        await this.conspectsService.updateConspect(this.conspect, this.conspect.id);
+      } else {
+        await this.conspectsService.createConspect(this.conspect);
+      }
       this.goAwayFromForm();
     }
   }
