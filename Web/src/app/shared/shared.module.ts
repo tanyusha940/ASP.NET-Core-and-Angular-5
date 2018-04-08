@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { LoaderComponent } from './loader/loader.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
-import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { RatingComponent } from '@app/shared/rating/rating.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -29,7 +28,6 @@ import { ToastOptions } from 'ng2-toastr';
   ],
   declarations: [
     LoaderComponent,
-    ConspectItemComponent,
     RatingComponent,
   ],
   providers: [

@@ -11,8 +11,8 @@ namespace CourseProject.Data.Model
         public int Mark { get; set; }
 
         [Required]
-        [ForeignKey("User")]
-        public string UserId { get; set; }
+        [ForeignKey("Identity")]
+        public string IdentityId { get; set; }
 
         [Required]
         public bool Active { get; set; }
@@ -20,7 +20,7 @@ namespace CourseProject.Data.Model
         [Required]
         public int ConspectId { get; set; }
 
-        public User User { get; set; }
+        public UserIdentity Identity { get; set; }
 
         public Conspect Conspect { get; set; }
     }

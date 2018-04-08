@@ -32,10 +32,8 @@ export class TagsComponent implements OnInit {
 
   public autocompleteItems: any;
   async ngOnInit() {
-    console.log(this.conspectId);
     if (this.conspectId !== null) {
         this.tags = await this.tagsService.getConspectTags(this.conspectId);
-        console.log(this.tags);
     }
   }
   setLanguage(language: string) {
