@@ -28,8 +28,9 @@
           ></textarea>
         <div class="error" *ngIf="isControlInvalid('content')"></div>
       </div>
-      <div class="col-md-6">
-          <div [innerHtml]="convertedText"></div>
+      <div class="col-md-15">
+        <h4 class="text-center">Preview</h4>
+          <label class="form-check-label" [innerHtml]="convertedText"></label>
       </div>
         <br/>
         <tag-input identifyBy="id" displayBy="text" [(ngModel)]="conspect.tags" [formControl]="form.get('tags')" [clearOnBlur]="true"
@@ -41,7 +42,7 @@
         <br/>
         <button type="submit" class="btn btn-primary" translate>Create conspect</button>
         <button type="button" class="btn btn-primary" translate (click)="onCancel()">Cancel</button>
-      </div>
     </div>
+  </div>
   </div>
 </form>
