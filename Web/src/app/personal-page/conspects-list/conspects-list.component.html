@@ -7,7 +7,9 @@
           <div class="card text-center">
             <div class="card-header">
               <h4> {{item.text}}</h4>
-              
+              <div class="button-panel pull-right">
+                  <input *ngIf="isEditButtonVisible(item)" type="button" class="btn btn-primary" value="Edit" (click)="onEdit(item)" />
+              </div>
             </div>
           </div>
           <div class="card-body">

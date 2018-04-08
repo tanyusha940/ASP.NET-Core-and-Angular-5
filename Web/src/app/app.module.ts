@@ -31,6 +31,7 @@ import { ConspectsViewModule } from '@app/conspects-view/conspects-view.module';
 import { AdminPageModule } from '@app/admin-page/admin-page.module';
 import { RegistrationModule } from '@app/registration/registration.module';
 import { EmailConfirmModule } from '@app/email-confirm/email-confirm.module';
+import { RatingsService } from '@app/shared/rating/rating.service';
 
 
 
@@ -66,6 +67,7 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
   declarations: [AppComponent],
   providers: [
     TagsService,
+    RatingsService
   ],
   bootstrap: [
     AppComponent

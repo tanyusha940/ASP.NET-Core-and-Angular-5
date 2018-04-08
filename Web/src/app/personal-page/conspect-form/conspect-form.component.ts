@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
@@ -8,13 +8,15 @@ import { I18nService } from '@app/core';
 import { HttpClient } from '@angular/common/http';
 import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 import { cloneDeep } from 'lodash';
+import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-conspect-form',
   templateUrl: './conspect-form.component.html',
   styleUrls: ['./conspect-form.component.scss']
 })
-export class ConspectFormComponent implements OnInit {
+export class ConspectFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   conspect: Conspect;
@@ -22,18 +24,44 @@ export class ConspectFormComponent implements OnInit {
   tagOptions: LookUp[] = [];
   tags: LookUp[] = [];
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
     private conspectsService: ConspectsService,
     private fb: FormBuilder,
     private i18nService: I18nService,
-    private http: HttpClient
+    private http: HttpClient,
+    private route: ActivatedRoute,
   ) { }
 
-  async ngOnInit() {
-    this.initForm();
-    this.conspect = new Conspect();
-    await this.getTagsLookUps();
+  ngOnInit() {
+    this.subscriptions.push(this.route.params.subscribe(params => this.loadConspect(+params['id'])));
   }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    });
+  }
+
+  private loadConspect(id?: number) {
+    this.conspect = null;
+    this.initForm();
+    if (id) {
+      this.conspectsService.getById(id)
+        .then((data: Conspect) => this.initConspect(data));
+    } else {
+      this.initConspect(new Conspect());
+    }
+  }
+
+  private initConspect(product: Conspect) {
+    this.initialState = product;
+    this.resetForm();
+  }
+
 
   isControlInvalid(controlName: string): boolean {
     const control = this.form.controls[controlName];

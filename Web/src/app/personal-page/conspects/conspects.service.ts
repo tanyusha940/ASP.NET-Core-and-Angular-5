@@ -29,6 +29,12 @@ export class ConspectsService {
       });
   }
 
+  async getById(id: number): Promise<Conspect> {
+    return await this.httpClient
+      .get<Conspect>(`/conspect/${id}`)
+      .toPromise();
+  }
+
   async deleteConspect(id: number): Promise<{}> {
     return await this.httpClient
       .delete(`/conspect/${id}`).toPromise();
