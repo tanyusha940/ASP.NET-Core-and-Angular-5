@@ -10,11 +10,13 @@ import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MarkdownParserService } from '@app/personal-page/conspect-form/markdown.service';
 
 @Component({
   selector: 'app-conspect-form',
   templateUrl: './conspect-form.component.html',
-  styleUrls: ['./conspect-form.component.scss']
+  styleUrls: ['./conspect-form.component.scss'],
+  providers:[MarkdownParserService]
 })
 export class ConspectFormComponent implements OnInit, OnDestroy {
 
@@ -22,6 +24,8 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
   conspect: Conspect;
   initialState = new Conspect();
   tagOptions: LookUp[] = [];
+  convertedText: string; 
+ 
 
   private subscriptions: Subscription[] = [];
 
@@ -31,7 +35,8 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
     private i18nService: I18nService,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private md: MarkdownParserService 
   ) { }
 
   ngOnInit() {
@@ -143,5 +148,8 @@ export class ConspectFormComponent implements OnInit, OnDestroy {
     if (!tag.id) {
       tag.id = 0;
     }
+  }
+  updateOutput(mdText: string) {
+    this.convertedText = this.md.convert(mdText);
   }
 }
