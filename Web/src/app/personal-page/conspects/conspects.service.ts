@@ -6,22 +6,28 @@ import { map, catchError } from 'rxjs/operators';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
 import { ConspectItem } from '@app/shared/consectItem/models/conspectItem';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 
 
 @Injectable()
 export class ConspectsService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private toastr: ToastsManager) { }
 
   async getConspects(): Promise<ConspectItem[]> {
       return await this.httpClient
       .get<ConspectItem[]>('/conspect').toPromise();
   }
 
-  async createConspect(conspect: Conspect): Promise<Conspect> {
-    return await this.httpClient
-      .post<Conspect>('/conspect', conspect)
-      .toPromise();
+  async createConspect(conspect: Conspect, tags: LookUp[]) {
+    await this.httpClient
+      .post<number>('/conspect', {conspect: conspect, tags: tags})
+      .toPromise()
+      .then(() => {
+        this.toastr.success('Conspect created', 'Success!');
+      });
   }
 
   async deleteConspect(id: number): Promise<{}> {

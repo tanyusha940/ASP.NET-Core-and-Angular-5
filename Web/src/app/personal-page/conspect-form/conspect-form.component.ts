@@ -41,36 +41,33 @@ export class ConspectFormComponent implements OnInit {
 
   async onSubmit() {
     const controls = this.form.controls;
-
     if (this.form.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
+    } else {
+      await this.conspectsService.createConspect(this.conspect, this.tags);
+      this.resetForm();
     }
-    await this.conspectsService.createConspect(this.form.value);
   }
 
   private initForm() {
     this.form = this.fb.group({
-      Name: ['', [
+      name: ['', [
         Validators.required,
         Validators.maxLength(50)
       ]],
-      SpecialityNumberId: ['', [
+      specialityNumberId: ['', [
         Validators.required,
         Validators.max(500)
       ]],
-      Content: ['', [
+      content: ['', [
         Validators.required
       ]],
-      Tags: ['', [
+      tags: ['', [
         Validators.required
       ]]
     });
-  }
-
-  async createConspect() {
-    await this.http.post('/conspect', {conspect: this.conspect, tags: this.tags}).toPromise();
   }
 
   setLanguage(language: string) {
@@ -84,11 +81,21 @@ export class ConspectFormComponent implements OnInit {
     return this.i18nService.supportedLanguages;
   }
 
-  onTagsChanged(e: any) {
-    console.log(e);
-  }
-
   async getTagsLookUps() {
      this.tagOptions = await this.http.get<LookUp[]>('/lookUp/tags').toPromise();
+  }
+
+  private resetForm() {
+    if (this.form != null) {
+      this.form.markAsPristine();
+      this.form.markAsUntouched();
+    }
+  }
+
+  onTagAdd(tag: LookUp) {
+    tag.id = +tag.id;
+    if (!tag.id) {
+      tag.id = 0;
+    }
   }
 }

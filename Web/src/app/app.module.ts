@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 import { environment } from '@env/environment';
 import { CoreModule } from '@app/core';
@@ -40,6 +41,7 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
 
 @NgModule({
   imports: [
+    ToastModule.forRoot(),
     BrowserModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     FormsModule,

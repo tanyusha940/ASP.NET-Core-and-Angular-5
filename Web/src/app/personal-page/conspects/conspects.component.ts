@@ -37,19 +37,6 @@ export class ConspectsComponent implements OnInit {
     return result;
   }
 
-  async onSubmit() {
-    const controls = this.form.controls;
-
-    if (this.form.invalid) {
-      Object.keys(controls)
-        .forEach(controlName => controls[controlName].markAsTouched());
-
-      return;
-    }
-
-    await this.conspectsService.createConspect(this.form.value);
-  }
-
   private initForm() {
     this.form = this.fb.group({
       Name: ['', [

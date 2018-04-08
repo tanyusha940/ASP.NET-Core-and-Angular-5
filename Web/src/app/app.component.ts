@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { merge } from 'rxjs/observable/merge';
 import { filter, map, mergeMap } from 'rxjs/operators';
+import { ToastsManager } from 'ng2-toastr';
 
 import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
@@ -23,7 +24,11 @@ export class AppComponent implements OnInit {
               private titleService: Title,
               private translateService: TranslateService,
               private i18nService: I18nService,
-              private authService: AuthenticationService) { }
+              private authService: AuthenticationService,
+              public toastr: ToastsManager,
+              vRef: ViewContainerRef) {
+                this.toastr.setRootViewContainerRef(vRef);
+               }
 
   ngOnInit() {
     // Setup logger

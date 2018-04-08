@@ -11,6 +11,7 @@ using CourseProject.Api.Services.LookUps.Models;
 using CourseProject.Data.Model;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Api.Services.Conspect
 {
@@ -47,19 +48,33 @@ namespace CourseProject.Api.Services.Conspect
 
             public async Task<int> Handle(Command command, CancellationToken cancellationToken)
             {
-                var user = await userManager.GetUserAsync(command.UserClaims);
+                var userName = command.UserClaims.Identities.First().Claims.First().Value;
+                var user = await userManager.FindByNameAsync(userName);
                 var conspect = MapConspect(command.Conspect);
-                var tags = command.Tags;
-                var conspectTags = tags.Select(tag => new ConspectTag
+                var tagNames = command.Tags.Select(tag => tag.Text.ToLower());
+                var existingTags = await _context.Tags.Where(tag => tagNames.Contains(tag.Text.ToLower())).ToListAsync(cancellationToken);
+                var newTags = tagNames.Where(name => !existingTags.Select(tag => tag.Text).Contains(name));
+                var conspectTags = existingTags.Select(tag => new ConspectTag
                     {
                         Conspect = conspect,
                         Tag = new Data.Model.Tag
                         {
+                          Id = tag.Id,
                           Text = tag.Text,
                           Active = true
                         }
                     })
                     .ToList();
+
+              var newConspectTags = newTags.Select(tag => new ConspectTag
+              {
+                Conspect = conspect,
+                Tag = new Data.Model.Tag()
+                {
+                  Text = tag,
+                  Active = true
+                }
+              });
 
                 conspect.CreatedDate = DateTime.Now;
                 conspect.Active = true;
@@ -67,6 +82,7 @@ namespace CourseProject.Api.Services.Conspect
                 conspect.ConspectTags = conspectTags;
                 _context.Conspects.Add(conspect);
                 _context.ConspectTags.AddRange(conspectTags);
+                _context.ConspectTags.AddRange(newConspectTags);
                 _context.SaveChanges();
                 return conspect.Id;
             }
