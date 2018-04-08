@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using CourseProject.Api.Services.Rating;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CourseProject.Web.Api.Controllers
 {
@@ -25,32 +26,20 @@ namespace CourseProject.Web.Api.Controllers
             }));
         }
 
-        // GET: api/Rating/5
-        [HttpGet("conspectRating/{conspectId}/{userId}")]
-        public async Task<IActionResult> GetRating([FromRoute] int conspectId, string userId)
+        [Authorize]
+        [HttpPost("rateConspect")]
+        public async Task<IActionResult> RateConspect([FromBody] RateConspect.Command command)
         {
-            return Ok(await _mediator.Send(new GetRating.Query
-            {
-                UserId = userId,
-                ConspectId = conspectId
-            }));
+          command.ClaimsPrincipal = User;
+          return Ok(await _mediator.Send(command));
         }
 
-        // POST: api/Rating
-        [HttpPost]
-        public async Task<IActionResult> CreateRating([FromBody] CreateRating.Command command)
+        [Authorize]
+        [HttpPost("canRate")]
+        public async Task<IActionResult> CanRateConspect([FromBody] UserRateConspectVerification.Query command)
         {
-            return Ok(await _mediator.Send(command));
+          command.ClaimsPrincipal = User;
+          return Ok(await _mediator.Send(command));
         }
-
-        // DELETE: api/Rating/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRating([FromRoute] int id)
-        {
-            return Ok(await _mediator.Send(new DeleteRating.Command
-            {
-                ConspectId = id
-            }));
-        }
-    }
+  }
 }

@@ -10,4 +10,19 @@ export class RatingsService {
         return await this.httpClient
         .get<number>(`/Rating/calculateRating/${id}`).toPromise();
     }
+
+    async rateConspect(conspectId: number, mark: number): Promise<number> {
+        return await this.httpClient
+        .post<number>(`/Rating/rateConspect`, {
+            conspectId: conspectId,
+            mark: mark
+        }).toPromise();
+    }
+
+    async canRateConspect(conspectId: number): Promise<boolean> {
+        return await this.httpClient
+        .post<boolean>(`/Rating/canRate`, {
+            conspectId: conspectId
+        }).toPromise();
+    }
 }
