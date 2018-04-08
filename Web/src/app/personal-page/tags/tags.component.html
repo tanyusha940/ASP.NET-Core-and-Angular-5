@@ -1,13 +1,10 @@
-<h4 translate>EnterTagsTitle</h4>
 <form class="form" [formGroup]="form">
     <div class="home-container">
         <div>
             <tag-input  formControlName ="tagItems"
-                        [ngModel] = "tagItemsNew"
-                        [addOnBlur]="true"
-                        [clearOnBlur]="true">
-                <tag-input-dropdown [autocompleteItems]="autocompleteItems">
-                </tag-input-dropdown>
+                        [ngModel]="tags"
+                        disable="true"
+                        [displayBy]="'text'" [identifyBy]="'id'">
             </tag-input>
         </div>
     </div>

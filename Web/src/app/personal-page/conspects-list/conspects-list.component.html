@@ -1,0 +1,39 @@
+<div class="button-panel pull-right" *ngIf="!isPreviewMode">
+    <input type="button" class="btn btn-primary" value="Create" (click)="onCreate()"/>
+</div>
+<div *ngFor="let item of conspects">
+
+  <div class="container h-100">
+    <div class="row align-items-center h-100">
+      <div class="col-7 mx-auto">
+        <div class="card h-100 border-primary justify-content-center">
+          <div class="card text-center">
+            <div class="card-header">
+              <h4> {{item.text}}</h4>
+              <div class="button-panel pull-right" *ngIf="!isPreviewMode">
+                  <input *ngIf="isButtonVisible(item)" type="button" class="btn btn-primary" value="Edit" (click)="onEdit(item)" />
+                  <input *ngIf="isButtonVisible(item)" type="button" class="btn btn-primary" value="Delete" (click)="onDelete(item)" />
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Tags</h6>
+            <app-tags [conspectId]="item.id"></app-tags>
+            <p class="card-text">
+              {{item.content}}
+            </p>
+          </div>
+          <div>
+
+          </div>
+          <div class="card-footer text-muted">
+            <app-rating [conspectId]="item.id"></app-rating>
+            {{item.userName}}
+            {{item.createdDate | date:'short'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>

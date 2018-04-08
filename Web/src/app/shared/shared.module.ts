@@ -7,9 +7,11 @@ import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.com
 import { BarRatingModule } from 'ngx-bar-rating';
 import { RatingComponent } from '@app/shared/rating/rating.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { CustomToastrOptions } from '@app/shared/toastr/toastr-options';
+import { ToastOptions } from 'ng2-toastr';
 
 @NgModule({
-  imports: [   
+  imports: [
     MarkdownModule.forRoot({
     provide: MarkedOptions,
     useValue: {
@@ -29,11 +31,14 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     LoaderComponent,
     ConspectItemComponent,
     RatingComponent,
-    
+  ],
+  providers: [
+    { provide: ToastOptions, useClass: CustomToastrOptions },
   ],
   exports: [
     LoaderComponent,
-    NgxPermissionsModule
+    NgxPermissionsModule,
+    RatingComponent
   ]
 })
 export class SharedModule { }

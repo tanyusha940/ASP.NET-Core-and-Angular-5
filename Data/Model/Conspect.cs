@@ -26,8 +26,8 @@ namespace CourseProject.Data.Model
         [Required]
         public string Content { get; set; }
 
-        [ForeignKey("User")]
-        public string UserId { get; set; }
+        [ForeignKey("UserIdentity")]
+        public string UserUserIdentityId { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }
@@ -37,7 +37,7 @@ namespace CourseProject.Data.Model
         [Required]
         public bool Active { get; set; }
 
-        public User User { get; set; }
+        public UserIdentity User { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
 

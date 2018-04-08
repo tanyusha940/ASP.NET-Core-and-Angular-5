@@ -15,13 +15,6 @@ namespace CourseProject.Web.Api.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/Tag
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            return Ok(await _mediator.Send(new GetTags.Query()));
-        }
-
         // GET: api/Tag/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTag([FromRoute] int id)

@@ -1,13 +1,34 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ConspectsComponent } from './conspects/conspects.component';
 
 import { extract, Route } from '@app/core';
+import { ConspectFormComponent } from '@app/personal-page/conspect-form/conspect-form.component';
+import { ConspectsListComponent } from '@app/personal-page/conspects-list/conspects-list.component';
 
 const routes: Routes = [
-    Route.withShell([
-        { path: 'page', component: ConspectsComponent, data: { title: extract('Personal Page') } }
-    ])
+  Route.withShell([
+    {
+      path: 'conspect',
+      component: ConspectFormComponent,
+      data: {
+        title: extract('Personal Page'),
+        create: true
+      },
+      children: [
+        {
+          path: ':id',
+          component: ConspectFormComponent
+        }
+      ]
+    },
+    {
+      path: 'account',
+      component: ConspectsListComponent,
+      data: {
+        url: '/lookUp/conspects/user'
+      }
+    }
+  ])
 ];
 
 @NgModule({
@@ -15,4 +36,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class PersonalPageRoutingModule { }
+export class PersonalPageRoutingModule {}

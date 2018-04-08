@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using CourseProject.Api.Services.Conspect.Services;
 using CourseProject.Data.Model;
 using CourseProject.Data.Model.Context;
 using CourseProject.Infrastructure.Authentication;
@@ -118,6 +119,8 @@ namespace CourseProject.Web.Api
         config.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
         config.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
         config.For<IMediator>().Use<Mediator>();
+        config.For<IUserService>().Use<UserSerivce>();
+        config.For<IConspectService>().Use<ConspectService>();
 
         //Populate the container using the service collection
         config.Populate(services);

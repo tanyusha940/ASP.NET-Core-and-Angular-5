@@ -28,7 +28,7 @@ namespace CourseProject.Api.Services.Rating.Models
         public bool UserVerification(Data.Model.Rating rating)
         {
             return _context.Conspects
-                .Where(x => x.UserId == rating.UserId)
+                .Where(x => x.UserUserIdentityId == rating.UserId)
                 .Any(x => x.Id == rating.ConspectId);
         }
     }

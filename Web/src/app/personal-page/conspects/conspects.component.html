@@ -1,9 +1,0 @@
-<app-conspect-form></app-conspect-form>
-<div *ngFor="let item of conspectItems">
-    <div class="panel panel-default">
-        {{item.name}}
-        <div class="panel-body">
-            <markdown class="variable-binding card" [data]="item.content"></markdown>
-        </div>
-    </div>
-  </div>

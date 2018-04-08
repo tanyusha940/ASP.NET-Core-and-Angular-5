@@ -2,7 +2,7 @@
 
 namespace CourseProject.Api.Services.Conspect.Models
 {
-    public class ConspectValidator : AbstractValidator<Data.Model.Conspect>
+    public class ConspectValidator : AbstractValidator<ConspectDto>
     {
         public ConspectValidator()
         {
@@ -18,10 +18,6 @@ namespace CourseProject.Api.Services.Conspect.Models
                 .LessThanOrEqualTo(500).WithMessage("incorrectly entered the number of the specialty");
             RuleFor(x => x.Content)
                 .NotNull().WithMessage("field Content is required");
-            RuleFor(x => x.CreatedDate)
-                .NotNull();
-            RuleFor(x => x.Active)
-                .NotNull();
         }
     }
 }

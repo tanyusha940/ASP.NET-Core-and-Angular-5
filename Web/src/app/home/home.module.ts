@@ -10,8 +10,9 @@ import { QuoteService } from './quote.service';
 import { TagCloudModule } from 'angular-tag-cloud-module';
 import {AgWordCloudModule} from 'angular4-word-cloud';
 import { TagsService } from '@app/personal-page/tags/tags.service';
-import { BarRatingModule } from  "ngx-bar-rating";
+import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { PersonalPageModule } from '@app/personal-page/personal-page.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +20,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     CoreModule,
     SharedModule,
     HomeRoutingModule,
+    PersonalPageModule,
     TagCloudModule,
     AgWordCloudModule.forRoot(),
     BarRatingModule,

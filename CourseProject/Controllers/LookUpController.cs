@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
+using CourseProject.Api.Services.LookUps;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CourseProject.Web.Api.Controllers
 {
@@ -11,5 +10,38 @@ namespace CourseProject.Web.Api.Controllers
     [Route("api/LookUp")]
     public class LookUpController : Controller
     {
-    }
+      private readonly IMediator _mediator;
+
+      public LookUpController(IMediator mediator)
+      {
+        _mediator = mediator;
+      }
+
+      [HttpGet("tags")]
+      public async Task<IActionResult> Get()
+      {
+        return Ok(await _mediator.Send(new GetTagLookUps.Query()));
+      }
+
+      [HttpGet("tags/{id}")]
+      public async Task<IActionResult> GetConspectTags([FromRoute] GetConspectTagsLookUps.Query query)
+      {
+        return Ok(await _mediator.Send(query));
+      }
+
+      [Authorize]
+      [HttpGet("conspects/user")]
+      public async Task<IActionResult> GetUserConspect([FromRoute] GetUserConspectLookUps.Query query)
+      {
+        query.UserClaims = User;
+        return Ok(await _mediator.Send(query));
+      }
+
+    [Route("conspects/latest")]
+      [HttpGet]
+      public async Task<IActionResult> GetSortByDateConspects()
+      {
+        return Ok(await _mediator.Send(new GetSortByDateConspects.Query()));
+      }
+  }
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CourseProject.Api.Services.Conspect;
+using CourseProject.Api.Services.LookUps;
 using CourseProject.Infrastructure.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
@@ -37,7 +37,7 @@ namespace CourseProject.Web.Api.Controllers
             }));
         }
 
-        [Route("api/Conspect/[action]")]
+        [Route("latest")]
         [HttpGet]
         public async Task<IActionResult> GetSortByDateConspects()
         {
@@ -46,23 +46,17 @@ namespace CourseProject.Web.Api.Controllers
 
         // PUT: api/Conspect/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutConspect([FromRoute] int id, [FromBody] Data.Model.Conspect conspect)
+        public async Task<IActionResult> PutConspect([FromBody] UpdateConspect.Command command)
         {
-            if (id != conspect.Id)
-            {
-                return BadRequest();
-            }
-
-            return Ok(await _mediator.Send(new UpdateConspect.Command
-            {
-                Conspect = conspect
-            }));
+            command.UserClaims = User;
+            return Ok(await _mediator.Send(command));
         }
 
         // POST: api/Conspect
         [HttpPost]
         public async Task<IActionResult> CreateConspect([FromBody] CreateConspect.Command command)
         {
+            command.UserClaims = User;
             return Ok(await _mediator.Send(command));
         }
 

@@ -1,21 +1,34 @@
 <h1 translate>CreateConspectTitle</h1>
 <form class="form" [formGroup]="form" (submit)="onSubmit()">
   <label for="Name" translate>NameConspect</label>
-  <input type="text" [formControl]="form.get('Name')" [(ngModel)]="conspect.name" />
-  <div class="error" *ngIf="isControlInvalid('Name')" translate>
+  <input type="text" [formControl]="form.get('name')" [(ngModel)]="conspect.name" />
+  <div class="error" *ngIf="isControlInvalid('name')" translate>
     ConspectNameInvalid
   </div>
   <br/>
   <label for="SpecialityNumberId" translate>Specialty number</label>
-  <input type="text" [formControl]="form.get('SpecialityNumberId')" [(ngModel)]="conspect.specialityNumberId" />
-  <div class="error" *ngIf="isControlInvalid('SpecialityNumberId')">
-      ConspectNumberInvalid 
+  <input type="text" [formControl]="form.get('specialityNumberId')" [(ngModel)]="conspect.specialityNumberId" />
+  <div class="error" *ngIf="isControlInvalid('specialityNumberId')">
+    ConspectNumberInvalid
   </div>
   <br/>
   <label for="Content" translate>Сontent</label>
-  <input type="text" [formControl]="form.get('Content')" [(ngModel)]="conspect.content" />
-  <div class="error" *ngIf="isControlInvalid('Content')"></div>
+  <input type="text" [formControl]="form.get('content')" [(ngModel)]="conspect.content" />
+  <div class="error" *ngIf="isControlInvalid('content')"></div>
   <br/>
-  <app-tags> </app-tags>
+  <tag-input
+  identifyBy="id"
+  displayBy="text"
+  [(ngModel)]="conspect.tags"
+  [formControl]="form.get('tags')"
+  [clearOnBlur]="true"
+  (onAdd)="onTagAdd($event)"
+  (onTextChange)="getTagsLookUps()">
+    <tag-input-dropdown [displayBy]="'text'" [identifyBy]="'id'" [focusFirstElement]="true" [autocompleteItems]="tagOptions">
+    </tag-input-dropdown>
+  </tag-input>
+  <div class="error" *ngIf="isControlInvalid('tags')"></div>
+  <br/>
   <button type="submit" translate>Create conspect</button>
+  <button type="button" translate (click)="onCancel()">Cancel</button>
 </form>

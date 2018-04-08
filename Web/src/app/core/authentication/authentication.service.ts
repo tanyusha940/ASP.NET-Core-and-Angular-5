@@ -86,6 +86,10 @@ export class AuthenticationService {
     return this._credentials;
   }
 
+  get username(): string | null {
+    return this.credentials ? this.credentials.username : null;
+  }
+
   /**
    * Sets the user credentials.
    * The credentials may be persisted across sessions by setting the `remember` parameter to true.

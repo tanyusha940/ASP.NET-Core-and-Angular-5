@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CourseProject.Data.Model.Context;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Api.Services.Rating
 {
@@ -23,10 +24,15 @@ namespace CourseProject.Api.Services.Rating
 
             protected override async Task<double> HandleCore(Query query)
             {
-                return _context.Ratings
-                    .Where(rating => rating.Active)
-                    .Where(rating => rating.ConspectId == query.Id)
-                    .Average(rating => rating.Mark);
+                var rates = await _context.Ratings
+                    .Where(rate => rate.Active)
+                    .Where(rate => rate.ConspectId == query.Id).ToListAsync();
+                if (rates.Count == 0)
+                {
+                  return 0;
+                }
+
+                return rates.Average(rate => rate.Mark);
             }
         }
     }
