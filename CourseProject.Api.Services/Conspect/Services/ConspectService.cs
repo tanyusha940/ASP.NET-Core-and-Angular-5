@@ -49,7 +49,9 @@ namespace CourseProject.Api.Services.Conspect.Services
       Data.Model.Conspect conspect)
     {
       var tagNames = TagLookUps.Select(tag => tag.Text.ToLower());
-      var existingTags = context.Tags.Where(tag => tagNames.Contains(tag.Text.ToLower()));
+      var existingTags = context.Tags
+        .Where(tag => tag.ConspectTags.All(conspectTag => conspectTag.ConspectId != conspect.Id))
+        .Where(tag => tagNames.Contains(tag.Text.ToLower()));
       var conspectTags = await existingTags.Select(tag => new ConspectTag
         {
           TagId = tag.Id,
