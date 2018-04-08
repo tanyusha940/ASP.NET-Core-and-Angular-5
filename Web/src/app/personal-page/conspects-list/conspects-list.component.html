@@ -11,7 +11,8 @@
             <div class="card-header">
               <h4> {{item.text}}</h4>
               <div class="button-panel pull-right" *ngIf="!isPreviewMode">
-                  <input *ngIf="isEditButtonVisible(item)" type="button" class="btn btn-primary" value="Edit" (click)="onEdit(item)" />
+                  <input *ngIf="isButtonVisible(item)" type="button" class="btn btn-primary" value="Edit" (click)="onEdit(item)" />
+                  <input *ngIf="isButtonVisible(item)" type="button" class="btn btn-primary" value="Delete" (click)="onDelete(item)" />
               </div>
             </div>
           </div>

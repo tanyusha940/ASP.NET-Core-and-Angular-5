@@ -33,7 +33,7 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
       this.url = params.url;
       this.isPreviewMode = params.isPreviewMode;
     }));
-    await this.refreshConspect();
+    await this.refreshConspects();
   }
 
   ngOnDestroy() {
@@ -44,12 +44,11 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  async refreshConspect() {
-    console.log(this.url);
+  async refreshConspects() {
     this.conspects = await this.conspectsService.getConspects(this.url);
   }
 
-  isEditButtonVisible(item: ConspectDto) {
+  isButtonVisible(item: ConspectDto) {
     const username = this.authenticationService.username;
     if (!username) {
       return false;
@@ -61,6 +60,11 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
   onEdit(item: ConspectDto) {
     const url = (item.id === null) ? 'conspect/create' : `conspect/${item.id}`;
     this.router.navigate([url]);
+  }
+
+  async onDelete(item: ConspectDto) {
+    await this.conspectsService.deleteConspect(item.id);
+    await this.refreshConspects();
   }
 
   onCreate() {

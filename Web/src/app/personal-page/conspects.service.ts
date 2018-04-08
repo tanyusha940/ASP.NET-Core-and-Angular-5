@@ -36,9 +36,13 @@ export class ConspectsService {
       .toPromise();
   }
 
-  async deleteConspect(id: number): Promise<{}> {
-    return await this.httpClient
-      .delete(`/conspect/${id}`).toPromise();
+  async deleteConspect(id: number) {
+    await this.httpClient
+      .delete(`/conspect/${id}`)
+      .toPromise()
+      .then(() => {
+        this.toastr.success('Conspect deleted!', 'Success!');
+      });
   }
   async updateConspect(conspect: Conspect, id: number) {
     await this.httpClient

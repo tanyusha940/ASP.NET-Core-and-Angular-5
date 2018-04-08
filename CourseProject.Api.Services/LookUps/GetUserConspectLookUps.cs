@@ -34,6 +34,7 @@ namespace CourseProject.Api.Services.LookUps
         return await _context.Conspects
           .Where(conspect => conspect.Active)
           .Where(conspect => conspect.User.Id == user.Id)
+          .OrderByDescending(conspect => conspect.UpdatedDate)
           .Select(conspect => new ConspectLookUp
           {
             Id = conspect.Id,
@@ -41,7 +42,8 @@ namespace CourseProject.Api.Services.LookUps
             SpecialityNumberId = conspect.SpecialityNumberId,
             CreatedDate = conspect.CreatedDate,
             UserName = conspect.User.UserName
-          }).ToListAsync();
+          })
+          .ToListAsync();
       }
     }
   }
