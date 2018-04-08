@@ -9,6 +9,8 @@ namespace CourseProject.Api.Services.LookUps.Models
 
       public DateTime CreatedDate { get; set; }
 
+      public string UserName { get; set; }
+
       public IQueryable<LookUp> Tags { get; set; }
   }
 }

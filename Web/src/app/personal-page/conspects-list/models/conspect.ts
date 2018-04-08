@@ -5,4 +5,5 @@ export class Conspect {
     public text: string;
     public content: string;
     public createdDate: Date;
+    public userName: string;
 }
