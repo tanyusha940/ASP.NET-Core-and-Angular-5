@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RatingsService } from '@app/shared/rating/rating.service';
 
 @Component({
   selector: 'app-rating',
@@ -7,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RatingComponent implements OnInit {
 
+  @Input() conspectId: number;
   rate: any = 0;
-  constructor() { }
+  constructor(private service: RatingsService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.getRating();
+  }
+
+  async getRating() {
+    if (this.conspectId !== null) {
+      this.rate = await this.service.getRating(this.conspectId);
+    }
   }
 
 }

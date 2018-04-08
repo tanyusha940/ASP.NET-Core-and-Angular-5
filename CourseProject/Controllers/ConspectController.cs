@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CourseProject.Api.Services.Conspect;
+using CourseProject.Api.Services.LookUps;
 using CourseProject.Infrastructure.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
@@ -37,7 +38,7 @@ namespace CourseProject.Web.Api.Controllers
             }));
         }
 
-        [Route("api/Conspect/[action]")]
+        [Route("latest")]
         [HttpGet]
         public async Task<IActionResult> GetSortByDateConspects()
         {

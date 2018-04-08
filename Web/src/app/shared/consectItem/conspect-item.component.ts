@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ConspectItem } from '@app/shared/consectItem/models/conspectItem';
+import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { NgModel } from '@angular/forms';
 import { TagsComponent } from '@app/personal-page/tags/tags.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
@@ -15,7 +14,8 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 })
 export class ConspectItemComponent implements OnInit {
 
-  conspectItems: ConspectItem[];
+  conspectItems: Conspect[];
+  tagsControl = new FormControl();
 
   constructor(
     private conspectsService: ConspectsService,

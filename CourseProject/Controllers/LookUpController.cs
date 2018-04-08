@@ -21,5 +21,18 @@ namespace CourseProject.Web.Api.Controllers
       {
         return Ok(await _mediator.Send(new GetTagLookUps.Query()));
       }
+
+      [HttpGet("tags/{id}")]
+      public async Task<IActionResult> GetConspectTags([FromRoute] GetConspectTagsLookUps.Query query)
+      {
+        return Ok(await _mediator.Send(query));
+      }
+
+    [Route("conspects/latest")]
+      [HttpGet]
+      public async Task<IActionResult> GetSortByDateConspects()
+      {
+        return Ok(await _mediator.Send(new GetSortByDateConspects.Query()));
+      }
   }
 }

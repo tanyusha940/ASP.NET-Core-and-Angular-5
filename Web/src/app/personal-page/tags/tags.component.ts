@@ -8,6 +8,7 @@ import { TagsService } from '@app/personal-page/tags/tags.service';
 import { Input} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { I18nService } from '@app/core';
+import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 
 @Component({
   selector: 'app-tags',
@@ -18,11 +19,11 @@ import { I18nService } from '@app/core';
 export class TagsComponent implements OnInit {
 
   form = new FormGroup({
-  tagItems:new FormControl
-  })
-  
-  tagItems: TagItem[];
-  tagItemsNew: any = [];
+  tagItems: new FormControl
+  });
+  @Input() conspectId: number;
+
+  tags: LookUp[];
 
   constructor(
     public tagsService: TagsService,
@@ -31,11 +32,11 @@ export class TagsComponent implements OnInit {
 
   public autocompleteItems: any;
   async ngOnInit() {
-    this.tagItems = await this.tagsService.getTags();
-    for(let i=0; i<this.tagItems.length; i++){
-      this.tagItemsNew.push(this.tagItems[i].value);
+    console.log(this.conspectId);
+    if (this.conspectId !== null) {
+        this.tags = await this.tagsService.getConspectTags(this.conspectId);
+        console.log(this.tags);
     }
-    this.autocompleteItems = this.tagItems;
   }
   setLanguage(language: string) {
     this.i18nService.language = language;

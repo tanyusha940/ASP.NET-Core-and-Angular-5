@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { RatingItem } from "@app/shared/rating/models/ratingsItem";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { RatingItem } from '@app/shared/rating/models/ratingsItem';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class RatingsService {
-    constructor(private httpClient: HttpClient){}
+    constructor(private httpClient: HttpClient) { }
 
-    async getRating(id: number): Promise<RatingItem[]>{
+    async getRating(id: number): Promise<number> {
         return await this.httpClient
-        .get<RatingItem[]>(`/Rating/calculateRating/${id}`).toPromise();
+        .get<number>(`/Rating/calculateRating/${id}`).toPromise();
     }
 }

@@ -37,7 +37,8 @@ import { ToastOptions } from 'ng2-toastr';
   ],
   exports: [
     LoaderComponent,
-    NgxPermissionsModule
+    NgxPermissionsModule,
+    RatingComponent
   ]
 })
 export class SharedModule { }

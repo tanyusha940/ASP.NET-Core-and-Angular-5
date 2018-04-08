@@ -5,7 +5,7 @@ import { TagsService } from '@app/personal-page/tags/tags.service';
 import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
 
 import { environment } from '@env/environment';
-import { ConspectItem } from '@app/shared/consectItem/models/conspectItem';
+import { Conspect } from '@app/personal-page/conspects-list/models/conspect';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class NewConspectComponent implements OnInit {
   version: string = environment.version;
 
   form: FormGroup;
-  conspectItems: ConspectItem[];
+  conspectItems: Conspect[];
   tagItems: TagItem[];
   constructor(
     private conspectsService: ConspectsService,
@@ -26,7 +26,7 @@ export class NewConspectComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.conspectItems = await this.conspectsService.GetSortByDateConspects();  
+    this.conspectItems = await this.conspectsService.GetSortByDateConspects();
   }
 
 }

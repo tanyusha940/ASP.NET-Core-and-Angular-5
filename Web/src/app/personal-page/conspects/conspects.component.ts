@@ -6,7 +6,6 @@ import { NgModel } from '@angular/forms';
 import { TagsComponent } from '@app/personal-page/tags/tags.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
-import { ConspectItem } from '@app/shared/consectItem/models/conspectItem';
 import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
 
 @Component({
@@ -17,7 +16,6 @@ import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
 export class ConspectsComponent implements OnInit {
 
   form: FormGroup;
-  conspectItems: ConspectItem[];
   conspect: Conspect;
   fb: FormBuilder;
 
@@ -26,7 +24,6 @@ export class ConspectsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.conspectItems = await this.conspectsService.getConspects();
   }
 
   isControlInvalid(controlName: string): boolean {

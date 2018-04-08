@@ -10,7 +10,7 @@ namespace CourseProject.Api.Services.User.Services
     {
       var emailMessage = new MimeMessage();
 
-      emailMessage.From.Add(new MailboxAddress("Администрация сайта", "tatsiana.shkoda@mail.ru"));
+      emailMessage.From.Add(new MailboxAddress("Администрация сайта", "kor1997@mail.ru"));
       emailMessage.To.Add(new MailboxAddress("", email));
       emailMessage.Subject = subject;
       emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
@@ -21,7 +21,7 @@ namespace CourseProject.Api.Services.User.Services
       using (var client = new SmtpClient())
       {
         await client.ConnectAsync("smtp.mail.ru", 25, false);
-        await client.AuthenticateAsync("tatsiana.shkoda@mail.ru", "39733jussnet");
+        await client.AuthenticateAsync("kor1997@mail.ru", "fogolan7002621");
         await client.SendAsync(emailMessage);
 
         await client.DisconnectAsync(true);

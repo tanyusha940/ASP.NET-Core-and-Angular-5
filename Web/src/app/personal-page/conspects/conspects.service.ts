@@ -5,7 +5,6 @@ import { of } from 'rxjs/observable/of';
 import { map, catchError } from 'rxjs/operators';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
-import { ConspectItem } from '@app/shared/consectItem/models/conspectItem';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 
@@ -16,9 +15,9 @@ export class ConspectsService {
   constructor(private httpClient: HttpClient,
               private toastr: ToastsManager) { }
 
-  async getConspects(): Promise<ConspectItem[]> {
+  async getConspects(url: string = '/conspect'): Promise<Conspect[]> {
       return await this.httpClient
-      .get<ConspectItem[]>('/conspect').toPromise();
+      .get<Conspect[]>(url).toPromise();
   }
 
   async createConspect(conspect: Conspect, tags: LookUp[]) {
@@ -40,13 +39,13 @@ export class ConspectsService {
       .toPromise();
   }
 
-  async GetSortByDateConspects(): Promise<ConspectItem[]> {
+  async GetSortByDateConspects(): Promise<Conspect[]> {
     return await this.httpClient
-    .get<ConspectItem[]>('/SortConspectController/GetSortByDateConspects').toPromise();
+    .get<Conspect[]>('/SortConspectController/GetSortByDateConspects').toPromise();
   }
 
-  async GetSortByRatingConspects(): Promise<ConspectItem[]> {
+  async GetSortByRatingConspects(): Promise<Conspect[]> {
     return await this.httpClient
-    .get<ConspectItem[]>('/SortConspectController/GetSortByRatingConspects').toPromise();
+    .get<Conspect[]>('/SortConspectController/GetSortByRatingConspects').toPromise();
   }
 }

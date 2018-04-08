@@ -7,6 +7,7 @@ import { ConspectsService } from '@app/personal-page/conspects/conspects.service
 import { I18nService } from '@app/core';
 import { HttpClient } from '@angular/common/http';
 import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-conspect-form',
@@ -17,6 +18,7 @@ export class ConspectFormComponent implements OnInit {
 
   form: FormGroup;
   conspect: Conspect;
+  initialState = new Conspect();
   tagOptions: LookUp[] = [];
   tags: LookUp[] = [];
 
@@ -86,6 +88,8 @@ export class ConspectFormComponent implements OnInit {
   }
 
   private resetForm() {
+    this.conspect = cloneDeep(this.initialState);
+    this.tags = cloneDeep([]);
     if (this.form != null) {
       this.form.markAsPristine();
       this.form.markAsUntouched();

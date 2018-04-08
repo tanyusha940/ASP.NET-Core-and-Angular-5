@@ -1,9 +1,8 @@
 import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 
 export class Conspect {
-    public text: string;
-    public specialityNumberId = 0;
-    public content: string;
     public id: number;
+    public text: string;
+    public content: string;
     public createdDate: Date;
 }
