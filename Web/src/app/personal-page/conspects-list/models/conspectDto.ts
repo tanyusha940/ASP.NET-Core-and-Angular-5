@@ -1,6 +1,6 @@
 import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
 
-export class Conspect {
+export class ConspectDto {
     public id: number;
     public text: string;
     public content: string;

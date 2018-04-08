@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ConspectsComponent } from './conspects/conspects.component';
 
 import { extract, Route } from '@app/core';
 import { ConspectFormComponent } from '@app/personal-page/conspect-form/conspect-form.component';

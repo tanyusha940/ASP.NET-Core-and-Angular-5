@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
-import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
+import { ConspectsService } from '@app/personal-page/conspects.service';
 import { I18nService } from '@app/core';
 import { HttpClient } from '@angular/common/http';
 import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';

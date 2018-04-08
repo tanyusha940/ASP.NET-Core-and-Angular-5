@@ -3,7 +3,7 @@ import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
 import { FormGroup } from '@angular/forms';
-import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
+import { ConspectsService } from '@app/personal-page/conspects.service';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 import { AgWordCloudData } from 'angular4-word-cloud';
 import { TagItem } from '@app/personal-page/tags/models/tagItem';

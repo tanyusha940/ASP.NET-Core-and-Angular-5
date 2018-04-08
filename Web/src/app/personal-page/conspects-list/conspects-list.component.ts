@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
-import { Conspect } from '@app/personal-page/conspects-list/models/conspect';
+import { ConspectsService } from '@app/personal-page/conspects.service';
+import { ConspectDto } from '@app/personal-page/conspects-list/models/conspectDto';
 import { RatingsService } from '@app/shared/rating/rating.service';
 import { RatingComponent } from '@app/shared';
 import { NgModel } from '@angular/forms';
@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class ConspectsListComponent implements OnInit, OnDestroy {
 
   @Input() url: string;
-  conspects: Conspect[];
+  conspects: ConspectDto[];
   rate: any = 0;
   private subscriptions: Subscription[] = [];
 
@@ -47,7 +47,7 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
     this.conspects = await this.conspectsService.getConspects(this.url);
   }
 
-  isEditButtonVisible(item: Conspect) {
+  isEditButtonVisible(item: ConspectDto) {
     const username = this.authenticationService.username;
     if (!username) {
       return false;
@@ -56,7 +56,7 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
     return username === item.userName;
   }
 
-  onEdit(item: Conspect) {
+  onEdit(item: ConspectDto) {
     const url = (item.id === null) ? '/conspect' : `/conspect/${item.id}`;
     this.router.navigate([url]);
   }

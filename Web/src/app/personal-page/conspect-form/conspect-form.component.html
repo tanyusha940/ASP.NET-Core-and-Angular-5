@@ -1,7 +1,7 @@
 <h1 translate>CreateConspectTitle</h1>
 <form class="form" [formGroup]="form" (submit)="onSubmit()">
   <label for="Name" translate>NameConspect</label>
-  <input type="text" [formControl]="form.get('name')" [(ngModel)]="conspect.text" />
+  <input type="text" [formControl]="form.get('name')" [(ngModel)]="conspect.name" />
   <div class="error" *ngIf="isControlInvalid('name')" translate>
     ConspectNameInvalid
   </div>

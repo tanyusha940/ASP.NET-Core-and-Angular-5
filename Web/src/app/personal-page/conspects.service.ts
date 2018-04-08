@@ -7,6 +7,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { LookUp } from '@app/personal-page/conspect-form/models/lookUp';
+import { ConspectDto } from '@app/personal-page/conspects-list/models/conspectDto';
 
 
 @Injectable()
@@ -15,9 +16,9 @@ export class ConspectsService {
   constructor(private httpClient: HttpClient,
               private toastr: ToastsManager) { }
 
-  async getConspects(url: string = '/conspect'): Promise<Conspect[]> {
+  async getConspects(url: string = '/conspect'): Promise<ConspectDto[]> {
       return await this.httpClient
-      .get<Conspect[]>(url).toPromise();
+      .get<ConspectDto[]>(url).toPromise();
   }
 
   async createConspect(conspect: Conspect, tags: LookUp[]) {

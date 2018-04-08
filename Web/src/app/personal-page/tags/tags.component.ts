@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConspectsService } from '@app/personal-page/conspects/conspects.service';
+import { ConspectsService } from '@app/personal-page/conspects.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
