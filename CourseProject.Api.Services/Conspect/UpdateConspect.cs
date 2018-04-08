@@ -48,13 +48,9 @@ namespace CourseProject.Api.Services.Conspect
         conspectService.MapConspectDtoToConspect(command.Conspect, user, conspect);
         conspect.Id = command.Conspect.Id;
 
-        var tagNames = command.Conspect.Tags.Select(tag => tag.Text.ToLower());
         var existingConspectTags = await conspectService.GetExistingConspectTags(command.Conspect.Tags, conspect);
         var newConspectTags = await conspectService.GetNewConspectTag(conspect, command.Conspect.Tags);
-        var tagsToDelete = await _context.ConspectTags
-          .Where(ct => ct.ConspectId == conspect.Id)
-          .Where(ct => !tagNames.Contains(ct.Tag.Text))
-          .ToListAsync();
+        var tagsToDelete = await conspectService.GetConspectTagsToDelete(conspect, command.Conspect.Tags);
 
         _context.ConspectTags.AddRange(existingConspectTags);
         _context.ConspectTags.AddRange(newConspectTags);

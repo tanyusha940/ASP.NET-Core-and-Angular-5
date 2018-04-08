@@ -78,5 +78,15 @@ namespace CourseProject.Api.Services.Conspect.Services
 
       return newConspectTags;
     }
+
+    public async Task<IList<ConspectTag>> GetConspectTagsToDelete(Data.Model.Conspect conspect,
+      ICollection<LookUp> TagLookUps)
+    {
+      var tagNames = TagLookUps.Select(tag => tag.Text.ToLower());
+      return await context.ConspectTags
+        .Where(ct => ct.ConspectId == conspect.Id)
+        .Where(ct => !tagNames.Contains(ct.Tag.Text))
+        .ToListAsync();
+    }
   }
 }

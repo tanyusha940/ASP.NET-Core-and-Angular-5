@@ -15,5 +15,7 @@ namespace CourseProject.Api.Services.Conspect.Services
     Data.Model.Conspect MapConspectDtoToConspect(ConspectDto conspectDto, UserIdentity user);
 
     Data.Model.Conspect MapConspectDtoToConspect(ConspectDto conspectDto, UserIdentity user, Data.Model.Conspect conspect);
+
+    Task<IList<ConspectTag>> GetConspectTagsToDelete(Data.Model.Conspect conspect, ICollection<LookUp> TagLookUps);
   }
 }
