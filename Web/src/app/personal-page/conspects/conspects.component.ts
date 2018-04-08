@@ -7,11 +7,13 @@ import { TagsComponent } from '@app/personal-page/tags/tags.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ConspectItemComponent } from '@app/shared/consectItem/conspect-item.component';
 import { Conspect } from '@app/personal-page/conspect-form/models/conspect';
+import { RatingsService } from '@app/shared/rating/rating.service';
 
 @Component({
   selector: 'app-conspects',
   templateUrl: './conspects.component.html',
-  styleUrls: ['./conspects.component.scss']
+  styleUrls: ['./conspects.component.scss'],
+  providers: [RatingsService]
 })
 export class ConspectsComponent implements OnInit {
 

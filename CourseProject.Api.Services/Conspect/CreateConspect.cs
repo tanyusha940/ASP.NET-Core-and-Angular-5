@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using CourseProject.Api.Services.Conspect.Models;
 using CourseProject.Api.Services.LookUps.Models;
 using CourseProject.Data.Model;
+using CourseProject.Infrastructure.Authentication;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,14 +31,14 @@ namespace CourseProject.Api.Services.Conspect
         {
           private readonly ApplicationContext _context;
           private readonly IValidator<ConspectDto> _validator;
-          private readonly UserManager<UserIdentity> userManager;
+          private readonly IUserService userService;
 
           public Handler(ApplicationContext context, IValidator<ConspectDto> commandValidator,
-            UserManager<UserIdentity> userManager)
+            IUserService userService)
           {
             _context = context;
             _validator = commandValidator;
-            this.userManager = userManager;
+            this.userService = userService;
           }
 
           public async Task<int> Handle(Command request, CancellationToken cancellationToken,
@@ -50,7 +51,7 @@ namespace CourseProject.Api.Services.Conspect
 
           public async Task<int> Handle(Command command, CancellationToken cancellationToken)
           {
-            var user = await GetUserIdentity(command.UserClaims);
+            var user = await userService.GetUserIdentity(command.UserClaims);
             var conspect = MapConspect(command.Conspect, user);
             var existingConspectTags = await GetExistingConspectTags(command.Tags, conspect);
             var newConspectTags = await GetNewConspectTag(conspect, command.Tags);
@@ -110,16 +111,6 @@ namespace CourseProject.Api.Services.Conspect
               .ToList();
 
             return newConspectTags;
-          }
-
-          private async Task<UserIdentity> GetUserIdentity(ClaimsPrincipal userClaims)
-          {
-            var userName = userClaims.Identities
-              .First()
-              .Claims.First().Value;
-            var userIdentity = await userManager.FindByNameAsync(userName);
-
-            return userIdentity;
           }
         }
     }

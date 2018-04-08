@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using CourseProject.Api.Services.LookUps;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CourseProject.Web.Api.Controllers
 {
@@ -25,6 +26,14 @@ namespace CourseProject.Web.Api.Controllers
       [HttpGet("tags/{id}")]
       public async Task<IActionResult> GetConspectTags([FromRoute] GetConspectTagsLookUps.Query query)
       {
+        return Ok(await _mediator.Send(query));
+      }
+
+      [Authorize]
+      [HttpGet("conspects/user")]
+      public async Task<IActionResult> GetUserConspect([FromRoute] GetUserConspectLookUps.Query query)
+      {
+        query.UserClaims = User;
         return Ok(await _mediator.Send(query));
       }
 

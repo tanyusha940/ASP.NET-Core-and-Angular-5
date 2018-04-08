@@ -118,6 +118,7 @@ namespace CourseProject.Web.Api
         config.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
         config.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
         config.For<IMediator>().Use<Mediator>();
+        config.For<IUserService>().Use<UserSerivce>();
 
         //Populate the container using the service collection
         config.Populate(services);
