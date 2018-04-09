@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Api.Services.LookUps
 {
-    public class GetSortByDateConspects
+    public class GetConspectsOrderByDate
     {
         public class Query : IRequest<List<ConspectLookUp>>
         {
@@ -26,18 +26,19 @@ namespace CourseProject.Api.Services.LookUps
 
             protected override async Task<List<ConspectLookUp>> HandleCore(Query query)
             {
-                return await _context.Conspects
-                    .Where(conspect => conspect.Active)
-                    .OrderByDescending(c=>c.CreatedDate)
-                    .Select(conspect => new ConspectLookUp
+                var result = await _context.Conspects
+                  .Where(conspect => conspect.Active)
+                  .OrderByDescending(c => c.CreatedDate)
+                  .Select(conspect => new ConspectLookUp
                   {
                     Id = conspect.Id,
                     Text = conspect.Name,
                     SpecialityNumberId = conspect.SpecialityNumberId,
                     CreatedDate = conspect.CreatedDate,
-                    Content =  conspect.Content,
+                    Content = conspect.Content,
                     UserName = conspect.User.UserName
-                 }).ToListAsync();
+                  }).ToListAsync();
+                return result;
             }
         }
     }
