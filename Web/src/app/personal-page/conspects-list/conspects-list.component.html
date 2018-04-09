@@ -18,10 +18,7 @@
           </div>
           <div class="card-body">
             <app-tags [conspectId]="item.id"></app-tags>
-            <markdown class="variable-binding card" [data]="item.content"></markdown>  
-            <p class="card-text">
-              {{item.content}}
-            </p>
+            <markdown  [data]="item.content"></markdown>  
           </div>
           <div>
 

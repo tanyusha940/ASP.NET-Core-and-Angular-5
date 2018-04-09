@@ -41,7 +41,8 @@ namespace CourseProject.Api.Services.LookUps
             Text = conspect.Name,
             SpecialityNumberId = conspect.SpecialityNumberId,
             CreatedDate = conspect.CreatedDate,
-            UserName = conspect.User.UserName
+            UserName = conspect.User.UserName,
+            Content = conspect.Content
           })
           .ToListAsync();
       }
