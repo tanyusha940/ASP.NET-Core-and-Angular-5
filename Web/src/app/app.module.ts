@@ -12,7 +12,6 @@ import { environment } from '@env/environment';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { HomeModule } from './home/home.module';
-import { AboutModule } from './about/about.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +26,7 @@ import { AdminPageModule } from '@app/admin-page/admin-page.module';
 import { RegistrationModule } from '@app/registration/registration.module';
 import { EmailConfirmModule } from '@app/email-confirm/email-confirm.module';
 import { RatingsService } from '@app/shared/rating/rating.service';
+import { BestConspectsModule } from '@app/best-conspects/best-conspects.module';
 
 
 
@@ -47,7 +47,7 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface fo more 
     CoreModule,
     SharedModule,
     HomeModule,
-    AboutModule,
+    BestConspectsModule,
     LoginModule,
     RegistrationModule,
     PersonalPageModule,

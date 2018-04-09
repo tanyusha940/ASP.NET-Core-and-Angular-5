@@ -8,18 +8,15 @@
       <div class="navbar-nav">
         <a class="nav-item nav-link text-uppercase" routerLink="/home" routerLinkActive="active">
           <i class="fas fa-home"></i>
-          <span translate>Home</span>
-        </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/new" routerLinkActive="active">
           <span translate>New</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/about" routerLinkActive="active">
-           <span translate>About</span>
+        <a class="nav-item nav-link text-uppercase" routerLink="/best" routerLinkActive="active">
+          <span translate>Best</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/admin" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" routerLink="/admin" routerLinkActive="active" *ngxPermissionsOnly="['admin']">
           <span translate>Admin</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/account" routerLinkActive="active">
+        <a class="nav-item nav-link text-uppercase" routerLink="/account" routerLinkActive="active" *ngxPermissionsOnly="['user']">
           <span translate>Personal page</span>
         </a>
       </div>

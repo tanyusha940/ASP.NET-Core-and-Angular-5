@@ -11,11 +11,11 @@ const routes: Routes = [
       component: AdminComponent,
       data: {
         title: extract('Admin'),
-        // permissions: {
-        //   only: 'admin'
-        // }
+        permissions: {
+          only: 'admin'
+        }
       },
-    //   canActivate: [NgxPermissionsGuard],
+      canActivate: [NgxPermissionsGuard],
     }]
   )];
 

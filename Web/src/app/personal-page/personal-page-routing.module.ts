@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { extract, Route } from '@app/core';
 import { ConspectFormComponent } from '@app/personal-page/conspect-form/conspect-form.component';
 import { ConspectsListComponent } from '@app/personal-page/conspects-list/conspects-list.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   Route.withShell([
@@ -12,12 +13,22 @@ const routes: Routes = [
       component: ConspectFormComponent,
       data: {
         title: extract('Personal Page'),
-        create: true
+        create: true,
+        permissions: {
+          only: ['user', 'admin']
+        }
       },
+      canActivate: [NgxPermissionsGuard],
       children: [
         {
           path: ':id',
-          component: ConspectFormComponent
+          component: ConspectFormComponent,
+          data: {
+            permissions: {
+              only: ['user', 'admin']
+            }
+          },
+          canActivate: [NgxPermissionsGuard],
         }
       ]
     },
@@ -25,8 +36,12 @@ const routes: Routes = [
       path: 'account',
       component: ConspectsListComponent,
       data: {
-        url: '/lookUp/conspects/user'
-      }
+        url: '/lookUp/conspects/user',
+        permissions: {
+          only: ['user', 'admin']
+        }
+      },
+      canActivate: [NgxPermissionsGuard],
     }
   ])
 ];

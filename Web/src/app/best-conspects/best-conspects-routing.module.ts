@@ -2,15 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { Route, extract } from '@app/core';
-import { HomeComponent } from './home.component';
+import { BestConspectsComponent } from '@app/best-conspects/best-conspects.component';
 
 const routes: Routes = [
   Route.withShell([
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home',
-      component: HomeComponent,
+    { path: 'best',
+      component: BestConspectsComponent,
       data: {
-        title: extract('Home'),
+        title: extract('Best'),
         url: '/lookUp/conspects/latest',
         isPreviewMode: true,
       }
@@ -23,4 +22,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class HomeRoutingModule { }
+export class BestConspectsRoutingModule { }

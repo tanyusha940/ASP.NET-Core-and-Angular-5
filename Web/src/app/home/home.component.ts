@@ -26,6 +26,13 @@ export class HomeComponent implements OnInit {
   tagItems: LookUp[];
   wordData: CloudData[] = [];
   ratingItem: RatingItem[];
+
+  options: CloudOptions = {
+    width : 1000,
+    height : 400,
+    overflow: false,
+  };
+
   constructor(
     private tagsService: TagsService
   ) {   }
@@ -37,12 +44,6 @@ export class HomeComponent implements OnInit {
     this.tagItems = await this.tagsService.getTags();
     this.getWords();
   }
-
-  options: CloudOptions = {
-    width : 1000,
-    height : 400,
-    overflow: false,
-  };
 
  async getWords() {
   const data: any = [];
@@ -57,9 +58,4 @@ export class HomeComponent implements OnInit {
   console.log(data);
   return await this.wordData;
   }
-// data: CloudData[] = [
-//   {text: 'Weight-8-link-color', weight: 8, link: 'https://google.com', color: '#ffaaee'},
-//   {text: 'Weight-10-link', weight: 10, link: 'https://google.com'},
-//   // ...
-// ]
 }
