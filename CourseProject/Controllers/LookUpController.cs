@@ -37,11 +37,18 @@ namespace CourseProject.Web.Api.Controllers
         return Ok(await _mediator.Send(query));
       }
 
-    [Route("conspects/latest")]
+      [Route("conspects/latest")]
       [HttpGet]
-      public async Task<IActionResult> GetSortByDateConspects()
+      public async Task<IActionResult> GetOrderByDateConspects()
       {
-        return Ok(await _mediator.Send(new GetSortByDateConspects.Query()));
+        return Ok(await _mediator.Send(new GetConspectsOrderByDate.Query()));
+      }
+
+      [Route("conspects/best")]
+      [HttpGet]
+      public async Task<IActionResult> GetOrderByRatingConspects()
+      {
+        return Ok(await _mediator.Send(new GetConspectsOrderByDate.Query()));
       }
   }
 }

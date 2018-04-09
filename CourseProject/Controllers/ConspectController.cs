@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
 using CourseProject.Api.Services.Conspect;
-using CourseProject.Api.Services.LookUps;
-using CourseProject.Infrastructure.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 
 namespace CourseProject.Web.Api.Controllers
 {
-    [ApiExceptionFilterAttribute]
     [Route("api/Conspect")]
     public class ConspectController : Controller
     {
@@ -33,13 +30,6 @@ namespace CourseProject.Web.Api.Controllers
             {
                 Id = id
             }));
-        }
-
-        [Route("latest")]
-        [HttpGet]
-        public async Task<IActionResult> GetSortByDateConspects()
-        {
-            return Ok(await _mediator.Send(new GetSortByDateConspects.Query()));
         }
 
         // PUT: api/Conspect/5

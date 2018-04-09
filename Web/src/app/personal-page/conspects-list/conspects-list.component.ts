@@ -74,4 +74,8 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
     this.router.navigate(['conspect/create']);
   }
 
+  isConspectListEmpty() {
+    return !this.conspects || !this.conspects.length;
+  }
+
 }

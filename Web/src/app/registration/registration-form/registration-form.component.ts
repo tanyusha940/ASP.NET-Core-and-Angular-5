@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class RegistrationFormComponent implements OnInit {
   form: FormGroup;
   registration: Registration = new Registration();
+  error: string;
 
   constructor(private router: Router,
               private i18nService: I18nService,
@@ -41,7 +42,6 @@ export class RegistrationFormComponent implements OnInit {
         return null;
       }
 
-      // Initializing the validator.
       if (!thisControl) {
         thisControl = control;
         otherControl = control.parent.get(otherControlName) as FormControl;
@@ -86,9 +86,13 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   async submit() {
+    this.error = null;
      await this.http.post('/user', this.registration)
       .toPromise()
-      .then(() => this.router.navigate(['/confirm']));
+      .then(() => this.router.navigate(['/confirm']))
+      .catch(() => {
+        this.error = 'Please enter unique username';
+      });
 
   }
 }

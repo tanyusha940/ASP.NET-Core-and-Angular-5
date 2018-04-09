@@ -65,9 +65,10 @@ namespace CourseProject.Api.Services.User
         {
           await userManager.AddToRoleAsync(identity, "user");
           await SendConfirmationMail(identity, request.UrlHelper);
+          return identity;
         }
 
-        return identity;
+        throw new ArgumentNullException();
       }
 
       private async Task SendConfirmationMail(UserIdentity userIdentity, IUrlHelper urlHelper)
