@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CourseProject.Web.Api.Controllers
 {
   [Produces("application/json")]
-  [Microsoft.AspNetCore.Mvc.Route("api/login")]
+  [Route("api/login")]
   [IgnoreAntiforgeryToken]
   public class AuthController : Controller
   {

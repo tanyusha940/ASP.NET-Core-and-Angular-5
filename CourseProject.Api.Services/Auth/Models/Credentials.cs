@@ -13,5 +13,7 @@
     public string Id { get; set; }
 
     public bool IsEmailConfirmed { get; set; }
+
+    public bool Active { get; set; }
   }
 }

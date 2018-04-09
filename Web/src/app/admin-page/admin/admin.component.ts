@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.userItem = await this.userService.getUsers();
+    await this.refreshUserList();
   }
 
   setLanguage(language: string) {
@@ -29,5 +29,22 @@ export class AdminComponent implements OnInit {
   }
   get languages(): string[] {
     return this.i18nService.supportedLanguages;
+  }
+
+  async blockUser(item: UsersItem) {
+    await this.userService.toggleBlockUser(item.id);
+    await this.refreshUserList();
+  }
+
+  async refreshUserList() {
+    this.userItem = await this.userService.getUsers();
+  }
+
+  getBlockButtonText(item: UsersItem): string {
+    return (item.active) ? 'block' : 'unblock';
+  }
+
+  makeAdmin(item: UsersItem) {
+
   }
 }

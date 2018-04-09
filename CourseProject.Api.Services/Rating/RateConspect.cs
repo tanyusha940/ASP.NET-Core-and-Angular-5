@@ -28,15 +28,15 @@ namespace CourseProject.Api.Services.Rating
               this.userService = userService;
             }
 
-            protected override async Task<int> HandleCore(Command query)
+            protected override async Task<int> HandleCore(Command command)
             {
-                var user = await userService.GetUserIdentity(query.ClaimsPrincipal);
+                var user = await userService.GetUserIdentity(command.ClaimsPrincipal);
                 var isUserMarkConspect = await _context.Ratings
                     .Where(rating => rating.Active)
                     .Where(rating => rating.IdentityId == user.Id)
-                    .AnyAsync(rating => rating.ConspectId == query.ConspectId);
+                    .AnyAsync(rating => rating.ConspectId == command.ConspectId);
 
-              var conspect = _context.Conspects.First(c => c.Id == query.ConspectId);
+              var conspect = _context.Conspects.First(c => c.Id == command.ConspectId);
 
               if (!isUserMarkConspect)
               {
@@ -44,7 +44,7 @@ namespace CourseProject.Api.Services.Rating
                 {
                   Identity = user,
                   Conspect = conspect,
-                  Mark = query.Mark,
+                  Mark = command.Mark,
                   Active = true
                 });
                 await _context.SaveChangesAsync();
