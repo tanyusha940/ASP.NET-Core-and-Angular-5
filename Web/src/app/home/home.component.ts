@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     this.tagItems = await this.tagsService.getTags();
+    this.getWords();
   }
 
   options: CloudOptions = {
@@ -53,6 +54,12 @@ export class HomeComponent implements OnInit {
 
   });
   this.wordData = data;
+  console.log(data);
   return await this.wordData;
   }
+// data: CloudData[] = [
+//   {text: 'Weight-8-link-color', weight: 8, link: 'https://google.com', color: '#ffaaee'},
+//   {text: 'Weight-10-link', weight: 10, link: 'https://google.com'},
+//   // ...
+// ]
 }

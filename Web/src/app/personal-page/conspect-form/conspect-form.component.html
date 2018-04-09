@@ -1,34 +1,48 @@
-<h1 translate>CreateConspectTitle</h1>
 <form class="form" [formGroup]="form" (submit)="onSubmit()">
-  <label for="Name" translate>NameConspect</label>
-  <input type="text" [formControl]="form.get('name')" [(ngModel)]="conspect.name" />
-  <div class="error" *ngIf="isControlInvalid('name')" translate>
-    ConspectNameInvalid
+  <div class="container h-100">
+    <div class="row align-items-center h-100">
+      <div class="col-5 mx-auto">
+        <h1 class="text-center" translate>CreateConspectTitle</h1>
+        <br>
+        <div class="form-group row">
+            <input class="col-10" class="form-control" type="text" [formControl]="form.get('name')"
+             [(ngModel)]="conspect.name" 
+             [placeholder]="'NameConspect' | translate"/>
+          <div class="error" *ngIf="isControlInvalid('name')">
+            <i class="text-danger" translate> ConspectNameInvalid </i>
+          </div>
+        </div>
+        <div class="form-group row">
+        <input class="col-10" class="form-control" type="text" [formControl]="form.get('specialityNumberId')"
+         [(ngModel)]="conspect.specialityNumberId" 
+         [placeholder]="'Specialty number' | translate" />
+        <div class="error" *ngIf="isControlInvalid('specialityNumberId')">
+          <i class="text-danger" translate>ConspectNumberInvalid</i>
+        </div>
+      </div>
+        <div class="form-group row">
+        <textarea  name="markdown" id="markdown-area" class="col-10" class="form-control"  type="text" [formControl]="form.get('content')"
+         [(ngModel)]="conspect.content" 
+         [placeholder]="'Сontent' | translate" 
+         (keyup)="updateOutput($event.target.value)"
+          ></textarea>
+        <div class="error" *ngIf="isControlInvalid('content')"></div>
+      </div>
+      <div class="col-md-15">
+        <h4 class="text-center">Preview</h4>
+          <label class="form-check-label" [innerHtml]="convertedText"></label>
+      </div>
+        <br/>
+        <tag-input identifyBy="id" displayBy="text" [(ngModel)]="conspect.tags" [formControl]="form.get('tags')" [clearOnBlur]="true"
+          (onAdd)="onTagAdd($event)" (onTextChange)="getTagsLookUps()">
+          <tag-input-dropdown [displayBy]="'text'" [identifyBy]="'id'" [focusFirstElement]="true" [autocompleteItems]="tagOptions">
+          </tag-input-dropdown>
+        </tag-input>
+        <div class="error" *ngIf="isControlInvalid('tags')"></div>
+        <br/>
+        <button type="submit" class="btn btn-primary" translate>Create conspect</button>
+        <button type="button" class="btn btn-primary" translate (click)="onCancel()">Cancel</button>
+    </div>
   </div>
-  <br/>
-  <label for="SpecialityNumberId" translate>Specialty number</label>
-  <input type="text" [formControl]="form.get('specialityNumberId')" [(ngModel)]="conspect.specialityNumberId" />
-  <div class="error" *ngIf="isControlInvalid('specialityNumberId')">
-    ConspectNumberInvalid
   </div>
-  <br/>
-  <label for="Content" translate>Сontent</label>
-  <textarea type="text" [formControl]="form.get('content')" [(ngModel)]="conspect.content"></textarea>
-  <div class="error" *ngIf="isControlInvalid('content')"></div>
-  <br/>
-  <tag-input
-  identifyBy="id"
-  displayBy="text"
-  [(ngModel)]="conspect.tags"
-  [formControl]="form.get('tags')"
-  [clearOnBlur]="true"
-  (onAdd)="onTagAdd($event)"
-  (onTextChange)="getTagsLookUps()">
-    <tag-input-dropdown [displayBy]="'text'" [identifyBy]="'id'" [focusFirstElement]="true" [autocompleteItems]="tagOptions">
-    </tag-input-dropdown>
-  </tag-input>
-  <div class="error" *ngIf="isControlInvalid('tags')"></div>
-  <br/>
-  <button type="submit" translate>Create conspect</button>
-  <button type="button" translate (click)="onCancel()">Cancel</button>
 </form>

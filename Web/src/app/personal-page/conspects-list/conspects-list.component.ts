@@ -8,6 +8,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthenticationService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown'; 
 
 @Component({
   selector: 'app-conspects-list',
@@ -26,7 +27,8 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
               private ratingsService: RatingsService,
               private authenticationService: AuthenticationService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+               }
 
   async ngOnInit() {
     this.subscriptions.push(this.route.data.subscribe((params: any) => {
@@ -46,6 +48,7 @@ export class ConspectsListComponent implements OnInit, OnDestroy {
 
   async refreshConspects() {
     this.conspects = await this.conspectsService.getConspects(this.url);
+    console.log(this.conspects);
   }
 
   isButtonVisible(item: ConspectDto) {

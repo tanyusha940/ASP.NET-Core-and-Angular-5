@@ -11,6 +11,8 @@ namespace CourseProject.Api.Services.LookUps.Models
 
       public string UserName { get; set; }
 
+      public string Content { get; set; }
+
       public IQueryable<LookUp> Tags { get; set; }
   }
 }
