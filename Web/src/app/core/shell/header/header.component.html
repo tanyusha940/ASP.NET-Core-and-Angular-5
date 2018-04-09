@@ -16,7 +16,7 @@
         <a class="nav-item nav-link text-uppercase" routerLink="/admin" routerLinkActive="active" *ngxPermissionsOnly="['admin']">
           <span translate>Admin</span>
         </a>
-        <a class="nav-item nav-link text-uppercase" routerLink="/account" routerLinkActive="active" *ngxPermissionsOnly="['user']">
+        <a class="nav-item nav-link text-uppercase" routerLink="/account" routerLinkActive="active" *ngxPermissionsOnly="['user', 'admin']">
           <span translate>Personal page</span>
         </a>
       </div>
