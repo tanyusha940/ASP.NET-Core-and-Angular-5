@@ -3,4 +3,5 @@ export class UsersItem {
     active: boolean;
     email: string;
     name: string;
+    isAdmin: boolean;
 }

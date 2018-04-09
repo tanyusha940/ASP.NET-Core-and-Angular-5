@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CourseProject.Api.Services.User.Models
+﻿namespace CourseProject.Api.Services.User.Models
 {
     public class UserDto
     {

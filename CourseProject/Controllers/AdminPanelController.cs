@@ -23,5 +23,17 @@ namespace CourseProject.Web.Api.Controllers
     {
       return Ok(await mediator.Send(command));
     }
+
+    [HttpPost("adminUpgrading")]
+    public async Task<IActionResult> ToggleAdminRole([FromBody] UpgradeToAdmin.Command command)
+    {
+      return Ok(await mediator.Send(command));
+    }
+
+    [HttpPost("isAdmin")]
+    public async Task<IActionResult> isAdmin([FromBody] IsUserAdmin.Query query)
+    {
+      return Ok(await mediator.Send(query));
+    }
   }
 }

@@ -20,4 +20,18 @@ export class UsersService {
                 this.toastr.success('Action Successfull', 'Success!');
               });
     }
+
+    async toggleUpgradeToAdmin(id: string) {
+        await this.httpClient
+            .post<boolean>('/adminPanel/adminUpgrading', {userId: id}).toPromise()
+            .then(() => {
+                this.toastr.success('Action Successfull', 'Success!');
+              });
+    }
+
+    async isAdmin(id: string): Promise<boolean> {
+        return await this.httpClient
+            .post<boolean>('/adminPanel/isAdmin', {userId: id})
+            .toPromise();
+    }
 }

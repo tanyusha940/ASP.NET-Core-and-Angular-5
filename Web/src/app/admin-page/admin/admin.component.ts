@@ -38,13 +38,25 @@ export class AdminComponent implements OnInit {
 
   async refreshUserList() {
     this.userItem = await this.userService.getUsers();
+    this.userItem.forEach(async(user) => {
+      user.isAdmin = await this.isAdmin(user);
+    });
   }
 
   getBlockButtonText(item: UsersItem): string {
     return (item.active) ? 'block' : 'unblock';
   }
 
-  makeAdmin(item: UsersItem) {
+  getAdminButtonText(item: UsersItem): string {
+    return (item.isAdmin) ? 'remove from admins' : 'add to admins';
+  }
 
+  async makeAdmin(item: UsersItem) {
+    await this.userService.toggleUpgradeToAdmin(item.id);
+    await this.refreshUserList();
+  }
+
+  async isAdmin(item: UsersItem): Promise<boolean> {
+    return await this.userService.isAdmin(item.id);
   }
 }
