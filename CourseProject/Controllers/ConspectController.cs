@@ -2,6 +2,7 @@
 using CourseProject.Api.Services.Conspect;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CourseProject.Web.Api.Controllers
 {
@@ -33,6 +34,7 @@ namespace CourseProject.Web.Api.Controllers
         }
 
         // PUT: api/Conspect/5
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutConspect([FromBody] UpdateConspect.Command command)
         {
@@ -41,6 +43,7 @@ namespace CourseProject.Web.Api.Controllers
         }
 
         // POST: api/Conspect
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateConspect([FromBody] CreateConspect.Command command)
         {

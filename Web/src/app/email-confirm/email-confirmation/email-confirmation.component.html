@@ -4,8 +4,9 @@
 
 <p *ngIf="isConfirmationSuccess">
   Confirmation successfull!
+  <input type="button" class="btn btn-primary" value="Login" (click)="goToLogin()" />
 </p>
 
-<p *ngIf="!isConfirmationSuccess === false">
+<p *ngIf="isConfirmationSuccess === false">
   Confirmation failed!
 </p>

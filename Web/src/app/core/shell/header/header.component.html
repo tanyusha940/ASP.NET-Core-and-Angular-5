@@ -33,12 +33,16 @@
           <a id="user-dropdown" class="nav-link" ngbDropdownToggle>
             <i class="fas fa-user-circle"></i>
           </a>
-          <div ngbDropdownMenu aria-labelledby="user-dropdown">
+          <div ngbDropdownMenu aria-labelledby="user-dropdown" *ngIf="!isUserUnauth()">
             <h6 class="dropdown-header">
               <span translate>Logged in as</span> <b>{{username}}</b></h6>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item" (click)="logout()" translate>Logout</button>
           </div>
+          <div ngbDropdownMenu aria-labelledby="user-dropdown" *ngIf="isUserUnauth()">
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" (click)="login()" translate>Login</button>
+            </div>
         </div>
       </div>
     </div>

@@ -45,4 +45,12 @@ export class HeaderComponent implements OnInit {
     return credentials ? credentials.username : null;
   }
 
+  isUserUnauth(): boolean {
+    return !this.authenticationService.username;
+  }
+
+  login() {
+    this.router.navigate(['/login']);
+  }
+
 }

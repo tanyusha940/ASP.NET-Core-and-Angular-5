@@ -57,7 +57,8 @@ namespace CourseProject.Api.Services.Auth
         {
           return new Credentials
           {
-            IsEmailConfirmed = false
+            IsEmailConfirmed = false,
+            Active = user.Active
           };
         }
 

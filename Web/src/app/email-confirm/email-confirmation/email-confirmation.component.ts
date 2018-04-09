@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-email-confirmation',
@@ -8,7 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EmailConfirmationComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router) { }
 
   isConfirmationSuccess: boolean;
   isConfirmationMessageVisible = false;
@@ -24,6 +25,10 @@ export class EmailConfirmationComponent implements OnInit {
     } else {
       this.isConfirmationMessageVisible = true;
     }
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 
 }

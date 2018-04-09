@@ -106,6 +106,8 @@ export class AuthenticationService {
   private setCredentials(credentials?: Credentials, remember?: boolean) {
 
     this._credentials = credentials || null;
+    const permissions = this.permissionsService.getPermissions();
+    console.log(permissions, 'permissions');
     this.permissionsService.flushPermissions();
     if (this._credentials && this._credentials.role) {
       this.permissionsService.addPermission(this._credentials.role);
