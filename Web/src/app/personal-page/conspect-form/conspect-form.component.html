@@ -40,7 +40,7 @@
         </tag-input>
         <div class="error" *ngIf="isControlInvalid('tags')"></div>
         <br/>
-        <button type="submit" class="btn btn-primary" translate>Create conspect</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid" translate>Create conspect</button>
         <button type="button" class="btn btn-primary" translate (click)="onCancel()">Cancel</button>
     </div>
   </div>
