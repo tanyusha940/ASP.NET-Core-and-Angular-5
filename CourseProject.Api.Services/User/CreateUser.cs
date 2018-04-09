@@ -79,7 +79,7 @@ namespace CourseProject.Api.Services.User
           code = code
         });
         await emailService.SendEmailAsync(userIdentity.Email, "Confirm your account",
-          $"Подтвердите регистрацию, перейдя по ссылке: <a href='http://localhost:24606{callbackUrl}'>link</a>");
+          $"{userIdentity.UserName}, подтвердите регистрацию, перейдя по ссылке: <a href='http://localhost:24606{callbackUrl}'>link</a>");
       }
     }
   }

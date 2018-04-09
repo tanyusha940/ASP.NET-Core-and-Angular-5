@@ -1,6 +1,8 @@
 <div *ngFor="let item of userItem">
   <div class="card">
     <div class="card-header">
+        <input type="button" class="btn btn-primary" [value]="getBlockButtonText(item)" (click)="blockUser(item)" />
+        <input type="button" class="btn btn-primary" value="Upgrade to admin" (click)="makeAdmin(item)" />
       <h4>Имя: </h4>
       <h4>{{item.name}}</h4>
     </div>

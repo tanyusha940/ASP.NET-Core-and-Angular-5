@@ -11,6 +11,7 @@ export interface Credentials {
   username: string;
   role: string;
   isEmailConfirmed: boolean;
+  active: boolean;
 }
 
 export interface LoginContext {
@@ -48,12 +49,17 @@ export class AuthenticationService {
     .post<Credentials>('/login', context)
     .toPromise()
     .then((data: Credentials) => {
-      if (data.isEmailConfirmed) {
-        this.setCredentials(data, context.remember);
-        return true;
+
+      if (!data.active) {
+        return 'your account was blocked';
       }
 
-      return 'confirm your email';
+      if (!data.isEmailConfirmed) {
+        return 'confirm your email';
+      }
+
+      this.setCredentials(data, context.remember);
+      return true;
     })
     .catch((data) => 'invalid login or password');
 
