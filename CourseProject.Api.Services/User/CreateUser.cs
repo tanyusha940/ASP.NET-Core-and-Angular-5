@@ -63,7 +63,7 @@ namespace CourseProject.Api.Services.User
         var result = await userManager.CreateAsync(identity, request.Password);
         if (result.Succeeded)
         {
-          await userManager.AddToRoleAsync(identity, "user");
+          await userManager.AddToRoleAsync(identity, "admin");
           await SendConfirmationMail(identity, request.UrlHelper);
           return identity;
         }

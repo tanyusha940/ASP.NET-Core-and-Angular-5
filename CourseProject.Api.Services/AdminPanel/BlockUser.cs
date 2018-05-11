@@ -24,7 +24,7 @@ namespace CourseProject.Api.Services.AdminPanel
       protected override async Task<bool> HandleCore(Command command)
       {
         var userToBlock = _context.Users
-          .First(user => user.Id == command.UserId);
+          .First(user => user.IdentityId == command.UserId);
         userToBlock.Active = !userToBlock.Active;
 
         await _context.SaveChangesAsync();

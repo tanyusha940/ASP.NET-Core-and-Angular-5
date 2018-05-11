@@ -21,7 +21,7 @@ namespace CourseProject.Api.Services.User.Services
       using (var client = new SmtpClient())
       {
         await client.ConnectAsync("smtp.gmail.com", 465, true);
-        await client.AuthenticateAsync("tatsiana.shkoda@gmail.com", "39733jussnet");
+        await client.AuthenticateAsync("tatsiana.shkoda@gmail.com", "1281velcom");
         await client.SendAsync(emailMessage);
 
         await client.DisconnectAsync(true);
